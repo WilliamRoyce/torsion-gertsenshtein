@@ -970,6 +970,20 @@ for M6.
   blanket** and strict pyright. The legacy ignore surface — dozens of per-path exemption blocks
   in `pyproject.toml` — is not inherited.
 
+  > **Amendment (2026-09-06) — a `tests_cosmo/**/*` blanket existed and is deleted at M0.**
+  > The coherence pass (`8b54fe6e`) added a `tests_cosmo/**/*` per-file-ignore block that was
+  > a **byte-for-byte 35-code clone of `tests/**/*`**. That was expedience, not design: it
+  > existed so that adding `tests_cosmo` to `testpaths` would not immediately fail lint. It
+  > imported exactly the exemption surface this bullet forbids, and the contradiction was
+  > caught by the M0 session rather than by anyone re-reading it.
+  >
+  > **Measured before deciding: removing the block leaves `ruff check tests_cosmo/` clean**,
+  > so it exempts nothing today and the correction is free. Deleted at M0 (I-524). New tests
+  > follow `test_package_boundary.py`'s style (docstring on the test function), with targeted
+  > `# noqa: CODE  # reason` where warranted. If a single code proves systematically
+  > unavoidable across many tests, it is added deliberately with its reason recorded — the
+  > rule bars an *inherited blanket*, not a justified exemption.
+
 ---
 
 ## 9. Packaging and documentation layout
