@@ -488,6 +488,14 @@ rules → the **flaw protocol** → the report-back format.
   per wave.
 - **Stay inside your owned paths** (listed in the header). Two sessions writing the same
   directory is the one collision a worktree does not prevent.
+- **Any guard you add carries its expiry.** When you write a test, assertion, lint rule or
+  CI gate, ask in the same breath *what future change makes this wrong rather than merely
+  unnecessary?* If there is one, record it **both** where the guard lives and in the row of
+  §7's milestone table that will trigger it. A guard's correctness has a lifetime, and the
+  moment of writing is the only moment its expiry is obvious — the merge checklist cannot
+  catch it, because such a failure bites at a milestone nothing is tested against yet.
+  (Found the hard way: `test_package_boundary.py` inverts into a blocker at M7, when
+  `git mv tidalcosmo tidal` makes its own regex match every legitimate import — #537.)
 - One `wolframscript` at a time, machine-wide — only a prompt flagged for the Wolfram lane
   may start a kernel.
 - Conventional commits; no attribution trailers.
@@ -555,8 +563,13 @@ What the next planning session does *first*, before planning anything:
 2. Re-run the full gate set once on the merged trunk.
 3. Read the delegates' reported discoveries and **route** each — amend at the site, open an
    issue, or fold into the next wave's scope.
-4. Update memory (`project_cosmology_program.md`, the MEMORY.md status line) and back up.
-5. *Then* plan the next wave, in detail; the one after it in outline; nothing beyond.
+4. **Prune stale worktrees.** `git worktree list`; for each entry whose branch is an
+   ancestor of `HEAD` and whose tree is clean, `git worktree remove` it and delete the
+   branch. **Never touch a worktree whose session is still active** — check for unmerged
+   commits and uncommitted changes first. A stale registration holding a branch ref
+   quietly confuses a later `git worktree list`.
+5. Update memory (`project_cosmology_program.md`, the MEMORY.md status line) and back up.
+6. *Then* plan the next wave, in detail; the one after it in outline; nothing beyond.
 
 ## What to implement next
 
