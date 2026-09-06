@@ -989,12 +989,45 @@ for M6.
 ## 9. Packaging and documentation layout
 
 One distribution during the transition, with **two console scripts** (`tidal` for legacy,
-`tidalcosmo` for the new package — never mixed), and optional extras `camb`, `cobaya`, and a
-`cosmo` aggregate. `[tool.setuptools.packages.find]` includes both roots;
+`tidalcosmo` for the new package — never mixed), and optional extras `camb`, `cobaya`, and an
+`all` aggregate. `[tool.setuptools.packages.find]` includes both roots;
 `[tool.setuptools.package-data]` must ship `**/*.yaml` or Cobaya's defaults do not install (§3).
 
 Documentation: narrative and program records in `docs/cosmology/`, technical documentation in
 `docs/tex/`, runnable configurations in `tidalcosmo/presets/`.
+
+> **Amendment (I-524 session, 2026-09-06) — the aggregate is `all`, not `cosmo`, and the
+> two cosmology extras are promoted to core on a stated trigger.**
+>
+> **Aggregate name.** `all` is the ecosystem convention (SOLikeT, astropy, sacc, healpy,
+> anesthetic); no surveyed package uses a domain name. More decisively, under the promotion
+> below **`cosmo` would be meaningful for exactly one milestone and then hollow** — it
+> aggregates `camb` + `cobaya` at M0, and both are core by M1b, leaving nothing to
+> aggregate. `all` stays meaningful across that change and already clears the "an aggregate
+> earns its place at ≈3+ orthogonal extras" bar six times over (`wolfram`, `sensitivity`,
+> `inference`, `jax`, `completion`, `color`). §9 chose a domain name for a distribution that
+> then served two domains; the §1.3 rename removes even that rationale.
+>
+> **Extras now, core on a stated trigger.** The right discriminator is *"does package source
+> import it?"*, not *"is it heavy?"* — SOLikeT declares both `camb` and `cobaya` core because
+> it imports both; mflike keeps `camb` test-only because it never imports it, consuming
+> `C_ℓ` from whatever provider is configured. At **M0 nothing imports either**, so an extra
+> is the honest declaration, and core-now would make `pip install tidal` pull a Boltzmann
+> code for someone who only wants the legacy flat-space solver — one distribution serves
+> both until M6/M7.
+>
+> | dependency | becomes **core** when | milestone |
+> |---|---|---|
+> | `camb` | `background/camb_seam.py` exists and imports it | **M1a** (#532) |
+> | `cobaya` | `__init__.py` re-exports a Cobaya component (§2.11) | **M1b** |
+>
+> **Consequence of §2.11 that M1b must not rediscover as a surprise:** once `__init__.py`
+> re-exports the Cobaya components — which §2.11 requires, for the short dotted path —
+> **`import tidalcosmo` fails without cobaya installed**, which affects pyright, coverage,
+> the boundary test walking the tree, and any doc build. So cobaya cannot stay optional past
+> that point. That is forced by the design, not a defect in it; record the triggers in a
+> `pyproject.toml` comment (the existing `pypolychord` block is the precedent for an install
+> fact the dependency table cannot express).
 
 **No PyPI release before M7** (§1.2).
 
