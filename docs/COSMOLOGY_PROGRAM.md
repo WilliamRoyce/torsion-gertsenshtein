@@ -518,7 +518,13 @@ requiring another end-of-phase sweep:
 
 1. Read the **full diff**, not a summary.
 2. Run every gate: `ruff check`, `ruff format --check`, `pyright`, `cspell`, **both**
-   suites, the boundary test.
+   suites, the boundary test. **Cap BLAS threads when running the suite** —
+   `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1`.
+   Several sessions share one 8-core machine, and an unrestricted run takes ~3 cores of
+   BLAS on its own; that is enough to make the wall-clock assertions in
+   `test_probe_perf` and `test_inference_eval_perf` fail spuriously (observed: 400 ms
+   against an 80 ms budget, where the probe's known quiet cost is 13–27 ms). A timing
+   failure under load is not a regression — check the load before reading it as one.
 3. Verify the prompt's success criteria **positively, from artifacts** — never from the
    session's report alone.
 4. Propagate any instruction-site amendment the session should have made and did not.
