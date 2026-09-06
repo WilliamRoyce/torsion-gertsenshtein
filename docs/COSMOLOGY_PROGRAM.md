@@ -518,7 +518,23 @@ requiring another end-of-phase sweep:
 
 1. Read the **full diff**, not a summary.
 2. Run every gate: `ruff check`, `ruff format --check`, `pyright`, `cspell`, **both**
-   suites, the boundary test. **Cap BLAS threads when running the suite** —
+   suites, the boundary test.
+
+   > **⚠ Local `cspell` is a pre-check, not the gate (found by I-524, 2026-09-06).**
+   > `npx cspell lint` and the `cspell-action` **disagree**: the action flagged
+   > `PYTHONIOENCODING` and `PYTHONNOUSERSITE` in `scripts/oracles/freeze_legacy_oracle.py`
+   > where local reported zero — most likely `allowCompoundWords: true` splitting them
+   > locally but not under the action's bundled version. Reproduced from both sides:
+   > local-with-compounds reports **0**, the action **2**, and local with compounds
+   > *disabled* reports **11**, so it over-reports in that mode. Chasing parity is a rabbit
+   > hole. **CI is the gate** — possible now because I-524 added `push` on this branch, so
+   > a run fires on every merge. A merge is not verified until the trunk run is green;
+   > treat a local pass as evidence of nothing.
+   >
+   > That file reached trunk via `e310e125`, which no CI had ever observed. The new lane
+   > caught it on its first execution — the criterion demonstrated rather than asserted.
+
+   **Cap BLAS threads when running the suite** —
    `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1`.
    Several sessions share one 8-core machine, and an unrestricted run takes ~3 cores of
    BLAS on its own; that is enough to make the wall-clock assertions in
@@ -546,7 +562,7 @@ Status: `drafted → dispatched → reported → merged`.
 
 | Wave | Prompt | Issue | Lane | Owned paths | Branch | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | I-524 — packaging, extras, CI lane | #524 | — | `pyproject.toml`, `.github/`, `tidalcosmo/__init__.py`, `tidalcosmo/cli/` | — | drafted |
+| 0 | I-524 — packaging, extras, CI lane | #524 | — | `pyproject.toml`, `.github/`, `tidalcosmo/__init__.py`, `tidalcosmo/cli/`, `cspell.json` | `cosmo/i524-packaging` | **merged** ✅ CI 34051208887 green on the merged SHA: 2885 passed, 39 skipped |
 | 0 | I-525 — freeze the legacy oracle | #525 | — | `scripts/oracles/`, `tests_cosmo/data/` | `cosmo/i525-oracles` | **merged** ✅ gate re-run independently: 185 fixtures current, regeneration byte-identical |
 | 0 | I-526 — install PSALTer, Tier-1 gate | #526 | **yes** | `scripts/install-psalter.sh`, `scripts/verify-wolfram-setup.sh`, `tests_cosmo/fixtures/` | — | drafted |
 | 1 | I-532 — CAMB seam, background protocol, flag schema | #532 | — | `tidalcosmo/{background,spectator,validity}/` | — | planned |

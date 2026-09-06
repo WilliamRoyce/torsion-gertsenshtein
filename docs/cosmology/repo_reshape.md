@@ -655,9 +655,30 @@ quoting a `log Z` from a run with non-uniform priors needs to know this.
 - **Conventional YAML keys** the reference packages all carry: `stop_at_error`, `extra_args`,
   `renames`, `python_path`. `renames` is genuinely useful to us for mapping sampled coupling
   names onto spec parameter names.
-- **YAML must be declared package data.** LAT_MFLike ships a `MANIFEST.in` for exactly this. Our
-  `[tool.setuptools.package-data]` needs `**/*.yaml`, or the defaults simply do not install and
-  the failure is confusing.
+- **YAML must be declared package data.** Our `[tool.setuptools.package-data]` needs
+  `**/*.yaml`, or the defaults simply do not install and the failure is confusing.
+
+> **Amendment (I-524 session, 2026-09-06) — right conclusion, wrong evidence, and the
+> recursive glob turns out to be load-bearing.**
+>
+> This bullet previously read "LAT_MFLike ships a `MANIFEST.in` for exactly this".
+> **It does not.** That file contains `include mflike/_version.py` plus four `exclude`/`prune`
+> lines and says nothing about YAML; the defaults ship because of
+> `[tool.setuptools.package-data] "*" = ["*.yaml"]`. `MANIFEST.in` governs the *sdist* file
+> list, not what a wheel installs, so it could not have been the mechanism.
+>
+> Two things verified while checking it, both of which make the requirement sharper:
+>
+> - **The failure really is silent.** Cobaya resolves a component's defaults in
+>   `ComponentBase.get_yaml_file()` with a bare `os.path.exists()` beside
+>   `inspect.getfile(cls)`, returning `None` when the file is absent. No error, no warning
+>   — the defaults are simply not there.
+> - **`**/*.yaml` is required; the common `"*" = ["*.yaml"]` idiom would not do.** That form
+>   applies per *package*, so it reaches only directories holding an `__init__.py`. SOLikeT's
+>   own tree shows the hole: `presets/defaults/` and `presets/templates/` have none, and
+>   their YAML survives only because SOLikeT builds with hatchling, which ships everything
+>   under the package root. Since §2.11 plans exactly such a `presets/` subtree, the
+>   recursive glob is the requirement rather than a stylistic preference.
 
 ---
 

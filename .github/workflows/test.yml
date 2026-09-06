@@ -1,9 +1,32 @@
 name: Run Tests
 
+# The cosmology program (#488) accumulates on the long-lived integration branch
+# feat/cosmology-program: each delegate branches off it, and only the finished programme
+# lands on main.  Testing only pull requests into main therefore left both of the moments
+# that matter unobserved -- a delegate finishing an issue, and a merge into the integration
+# branch -- so "the lane is green" was unverifiable at merge time (#524).
+#
+# pull_request filters on the *base* branch and runs from the merge commit, so a pull
+# request from a cosmo/* branch into feat/cosmology-program is covered by the entry below
+# without needing a push trigger on a branch glob (which would double up against the pull
+# request).  workflow_dispatch only dispatches workflows already present on the default
+# branch, so it is inert until this merges to main.
 on:
   pull_request:
     branches:
       - main
+      - feat/cosmology-program
+  push:
+    branches:
+      - feat/cosmology-program
+  workflow_dispatch:
+
+# Collapse superseded runs of the same branch and event.  The event is part of the key on
+# purpose: a push and a pull request describe different commits (the branch tip and the
+# merge commit), so cancelling one because the other started would hide a real result.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -35,7 +58,10 @@ jobs:
         run: uv run pyright
 
       - name: Run tests with coverage
-        run: uv run pytest --cov=tidal --cov=tidalcosmo --cov-report=term-missing --cov-report=xml
+        # -rs prints the reason for every skip.  Without it a run reports a bare count,
+        # and "39 skipped on CI versus 28 locally" is unanswerable after the fact -- which
+        # is exactly what happened on run 34051208887 (#524).
+        run: uv run pytest -rs --cov=tidal --cov=tidalcosmo --cov-report=term-missing --cov-report=xml
 
       - name: Upload coverage to Codecov
         if: always()

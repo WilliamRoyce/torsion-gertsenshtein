@@ -5,14 +5,14 @@
 help:  ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-test:  ## Run test suite
-	uv run pytest tests/ -x -q
+test:  ## Run both test suites (paths come from pyproject testpaths)
+	uv run pytest -x -q
 
-test-verbose:  ## Run test suite with verbose output
-	uv run pytest tests/ -v
+test-verbose:  ## Run both test suites with verbose output
+	uv run pytest -v
 
 test-coverage:  ## Run tests with coverage report
-	uv run pytest tests/ --cov=tidal --cov-report=term-missing --cov-report=xml
+	uv run pytest --cov=tidal --cov=tidalcosmo --cov-report=term-missing --cov-report=xml
 
 lint:  ## Check code style with ruff
 	uv run ruff check
@@ -56,7 +56,7 @@ publication-figures:  ## Regenerate App C PDFs from canonical benchmark data
 figC6-pull:  ## Pull jac_speedup.json from HPC (works mid-run thanks to per-config checkpointing) and regenerate figC6 PDF
 	bash scripts/figures/pull_and_plot_figC6.sh
 
-publication: publication-figures  ## Rebuild all App C publication artefacts
+publication: publication-figures  ## Rebuild all App C publication artifacts
 
 publication-test:  ## Run publication-pipeline tests (skipped by default lane)
 	uv run pytest -m publication tests/publication/
