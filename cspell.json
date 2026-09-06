@@ -568,6 +568,8 @@
     "PYEOF",
     "Pylance",
     "pyrightconfig",
+    "PYTHONIOENCODING",
+    "PYTHONNOUSERSITE",
     "Qorb",
     "qphi",
     "Qtorsion",
