@@ -570,6 +570,23 @@ random coupling points, with the non-generic-point failure mode documented.
 
 ### 6.2 The massless sector
 
+> **Amendment (scientific review, 2026-09-06 — supervisor intel, Barker).** This section
+> repeatedly says the numerical massless analysis is "implemented numerically nowhere",
+> which reads as *we must invent the algorithm*. **That is not the situation.** Barker's
+> account: the massless analysis was omitted from the published supplementary material
+> **for convenience — TorC was not interested in massless particles — not because it is
+> difficult**, and the **general algorithm is well understood** in the literature.
+>
+> So "implemented nowhere" is scoped to *the released code*, and L4 is a
+> **find-and-implement** task, not a research task: locate the published treatments of the
+> massless spectrum, curate them into `docs/references.md`, and implement the *complete*
+> algorithm — the same learn-from-Barker-then-go-to-the-literature pattern the Schur
+> criterion (§5) already follows. **A literature search is therefore a deliverable of the
+> Stage-2 handoff, and precedes implementation.** This lowers L4's assessed risk
+> accordingly; ask Barker for the specific references he has in mind (agenda item,
+> `docs/meetings/2026-09-11_supervisor.md`).
+
+
 The paper's license for skipping it (arXiv:2606.30785 §implementation ¶"Mass spectra"): the
 massless case needs "a full component decomposition" (little-group change), and "additional
 radiative degrees of freedom are excluded by the thermal history" — footnoted as holding only
@@ -594,7 +611,8 @@ Four layers, by cost:
   for our theory class (§5.1) — present for the graviton-type conditions, absent where PSALTer
   halts.
 - **L4 — numerical massless residue, fallback and cross-check** (2406.09500 §MasslessSpectrum,
-  eqs. `MatrixEquation`→`TotalNoGhost`, implemented numerically nowhere): constraint matrix
+  eqs. `MatrixEquation`→`TotalNoGhost`, implemented numerically nowhere **in the released
+  code — see the amendment below; the algorithm itself is standard**): constraint matrix
   `C(En, Mo)` → right null vectors with the `(E−p)^{μ_b}` spurious-pole guard → reduced
   Hermitian `Π_red = ξ†O⁺ξ` (Moore–Penrose by SVD — expensive symbolically, cheap
   numerically) → residue at `E→p` by extrapolation in `E` at fixed `p` (the direct analogue of
@@ -632,7 +650,7 @@ and 9–12 apply to both routes.
 | 9 | Gauge handling: Toeplitz block SVD → polynomial null modes `V(k)`; regularized `M̃ = M + VV†`; projection; spurious-root stripping | eqs. `PolyExpansions`, `BlockMatrix`, `RegularizedWaveOperator`, `GaugeProjection` | `jl unitarity.jl::{find_gauge_modes, regularize_wave_operator, project_out_gauge, is_gauge_root, solve_pep}` |
 | 10 | Mass dimensions | eq. `MassRescaling` | `jl mass_dimensions.jl` — deferred (§3.1) |
 | 11 | Gauge-surface proximity / emergent symmetries | eq. `SVHellmannFeynman` | `jl broken_symmetries.jl` — optional diagnostic, never on the verdict path |
-| 12 | Massless spectrum | 2406.09500 §MasslessSpectrum | implemented numerically nowhere — L4, §6.2 |
+| 12 | Massless spectrum | 2406.09500 §MasslessSpectrum | not in the released code — **the algorithm is standard, see §6.2's amendment** — L4, §6.2 |
 
 ## 8. Why the released code drops gauge sectors — worked from the published files
 
@@ -748,7 +766,11 @@ compile time reported separately.
 9. **Fixed shapes per structure** (§9).
 10. **Gate-only v1**: mass dimensions and emergent symmetries explicitly deferred, extension
     point named (§3.1).
-11. **Verdict payload** follows the `gauge_certificate` honest-flag convention: per-state
+11. **Verdict payload** follows the project's honest-flag convention — *(amended
+    2026-09-06: this pointed at `gauge_certificate`, which `repo_reshape.md` §5.3 **drops**
+    as an artifact of the halted symbolic-gauge arc (#477). The surviving convention is the
+    shared **flagged-rejection** mechanism owned by `tidalcosmo/validity/` and defined at
+    M1a; follow that.)* — per-state
     `J^P`, masses, `K_J` spectra, health, massless count vs declared content,
     `massless_sector` provenance (`compiled`/`numerical`/`not-assessed`),
     `extra_massless_poles` (→ `ΔN_eff` flag), `ghost_method` (`schur-kinetic`/`residue`),
@@ -775,7 +797,8 @@ curvature-squared terms (§2).
   emerges as a learned constraint, and `D_KL` quantifies how much the data vs the unitarity
   likelihood contributes — a result, not plumbing.
 - **Validity flags**: `extra_massless_poles` feeds the program's spectator-validity
-  enforcement (`ΔN_eff`); the verdict payload joins `gauge_certificate` in the honest-flags
+  enforcement (`ΔN_eff`); the verdict payload joins the shared flagged-rejection family
+  (`validity/`, defined at M1a — **not** the dropped `gauge_certificate`) in the honest-flags
   family.
 
 ## 12. Validation set

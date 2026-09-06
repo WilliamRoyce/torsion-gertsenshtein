@@ -331,6 +331,7 @@ Per operator the derivation must output `ω±(k, η)`, hence
 | --- | --- | --- |
 | Per-operator dispersion relations as above | WS2 / #499 | all |
 | A homogeneous torsion zero-mode `S₀(η)` (or `(u, v)`) evolved on CAMB's `a(η)` as a spectator, with `ρ_S ≪ ρ_crit` flagged | WS2 | O4-iso only |
+| **Background-EOM residual on the CAMB background** — mandatory here, see the note below | WS2 / #501 | O4-iso only |
 | Torsion perturbation `δT(k, η)` → rotation field `α(n̂)` and its spectrum | WS2/WS4 | O4-aniso |
 | **O4a** — post-processing rotation of CAMB's lensed `C_ℓ`; needs **no FRW solver** because the CS/photon sector is conformally invariant | WS4 | O4-iso |
 | **O4b** — rotation inside the polarization line-of-sight integral (`e^{±2iβ(η)}` under the visibility function), required when `β` varies over recombination, is `ℓ`-dependent, or is frequency-dependent | WS4 | O4-iso, time-dependent |
@@ -341,6 +342,24 @@ Per operator the derivation must output `ω±(k, η)`, hence
 relation → zero-mode integration → `β` → array rotation of CAMB's `C_ℓ` → Gaussian
 likelihood on `β`. No new solver, no FRW evolution of photons.
 
+> **⚠ Amendment (scientific review, 2026-09-06) — O4a is the one rung that requires
+> `T̄ ≠ 0`, so the background-EOM residual is mandatory here.** The zero-mode row above
+> requires `S₀(η) ≠ 0`; a non-vanishing homogeneous torsion background *is* `T̄ ≠ 0`, which
+> places O4a **outside** the `T̄ = 0` class where the tadpole vanishes identically and inside
+> the class §4.1 describes as tracking (effective `G` rescaled, so CAMB's `G` is not the
+> theory's `G`). The dependency graph in §5 wires the residual check `RES` into O2 and O3
+> only; **O4a was omitted, and it is the rung that needs it most.** Added to the table
+> above. See `spectator_route.md` §3's amendment for why the residual is a precondition of
+> the expansion rather than a diagnostic, and note the flat-space `T̄ = 0` proof in
+> `docs/tex/background_validity.tex` does **not** transfer to FRW.
+>
+> **Second, narrower point: #503 gates only half of O4a's stated precondition.** The
+> precondition is "the operator is `n = 0` **and** `β` is effectively constant over
+> recombination". A photon dispersion relation fixes `n`; whether `β` is constant is a
+> property of the **zero-mode's own time evolution**, which is the separate WS2 capability
+> in the row above and is currently gated by nothing. Both halves must be settled before
+> O4a can be claimed as the cheap rung — otherwise it is O4b.
+
 ### 4.3 Known-answer targets
 
 | Check | Target | Tolerance |
@@ -349,7 +368,7 @@ likelihood on `β`. No new solver, no FRW evolution of photons.
 | Torsion regression (`ν²` sector) | reproduce Das et al.'s bound `ξ₁T₁ = (−3.35 ± 2.65)×10⁻²² GeV⁻¹` from `α = (−2.4 ± 1.9)°` at 100 GHz, `z = 1100`, then update it with modern data | reproduce, then improve |
 | Axion channel | Itin & Hehl: `θ = c₁uv`, `θ̇ = c₁(u̇v + uv̇)`; no light-cone birefringence on FRW; `v_light² = f/h` | symbolic match |
 | Isotropic data | `β = 0.277° ± 0.057°`, 4.8σ (Eskilt, arXiv:2608.06480; 3.5σ under the dust-mitigation test). History: Minami & Komatsu `0.35° ± 0.14°`; Diego-Palazuelos `0.30° ± 0.11°`; Eskilt & Komatsu `0.342°^{+0.094}_{−0.091}`; ACT DR6 `0.215° ± 0.074°` | likelihood input |
-| Frequency scaling | `β(ν) = β₀(ν/150 GHz)^n` with `n = −0.20^{+0.41}_{−0.39}` (Eskilt & Komatsu arXiv:2205.13962) — consistent with 0, disfavors `−2` | excludes `ν²` as the explanation at high significance |
+| Frequency scaling | `β(ν) = β₀(ν/150 GHz)^n` with `n = −0.20^{+0.41}_{−0.39}` (Eskilt & Komatsu arXiv:2205.13962) — consistent with 0, and the paper's own sentence disfavors `n = −2` (**Faraday rotation**, not our `ν²` operator — *amended 2026-09-06*: the exclusion below is sound but was grounded on the wrong tail of the quoted sentence. Our `ν²` operator needs `n = +2`, excluded by the same posterior at `(2 + 0.20)/0.41 ≈ 5.4σ`; cite that, not the `−2` clause) | excludes `ν²` as the explanation at high significance |
 | Anisotropic data | SPT-3G `A_CB < 1.2×10⁻⁴` (95%), tightening to `0.53×10⁻⁴` with a lensing prior (arXiv:2510.07928); combined `A_CB < 1×10⁻⁴` (arXiv:2504.13154) | bound |
 | V-modes | CLASS 40 GHz: `ℓ(ℓ+1)C_ℓ^{VV}/2π` between `0.4` and `13.5 μK²` for `1 ≤ ℓ ≤ 120` (arXiv:1911.00391); SPIDER `141–255 μK²`; MIPOL | bound |
 

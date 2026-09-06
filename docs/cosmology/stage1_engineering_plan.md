@@ -579,7 +579,10 @@ because in each case it generalizes past this handoff.
    live in a record; a finding that invalidates a stated instruction has to live where the
    instruction is*, because §4.5 is what an implementer reads. Pinned to `bb45adb0` because a
    later PSALTer release could implement the option, and a bare "it's dead" would then be
-   wrong in the other direction. Applied 2026-09-04: six inline amendment notes covering
+   wrong in the other direction. Applied 2026-09-04, and extended by the coherence pass and
+   the scientific review — **the live count is the ledger at the head of
+   `spectrum_design.md`, not a number repeated here** (it said "six" and had already drifted).
+   The notes cover
    §4.1 (#522), §4.5 (#521), §6.1 (#523) and §14.1/§14.2. The same principle promoted the
    other two findings from "recorded" to "amended" — each of them also invalidated an
    instruction, not merely a background claim.

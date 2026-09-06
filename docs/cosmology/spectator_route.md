@@ -78,6 +78,47 @@ action requires the PGT background equations to hold on (FRW, `T̄=0`/tracking) 
 tracking/frozen solutions in arXiv:2003.02690 (local, group's own). Check = background-EOM
 residual on the CAMB background, per theory.
 
+> **⚠ Amendment (scientific review, 2026-09-06) — this is a precondition of §3's argument,
+> not a safety net bolted onto it, and on FRW it is an OPEN question.**
+>
+> The order-1 step above ("tadpoles vanish on the background solution") is what licenses
+> keeping the quadratic action whole. The order-1 coefficient `(δS/δφ)|_φ̄` **is** the
+> background field equation, so it vanishes only if the background solves the equations of
+> *the theory being expanded*. Ours does not by construction — CAMB's background solves
+> **Einstein's** equations while the action is **PGT**. A surviving linear term is a
+> **source** in the perturbation EOM: the spectator modes would be *driven*, not freely
+> propagating. So the residual is not a diagnostic that happens to be prudent; it is the
+> tadpole coefficient, and §3's consistency argument is conditional on it.
+>
+> **What is settled and what is not.** `docs/tex/background_validity.tex` §"Background
+> Torsion: `T̄ = 0` Is Exact" proves the Cartan equation gives `0 = 0` for *all* PGT+EM
+> theories with non-minimal couplings — **on flat Minkowski with uniform `B₀`**, and the
+> result it rests on (Bahamonde et al.) finds non-trivial `T̄` precisely for **curved**
+> spacetime. **FRW is curved, so that proof does not transfer.** On FRW, arXiv:2003.02690
+> gets partway: `Q = 0` solves the pseudoscalar equation identically for *any* couplings,
+> but a *fully* torsion-free FRW background additionally requires `σ₃ = 0` (k-screening) or
+> the Einstein–Cartan case; outside those, the tracking class rescales effective `G` and
+> CAMB's `G` is not the theory's `G`.
+>
+> **How the program handles it** (user decision, 2026-09-05):
+> 1. **Scope declared.** Admissible theories are those admitting the assumed background.
+>    This is a stated validity condition of the route, and it is the user's judgement
+>    whether their theory qualifies — not something the pipeline silently assumes.
+> 2. **Tested per theory, in-pipeline.** The background-EOM residual (#501) is that test,
+>    and being the tadpole coefficient makes its tolerance **derivable** rather than
+>    arbitrary: the induced source must sit far below the signal being computed. The
+>    expected regime is a **small new term on top of GR**, where the residual and the source
+>    it induces are correspondingly small — which is the case the tolerance formalizes, and
+>    why this is a workable condition rather than a blocker.
+> 3. **Scoped, not settled.** Extending the Minkowski proof to FRW is genuine physics work
+>    and is tracked as its own issue: survey what is established, which theory classes
+>    provably admit a torsion-free FRW background and which do not, and what settling it
+>    would require. A scoping note and curated references, not a theorem.
+>
+> **Where it bites first: O4a**, which *requires* a homogeneous mode `S₀(η) ≠ 0` — i.e.
+> `T̄ ≠ 0` by construction. It is the one rung guaranteed outside the `T̄ = 0` class, so the
+> residual check is mandatory there, not optional.
+
 ## 4. Scope boundary
 
 Reachable in the strict limit: **(i) propagation** effects on standard quanta (tensor

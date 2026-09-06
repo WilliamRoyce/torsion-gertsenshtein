@@ -533,7 +533,10 @@ two-way tensor coupling is ever *wanted*.
   likelihood call on the segment grids, into batched `(N_nodes, N_mode, n, n)` arrays.
   Memory estimate: a fully dense outer product at worst case is 1.6–2.6 GB. Chunking per
   η-segment and per k-bucket is the default (different k want different η-grids anyway),
-  but **memory cost never disqualifies a route** — production runs land on HPC nodes with
+  but **memory cost rarely disqualifies a route** — *(amended 2026-09-06: this read
+  "never disqualifies … production runs land on HPC nodes", which contradicts **D4**,
+  no HPC without explicit permission, local only. Size the dense path for a local
+  machine; HPC is not an available resource to plan against.)* production runs land on HPC nodes with
   hundreds of GB, so the dense path stays available where simpler or faster.
 - **Batched small-matrix kernels**: expm/eig/solve over a leading batch axis. Baseline is
   the scipy loop (measured §1); the JAX vmap pattern is reserved for a future GPU path
@@ -640,6 +643,11 @@ Design decisions, each with its failure mode:
 - **Switching criterion**: adiabaticity `ε_ad = max_{i≠m}|Γ_im|/|λ_i − λ_m|` (the matrix
   form of Ioannisian's `θ̇/Δ`); take a WKB step of size `h_ad = min_i|λ_i|/|λ_i'|`
   (riccati's `h_osc`) iff `h_ad > 5π/max|Im λ|` and `ε_ad·h_ad ≪ 1`; otherwise a Magnus
+  *(the `5π/max|Im λ|` form is **our design choice**, not a quoted criterion — amended
+  2026-09-06. `riccati` states two separate conditions, `h_osc > 5 h_slo` **and**
+  `ω(t_i) h_osc > 2π`, the first comparing against a different proposed step size. The
+  merged single condition above appears in neither source; it is reasonable, and the
+  bake-off sets the constant, but it must not be presented as derived from riccati.)*
   step at `h ≤ π/‖M‖`. Error estimate: Ω_B at order 1 vs order 2 plus the GL quadrature
   difference (the oscode two-error pattern); accept iff the predicted next step grows.
   **Prototype evidence on the trigger threshold**: with `‖Γ‖·h ≤ 0.02` the switching

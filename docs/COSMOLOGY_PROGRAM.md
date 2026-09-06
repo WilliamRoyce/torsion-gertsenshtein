@@ -105,7 +105,10 @@ We enforce it numerically, per run (honest-flags style, like `gauge_certificate`
 - `ρ_new/ρ_γ` against the `ΔN_eff ≲ 0.1` bound (Domcke & Garcia-Cely arXiv:2006.01161,
   local);
 - conversion probability `P_max ≪ 1`;
-- amplitudes `|h|, |f| ≪ 1`;
+- amplitudes `|h| ≪ 1` and `|f| ≪ |F̄|` *(amended 2026-09-06: this read `|h|, |f| ≪ 1`.
+  `f` is a field-strength perturbation, so `|f| ≪ 1` is not dimensionally meaningful —
+  the criterion in the source, `spectator_route.md` §2, is that it be small **relative
+  to the background field** `F̄`)*;
 - **growth-impact monitor**: per mode, the ratio of new-sector to standard-sector source
   terms in the Einstein constraints — "would these perturbations have affected the growth
   we froze?"
