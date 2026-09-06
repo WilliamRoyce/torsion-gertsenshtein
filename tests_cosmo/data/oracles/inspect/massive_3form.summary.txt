@@ -1,0 +1,29 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/massive_3form/theory.toml
+# spec: examples/data/massive_3form.json
+# command: tidal --no-banner inspect examples/data/massive_3form.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  C_0 identity(C_0) ?
+  C_0 laplacian_x(C_0) eff>0
+  C_0 laplacian_y(C_0) eff>0
+  C_0 laplacian_z(C_0) eff>0
+  C_1 identity(C_1) ?
+  C_1 laplacian_x(C_1) eff>0
+  C_1 laplacian_y(C_1) eff>0
+  C_1 laplacian_z(C_1) eff>0
+  C_2 identity(C_2) ?
+  C_2 laplacian_x(C_2) eff>0
+  C_2 laplacian_y(C_2) eff>0
+  C_2 laplacian_z(C_2) eff>0
+  C_3 identity(C_3) ?
+  C_3 laplacian_x(C_3) eff>0
+  C_3 laplacian_y(C_3) eff>0
+  C_3 laplacian_z(C_3) eff>0
+#--- stderr ---
+
+#--- end ---

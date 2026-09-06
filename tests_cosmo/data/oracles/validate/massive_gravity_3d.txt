@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/massive_gravity/theory.toml
+# spec: examples/data/massive_gravity_3d.json
+# plain-command: tidal --no-banner validate examples/data/massive_gravity_3d.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/massive_gravity_3d.json --stability
+# stability-exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[OK] massive_gravity_3d.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[OK] massive_gravity_3d.json is valid [stable]
+#--- end ---

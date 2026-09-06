@@ -1,0 +1,18 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_gertsenshtein/theory_exact.toml
+# spec: examples/data/torsion_gertsenshtein_exact.json
+# command: tidal --no-banner inspect examples/data/torsion_gertsenshtein_exact.json --detail summary
+# exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+
+#--- stderr ---
+[ERROR] JSON has fields with time_order > 2 (['h_4', 'h_7', 'h_9']) but no [perturbation] section in theory.toml. Ostrogradsky reduction was removed in v6 because it introduces ghost modes.
+Migration: add
+    [perturbation]
+    small_parameters = ["<param>"]
+to your theory.toml and re-derive. Then `tidal simulate` will automatically use `--perturbative-order 1` by default.
+See docs/PERTURBATIVE_REDUCTION_IMPLEMENTATION.md.
+#--- end ---

@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/euler_heisenberg/theory.toml
+# spec: examples/data/euler_heisenberg.json
+# command: tidal --no-banner inspect examples/data/euler_heisenberg.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  a_0 gradient_x(v_a_3) ?
+  a_0 laplacian_x(a_0) ?
+  a_1 laplacian_x(a_1) ?
+  a_2 laplacian_x(a_2) ?
+  a_3 gradient_x(v_a_0) ?
+  a_3 laplacian_x(a_3) ?
+#--- stderr ---
+
+#--- end ---

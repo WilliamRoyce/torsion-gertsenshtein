@@ -1,0 +1,25 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_dark_photon_fv/theory.toml
+# spec: examples/data/torsion_dark_photon_fv.json
+# plain-command: tidal --no-banner validate examples/data/torsion_dark_photon_fv.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/torsion_dark_photon_fv.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'B0' (used in: a_1, a_2, h_5, h_7, t_1, t_2) has no default value
+[WARN] Parameter 'deltam' (used in: a_0, a_1, a_2, a_3, h_5, h_7, t_0, t_1, t_2, t_3) has no default value
+[WARN] Parameter 'kappa' (used in: h_5, h_7) has no default value
+[WARN] Parameter 'mA2' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'mT2' (used in: t_0, t_1, t_2, t_3) has no default value
+[WARN] Parameter 'xi' (used in: t_0, t_1, t_2, t_3) has no default value
+[OK] torsion_dark_photon_fv.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-mA2' (Python form: '-mA2'): name 'mA2' is not defined
+#--- end ---

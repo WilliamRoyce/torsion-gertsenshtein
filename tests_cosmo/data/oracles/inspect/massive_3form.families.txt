@@ -1,0 +1,14 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/massive_3form/theory.toml
+# spec: examples/data/massive_3form.json
+# command: tidal --no-banner inspect examples/data/massive_3form.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'C'  rank=0  n=4   (grouping GUESSED from name, no metadata)
+    members: C_0, C_1, C_2, C_3
+#--- stderr ---
+
+#--- end ---

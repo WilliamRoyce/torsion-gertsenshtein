@@ -1,0 +1,20 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_dark_photon_fv/theory.toml
+# spec: examples/data/torsion_dark_photon_fv.json
+# command: tidal --no-banner inspect examples/data/torsion_dark_photon_fv.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'a'  rank=1  n=4
+    0 temporal index/indices: a_1, a_2, a_3
+    1 temporal index/indices: a_0
+family 'h'  rank=2  n=2
+    0 temporal index/indices: h_5, h_7
+family 't'  rank=1  n=4
+    0 temporal index/indices: t_1, t_2, t_3
+    1 temporal index/indices: t_0
+#--- stderr ---
+
+#--- end ---

@@ -1,0 +1,14 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gravitational_waves/theory.toml
+# spec: examples/data/linearized_gravity.json
+# command: tidal --no-banner inspect examples/data/linearized_gravity.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'h'  rank=2  n=2
+    0 temporal index/indices: h_5, h_7
+#--- stderr ---
+
+#--- end ---

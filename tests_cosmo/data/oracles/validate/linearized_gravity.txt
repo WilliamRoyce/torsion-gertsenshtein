@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gravitational_waves/theory.toml
+# spec: examples/data/linearized_gravity.json
+# plain-command: tidal --no-banner validate examples/data/linearized_gravity.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/linearized_gravity.json --stability
+# stability-exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[OK] linearized_gravity.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[OK] linearized_gravity.json is valid [stable]
+#--- end ---

@@ -1,0 +1,24 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/euler_heisenberg/theory_e_dual_gaussian.toml
+# spec: examples/data/euler_heisenberg_e_dual_gaussian.json
+# plain-command: tidal --no-banner validate examples/data/euler_heisenberg_e_dual_gaussian.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/euler_heisenberg_e_dual_gaussian.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'Bpeak' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'rho' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'sigB' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'zc1' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'zc2' (used in: a_0, a_1, a_2, a_3) has no default value
+[OK] euler_heisenberg_e_dual_gaussian.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '(-4*Bpeak^2*rho*zc1)/(E^((zc1 - x[])^2/sigB^2)*sigB^2)' (Python form: '(-4*Bpeak**2*rho*zc1)*exp(-((zc1 - x)**2/sigB**2))/(sigB**2)'): name 'Bpeak' is not defined
+#--- end ---

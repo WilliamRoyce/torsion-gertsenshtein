@@ -1,0 +1,20 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/spherical_kg_1d/theory.toml
+# spec: examples/data/spherical_kg_1d.json
+# plain-command: tidal --no-banner validate examples/data/spherical_kg_1d.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/spherical_kg_1d.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'spm2' (used in: phi_0) has no default value
+[OK] spherical_kg_1d.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-spm2' (Python form: '-spm2'): name 'spm2' is not defined
+#--- end ---

@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/massive_3form/theory.toml
+# spec: examples/data/massive_3form.json
+# plain-command: tidal --no-banner validate examples/data/massive_3form.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/massive_3form.json --stability
+# stability-exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[OK] massive_3form.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[OK] massive_3form.json is valid [stable]
+#--- end ---

@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/coupled_scattering/theory.toml
+# spec: examples/data/coupled_scattering.json
+# command: tidal --no-banner inspect examples/data/coupled_scattering.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  chi_0 identity(chi_0) ?
+  chi_0 identity(phi_0) ?
+  chi_0 laplacian_x(chi_0) eff>0
+  phi_0 identity(chi_0) ?
+  phi_0 identity(phi_0) ?
+  phi_0 laplacian_x(phi_0) eff>0
+#--- stderr ---
+
+#--- end ---

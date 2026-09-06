@@ -1,0 +1,1694 @@
+{
+  "generator": "scripts/oracles/freeze_legacy_oracle.py",
+  "regenerate": "uv run python -m scripts.oracles.freeze_legacy_oracle",
+  "corpus_predicate": "every examples/*/*.toml whose [output].path, resolved relative to the TOML's own directory, ends in .json",
+  "summary": {
+    "toml_candidates": 50,
+    "pairs": 46,
+    "excluded": 4,
+    "validate_pass": 27,
+    "validate_fail": 19,
+    "stability_pass": 6,
+    "stability_undefined_parameter": 39
+  },
+  "exclusions": [
+    {
+      "theory": "examples/curved_spacetime/de_sitter.toml",
+      "expected_spec": "examples/data/de_sitter_kg.json",
+      "reason": "no committed spec; re-deriving it needs the Wolfram lane, unavailable to the session that froze this corpus"
+    },
+    {
+      "theory": "examples/gertsenshtein/theory_dipolar.toml",
+      "expected_spec": "examples/data/gertsenshtein_dipolar.json",
+      "reason": "no committed spec; re-deriving it needs the Wolfram lane, unavailable to the session that froze this corpus"
+    },
+    {
+      "theory": "examples/gertsenshtein/theory_dipolar_centered.toml",
+      "expected_spec": "examples/data/gertsenshtein_dipolar_centered.json",
+      "reason": "no committed spec; re-deriving it needs the Wolfram lane, unavailable to the session that froze this corpus"
+    },
+    {
+      "theory": "examples/gertsenshtein/theory_radial.toml",
+      "expected_spec": "examples/data/gertsenshtein_radial.json",
+      "reason": "no committed spec; re-deriving it needs the Wolfram lane, unavailable to the session that froze this corpus"
+    }
+  ],
+  "entries": [
+    {
+      "id": "chern_simons_3d",
+      "theory": "examples/chern_simons/theory.toml",
+      "source_spec": "examples/data/chern_simons_3d.json",
+      "derivation_hash": "ea952622130d04d0c2c35e4293ba13d6279eba56fb2ffec0d27b057562186c3d",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/chern_simons_3d.json",
+          "sha256": "0eb55354138028a8ddab09761207dd60208e79265a8426110052fb7c25c5f93f",
+          "bytes": 6237
+        },
+        "inspect_summary": {
+          "path": "inspect/chern_simons_3d.summary.txt",
+          "sha256": "e08d6fe6243a8a88581c5d893b5e83533a8e7db8e274fed48b0691c568af2011",
+          "bytes": 1031
+        },
+        "inspect_families": {
+          "path": "inspect/chern_simons_3d.families.txt",
+          "sha256": "77686a84cde5b370967cce57e8c2df5be9e088bbce7435258f5da3a7ebb02dbd",
+          "bytes": 610
+        },
+        "validate": {
+          "path": "validate/chern_simons_3d.txt",
+          "sha256": "42436d26572beed19b433c878490c6e751e3375973cec0d3c2f0d3c54bb1794b",
+          "bytes": 919
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "coupled_scalars",
+      "theory": "examples/coupled_scalars/theory.toml",
+      "source_spec": "examples/data/coupled_scalars.json",
+      "derivation_hash": "896ab91a9117d1647b6eea6afbfa7f68bbc17838a24a1e2d751c4fa7521e6952",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/coupled_scalars.json",
+          "sha256": "61ee9dba7cc656dfa76e632c2bdc49f709581d468c079cbc2f917676b8badfb9",
+          "bytes": 4493
+        },
+        "inspect_summary": {
+          "path": "inspect/coupled_scalars.summary.txt",
+          "sha256": "25d1975049dc00770ac21ee205ef2b6c1b905d904bee5d8d6e133e371e686ed7",
+          "bytes": 714
+        },
+        "inspect_families": {
+          "path": "inspect/coupled_scalars.families.txt",
+          "sha256": "fd0ddea40fbf606916ab2fc2a709e8d1b2f8f0378902b140ad799c5f2394ca39",
+          "bytes": 632
+        },
+        "validate": {
+          "path": "validate/coupled_scalars.txt",
+          "sha256": "3c6f30a35e31229c972aea4c931d3ce4975d8b1d020044319942c04578568304",
+          "bytes": 1105
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "coupled_scattering",
+      "theory": "examples/coupled_scattering/theory.toml",
+      "source_spec": "examples/data/coupled_scattering.json",
+      "derivation_hash": "02d4ae19e3850c28e44f6b46252845edec4e42d9d801d973882a18cc636cac33",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/coupled_scattering.json",
+          "sha256": "5ac01683ca8f967607335de33df308c2f43e2e26a3867817d2513e1d61ed540d",
+          "bytes": 4222
+        },
+        "inspect_summary": {
+          "path": "inspect/coupled_scattering.summary.txt",
+          "sha256": "e361d2d36b0c08e477842fec2261f15e3512f023d6c885f12df1666a087f6bc7",
+          "bytes": 743
+        },
+        "inspect_families": {
+          "path": "inspect/coupled_scattering.families.txt",
+          "sha256": "873e5074839755173e4560b138aac8c89039d8ef12573962e6b2dc894a780a16",
+          "bytes": 649
+        },
+        "validate": {
+          "path": "validate/coupled_scattering.txt",
+          "sha256": "a182235c2bf06ba009673531691cd9f80f1fa500654388441f7dad800bb22f2b",
+          "bytes": 1162
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "conformal_kg_static",
+      "theory": "examples/curved_spacetime/conformal_static.toml",
+      "source_spec": "examples/data/conformal_kg_static.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": true,
+      "artifacts": {
+        "spec": {
+          "path": "specs/conformal_kg_static.json",
+          "sha256": "57755fe5774020afa96f026262975e1293afca96eccc942f15c294d55b339489",
+          "bytes": 1590
+        },
+        "inspect_summary": {
+          "path": "inspect/conformal_kg_static.summary.txt",
+          "sha256": "fbe0738a0cb68e7e50977da847fbc71604e7d3a56d8f251de4ca07da9ddb0de6",
+          "bytes": 642
+        },
+        "inspect_families": {
+          "path": "inspect/conformal_kg_static.families.txt",
+          "sha256": "067ebdcdc5b5e955be8b86d3617668a07132b7a66c7fbf51a306c9c65e343bc8",
+          "bytes": 624
+        },
+        "validate": {
+          "path": "validate/conformal_kg_static.txt",
+          "sha256": "3add65acbe070c8405eb7a46ea9ee8479d525e5c8ae888a2fe014bf46370022b",
+          "bytes": 821
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "dark_photon_plasma",
+      "theory": "examples/dark_photon_plasma/theory.toml",
+      "source_spec": "examples/data/dark_photon_plasma.json",
+      "derivation_hash": "83fe6126fa82c6901cc99cbebe6a23cf60e19229dc1ace3cdf8dcd8a8a7ae723",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/dark_photon_plasma.json",
+          "sha256": "e8dbfacfaab212b7a9c6dedb977129006fb50d9b835cb5e065a84faedcef127d",
+          "bytes": 43033
+        },
+        "inspect_summary": {
+          "path": "inspect/dark_photon_plasma.summary.txt",
+          "sha256": "4970596818133b786822ead1bac4d9884529c3b41aa240490774ae36ffe5a1b5",
+          "bytes": 4948
+        },
+        "inspect_families": {
+          "path": "inspect/dark_photon_plasma.families.txt",
+          "sha256": "330fab0480227e989d93289e60fce69838d20e9b263a1bb05235e2a7901c65a4",
+          "bytes": 869
+        },
+        "validate": {
+          "path": "validate/dark_photon_plasma.txt",
+          "sha256": "60da2473ffede287743bd08a9d06926f530a60653bd5dc674d7cd28750ac4aa5",
+          "bytes": 1506
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "dark_photon_plasma_e_dual_gaussian",
+      "theory": "examples/dark_photon_plasma/theory_e_dual_gaussian.toml",
+      "source_spec": "examples/data/dark_photon_plasma_e_dual_gaussian.json",
+      "derivation_hash": "cacab7d2659ed5602ed8b6e5d06fb7244aa33ce595205ee7b692bdcff3d36d60",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/dark_photon_plasma_e_dual_gaussian.json",
+          "sha256": "b27581221fbc8ab1bbc86c27574cb00ecc0033f256ca849134280348e420c635",
+          "bytes": 146265
+        },
+        "inspect_summary": {
+          "path": "inspect/dark_photon_plasma_e_dual_gaussian.summary.txt",
+          "sha256": "a3bd12c2d893ed3a39cdad91a05f1843837e1ef30ec06179838c882ae7acec99",
+          "bytes": 7833
+        },
+        "inspect_families": {
+          "path": "inspect/dark_photon_plasma_e_dual_gaussian.families.txt",
+          "sha256": "5675095154b8c2e8d8bb3581ed5ba57b7b28ada54052fdb472db1d1a982598ab",
+          "bytes": 1016
+        },
+        "validate": {
+          "path": "validate/dark_photon_plasma_e_dual_gaussian.txt",
+          "sha256": "dab1ce5be990cf9f2323ec09baf8c2129b9eee166c8b86021ad53c821725e3d9",
+          "bytes": 2314
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "navier_cauchy_2d",
+      "theory": "examples/elasticity/theory.toml",
+      "source_spec": "examples/data/navier_cauchy_2d.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": true,
+      "artifacts": {
+        "spec": {
+          "path": "specs/navier_cauchy_2d.json",
+          "sha256": "9208109fac62856f007d3aae41a6965c3307736dceb13c5eca8e4800324be908",
+          "bytes": 4726
+        },
+        "inspect_summary": {
+          "path": "inspect/navier_cauchy_2d.summary.txt",
+          "sha256": "b3c9715717f7331c891e75e376a36bd96d72f81d6479fb781882e26726abcac5",
+          "bytes": 739
+        },
+        "inspect_families": {
+          "path": "inspect/navier_cauchy_2d.families.txt",
+          "sha256": "b02061fc87725f7e4951954baaa4e273caa8edf2e38e2546f71de92b78bc0c18",
+          "bytes": 687
+        },
+        "validate": {
+          "path": "validate/navier_cauchy_2d.txt",
+          "sha256": "a469aada9e0e029b72e367ac7b6581965c491698e6cba73cb0548260e190b38b",
+          "bytes": 790
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "euler_heisenberg",
+      "theory": "examples/euler_heisenberg/theory.toml",
+      "source_spec": "examples/data/euler_heisenberg.json",
+      "derivation_hash": "15d7de2581d82212236915cd269ad560b81315471055fee17ff3f8e2f2a8e8a3",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/euler_heisenberg.json",
+          "sha256": "8ab9cf1b1d74b092a24f9a429e0ff2f95e3901697612af313d011bdf1dcb7f16",
+          "bytes": 7489
+        },
+        "inspect_summary": {
+          "path": "inspect/euler_heisenberg.summary.txt",
+          "sha256": "f857db63e26626328f1505c902b5bd7775bb4ddcb31e3a8ddc713f1a94cd2813",
+          "bytes": 719
+        },
+        "inspect_families": {
+          "path": "inspect/euler_heisenberg.families.txt",
+          "sha256": "a87c3220b6f0f0dc58d0366697bac2a15b444d386890299ea3d2210baafa90b5",
+          "bytes": 621
+        },
+        "validate": {
+          "path": "validate/euler_heisenberg.txt",
+          "sha256": "69b85fee1755067211970b8721c4a1a56a57dcc085518cc00abcee233d0bca27",
+          "bytes": 1013
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "euler_heisenberg_e_dual_gaussian",
+      "theory": "examples/euler_heisenberg/theory_e_dual_gaussian.toml",
+      "source_spec": "examples/data/euler_heisenberg_e_dual_gaussian.json",
+      "derivation_hash": "150584268a52937acc7ba05f979d32ecc947c66e99e59f8b1dc2f094bef1051b",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/euler_heisenberg_e_dual_gaussian.json",
+          "sha256": "c0d1b9e0476a73b0120d768c0c0d339099bd4fd22d9ef6c2c13890ca0488085b",
+          "bytes": 24915
+        },
+        "inspect_summary": {
+          "path": "inspect/euler_heisenberg_e_dual_gaussian.summary.txt",
+          "sha256": "3ac7c479962e6852eafabb201ecada45edc3d1ca692f1ecd91653de40fc38992",
+          "bytes": 871
+        },
+        "inspect_families": {
+          "path": "inspect/euler_heisenberg_e_dual_gaussian.families.txt",
+          "sha256": "6b78293587f6d1566538312a7a394655ce24ed3fb3141b25d0d88a2137628d1b",
+          "bytes": 669
+        },
+        "validate": {
+          "path": "validate/euler_heisenberg_e_dual_gaussian.txt",
+          "sha256": "3822723c3e1b69fb41064d4d5f9a1805e605da2fee40d5b26a4cce6648acea88",
+          "bytes": 1413
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein",
+      "theory": "examples/gertsenshtein/theory.toml",
+      "source_spec": "examples/data/gertsenshtein.json",
+      "derivation_hash": "35b1938741c849232c946fa2e2d620e8466f72f796111ebf1de167e9e59bfba9",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein.json",
+          "sha256": "29de9b1f02c78ac1b3557918a2f9aed46bbf29282b057c325d73ecedd3fe5dff",
+          "bytes": 9064
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein.summary.txt",
+          "sha256": "64f38253429adc798f794b6efd92a8f1264a8ec0e5ac92fbe22f5b98e8317695",
+          "bytes": 882
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein.families.txt",
+          "sha256": "5b680c1b2feca89e56f65b0da8585858a4798b21aeb411404b685a78c9866947",
+          "bytes": 675
+        },
+        "validate": {
+          "path": "validate/gertsenshtein.txt",
+          "sha256": "da78ac8bffe2fdfe672bad18123d1b8d90f602a053bd4c28d031ef05f72e7f18",
+          "bytes": 971
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_e0_dual_gaussian",
+      "theory": "examples/gertsenshtein/theory_e0_dual_gaussian.toml",
+      "source_spec": "examples/data/gertsenshtein_e0_dual_gaussian.json",
+      "derivation_hash": "6013daedab60b943590a9f4a36d0dae535ecf81da4278be3b8ef6faf49928ed1",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_e0_dual_gaussian.json",
+          "sha256": "4be499d9731e9970218bd7efe2535da62f6f20146c3af11ae6d23703f1b49901",
+          "bytes": 16372
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_e0_dual_gaussian.summary.txt",
+          "sha256": "28924f1509271de1884b6de2edaac9f8224749841fac9be8b38a3f5a55228e56",
+          "bytes": 967
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_e0_dual_gaussian.families.txt",
+          "sha256": "03873ae7a4bc6067615496c1f98ae6c1d7b09e5418dab40b4f4bde3484e6b233",
+          "bytes": 726
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_e0_dual_gaussian.txt",
+          "sha256": "8b0fb27157630a74057c933b7b3bbc7a4a117b32cda1ce5689ee7d73645f2919",
+          "bytes": 1384
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_eh",
+      "theory": "examples/gertsenshtein/theory_eh.toml",
+      "source_spec": "examples/data/gertsenshtein_eh.json",
+      "derivation_hash": "cee79c30c879cf3e08b5888e90ac5caebf6d3ff3017230a4b740684680ea2e2d",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_eh.json",
+          "sha256": "08d5528569b7a148f1673dd9d1a592ed45097764879b9334a02a22c5482c94cd",
+          "bytes": 14015
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_eh.summary.txt",
+          "sha256": "5842849a895cbc6ccf0baa5089cd33c5d5a7ced05505c604c23dfc0ac5673f02",
+          "bytes": 917
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_eh.families.txt",
+          "sha256": "deb790a01073b4c00da344bc52240a7b799b6a70b78f8c3044a529f464587999",
+          "bytes": 684
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_eh.txt",
+          "sha256": "287dd85cc1dab7bc08e3c2915031e4b6e74c1eb482296e3e6a076fb7df04908a",
+          "bytes": 1099
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_eh_top",
+      "theory": "examples/gertsenshtein/theory_eh_top.toml",
+      "source_spec": "examples/data/gertsenshtein_eh_top.json",
+      "derivation_hash": "f8b687e4c9e8e6c20f19a774ef7969a96f1b3b7d4fd1e7ab248ece597c066fdf",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_eh_top.json",
+          "sha256": "9fd5fd5c8b4b230f0248487e7b9f3b154e12cd52a66b97ebe35ba3e1cc02654b",
+          "bytes": 14066
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_eh_top.summary.txt",
+          "sha256": "3fc808741456754b35c2f5f585d56633fc6e3c75d387bf39a07c5ab1f4714779",
+          "bytes": 929
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_eh_top.families.txt",
+          "sha256": "904678f2b326fdc2aa54ecec95116975c3342930a101390c370b7d043ea3ab36",
+          "bytes": 696
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_eh_top.txt",
+          "sha256": "039a2b91548e92fb3f3d071107425b8a6c44a1943167b1a74dac392a6e62847d",
+          "bytes": 1119
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_localized",
+      "theory": "examples/gertsenshtein/theory_localized.toml",
+      "source_spec": "examples/data/gertsenshtein_localized.json",
+      "derivation_hash": "c0091e25ab269bf6550f13e989b13e049244ee5f28e969a407fec9895904b56c",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_localized.json",
+          "sha256": "88c35d30aa2d5ff3299384dcee4faf314c8a047593bf16fe5dffb7eb77587255",
+          "bytes": 10762
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_localized.summary.txt",
+          "sha256": "daf7225114af8ce95587b4611b3caea12d7b3cdb74d00b620a2a220038e237e7",
+          "bytes": 956
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_localized.families.txt",
+          "sha256": "3d7812c3a8213dc6b90c4a7f7115021c151c73458aef873eae9ce40db3feae0e",
+          "bytes": 705
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_localized.txt",
+          "sha256": "1971e306456c80bfed315759c40a2588f3c47320ac910a20576b1956ff3df455",
+          "bytes": 1174
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_ungauged",
+      "theory": "examples/gertsenshtein/theory_ungauged.toml",
+      "source_spec": "examples/data/gertsenshtein_ungauged.json",
+      "derivation_hash": "568ceb193adae07c7cdd517180bcfc8829ad9c0f7f2483c012fa10a290d90a13",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_ungauged.json",
+          "sha256": "10726af8ef75abad3ecbeeae443e6dc2bd0bc6aa147707514537d14fcdc15f39",
+          "bytes": 33061
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_ungauged.summary.txt",
+          "sha256": "6bf47b2e0a3411383fca6f200a69838ae26dbff93a7fb8c22e7261ab46820f38",
+          "bytes": 2344
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_ungauged.families.txt",
+          "sha256": "20c3da61f5f55fd4e0d960aae038fadd1b297f0aa93cf6a0de952821119dcfbb",
+          "bytes": 801
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_ungauged.txt",
+          "sha256": "a1a67931b190bfc27570abf17bbf42552749a15d5c3114a7583d18dc0eefd7d2",
+          "bytes": 1106
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_ungauged_e_dual_gaussian",
+      "theory": "examples/gertsenshtein/theory_ungauged_e_dual_gaussian.toml",
+      "source_spec": "examples/data/gertsenshtein_ungauged_e_dual_gaussian.json",
+      "derivation_hash": "048cddbcefb9f645822dd9bae24de64535fa0836304656414eb55a851f14c9db",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_ungauged_e_dual_gaussian.json",
+          "sha256": "3cc8e0df65e1809013392cea12b6d7c7cd0399c944f0ee4cafb8f20960cc2d0a",
+          "bytes": 72988
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_ungauged_e_dual_gaussian.summary.txt",
+          "sha256": "34c2e41f3f312e6c3a6da26a49fb1aef9feb097035fbee4f6d2d596125e766ce",
+          "bytes": 2414
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_ungauged_e_dual_gaussian.families.txt",
+          "sha256": "69f9bd83d5ef88099075abd5e292ab447de412bcc082b4d8dffbbf5d4ce797c3",
+          "bytes": 849
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_ungauged_e_dual_gaussian.txt",
+          "sha256": "cc8647c53bd005df25a3b077348e64e332ece057834df3787c31502d490e529d",
+          "bytes": 1664
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "gertsenshtein_proca",
+      "theory": "examples/gertsenshtein_proca/theory.toml",
+      "source_spec": "examples/data/gertsenshtein_proca.json",
+      "derivation_hash": "7b4fb750703e807477fcb6bd27f52ae69bf510093bfebd722451f2ac08a9f0f3",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/gertsenshtein_proca.json",
+          "sha256": "23caf04282e475e4199a9e80c66cd48e21d24b881769e053f8f911aa3655a6d9",
+          "bytes": 10702
+        },
+        "inspect_summary": {
+          "path": "inspect/gertsenshtein_proca.summary.txt",
+          "sha256": "fe2bd1c7c9c8cd64687987983e776ad3975f0632d4eda9c7d0fe395db2714caf",
+          "bytes": 988
+        },
+        "inspect_families": {
+          "path": "inspect/gertsenshtein_proca.families.txt",
+          "sha256": "eb42622b1930e8a00619f6c09e5d0ac3ea25ac2c90023635c2f8d4983c89d981",
+          "bytes": 693
+        },
+        "validate": {
+          "path": "validate/gertsenshtein_proca.txt",
+          "sha256": "a5b5d4ed676a7275b992bbe1f045696a8498601d14f946121bda55adfe5701ec",
+          "bytes": 1080
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "linearized_gravity",
+      "theory": "examples/gravitational_waves/theory.toml",
+      "source_spec": "examples/data/linearized_gravity.json",
+      "derivation_hash": "91083c10efee4fa365094e57237cad0ffb0e675a80c95cbfe75bda6e00ff9b04",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/linearized_gravity.json",
+          "sha256": "33d24c674ff02e67bdf4a87ea1a62e41b54f5dd9d5165bcb3adbd79e9567ce55",
+          "bytes": 2807
+        },
+        "inspect_summary": {
+          "path": "inspect/linearized_gravity.summary.txt",
+          "sha256": "913598c989025fdb9341a8be10e836e36cb0296a1338e8422f269b6b7943bfe7",
+          "bytes": 632
+        },
+        "inspect_families": {
+          "path": "inspect/linearized_gravity.families.txt",
+          "sha256": "236ed7fe93b6ad39d67bca01f0c414ef00118a616fac17b6475340bce8481938",
+          "bytes": 589
+        },
+        "validate": {
+          "path": "validate/linearized_gravity.txt",
+          "sha256": "9dd7f94ea06a747a8682f067d807a2e0f838e891d60b9c1d5ed37ee20660f840",
+          "bytes": 809
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "graviton_torsion",
+      "theory": "examples/graviton_torsion/theory.toml",
+      "source_spec": "examples/data/graviton_torsion.json",
+      "derivation_hash": "0e299411d0dfd7ba50f48f5d42ccf349e8477b7097d2e8a5f60db1473e848e15",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/graviton_torsion.json",
+          "sha256": "f08be6490aaf6f6317168b089bd9f674da8e87c28e4146a25a4ca27749c4099f",
+          "bytes": 152597
+        },
+        "inspect_summary": {
+          "path": "inspect/graviton_torsion.summary.txt",
+          "sha256": "a92ae3f20090c3248911b520a0eac84d9d003d924a423c370bb2cdea3821bb50",
+          "bytes": 7247
+        },
+        "inspect_families": {
+          "path": "inspect/graviton_torsion.families.txt",
+          "sha256": "33e929d2050785c94a20f6e4a51442f5df6c29908c6c092694159088daa6021a",
+          "bytes": 865
+        },
+        "validate": {
+          "path": "validate/graviton_torsion.txt",
+          "sha256": "ccb87708772b0bcab340148494b7d649b8b7c6d5a0b962db9a594052915a65c7",
+          "bytes": 39913
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "massive_3form",
+      "theory": "examples/massive_3form/theory.toml",
+      "source_spec": "examples/data/massive_3form.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": true,
+      "artifacts": {
+        "spec": {
+          "path": "specs/massive_3form.json",
+          "sha256": "523860e7fdb2926d8fb9245bc3df615c47e5bb277b3a8f3f6dee344906ec821a",
+          "bytes": 7966
+        },
+        "inspect_summary": {
+          "path": "inspect/massive_3form.summary.txt",
+          "sha256": "825753966b61635b04718d33e92db07aac44711f155192e58d486922204a54ed",
+          "bytes": 994
+        },
+        "inspect_families": {
+          "path": "inspect/massive_3form.families.txt",
+          "sha256": "b8ed23d0de6bcf8f19f135efd0853706fecb85792d3c9db92e77f11974f289b4",
+          "bytes": 610
+        },
+        "validate": {
+          "path": "validate/massive_3form.txt",
+          "sha256": "99bdefc6ff1f75b637f32fbaed01e8132460d00d75fa42b186830f1ffd767b19",
+          "bytes": 778
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "massive_gravity_3d",
+      "theory": "examples/massive_gravity/theory.toml",
+      "source_spec": "examples/data/massive_gravity_3d.json",
+      "derivation_hash": "459e82c89ba928dde5ce07f54a88a921585108f3254d10c36521709a9c28bc79",
+      "has_metadata_parameters": true,
+      "artifacts": {
+        "spec": {
+          "path": "specs/massive_gravity_3d.json",
+          "sha256": "80a5b5729ef40c6157a610382ac7dae30d23ff66f59f113903da503f039397e0",
+          "bytes": 18806
+        },
+        "inspect_summary": {
+          "path": "inspect/massive_gravity_3d.summary.txt",
+          "sha256": "4427ad94b798d4a7f99cbccfd4c8a21d6f0ecd6c81b31bcad9f1d1edaa647944",
+          "bytes": 1374
+        },
+        "inspect_families": {
+          "path": "inspect/massive_gravity_3d.families.txt",
+          "sha256": "8b13765b5a45ed1899ab727c205a62c09087c1508e8f7b5b0b50e882103e2cca",
+          "bytes": 663
+        },
+        "validate": {
+          "path": "validate/massive_gravity_3d.txt",
+          "sha256": "3929b2d8461f897af954e6db79a459cd71fe31c5a5d18dc21b8cbb2d70589760",
+          "bytes": 805
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "polar_kg",
+      "theory": "examples/polar_kg/theory.toml",
+      "source_spec": "examples/data/polar_kg.json",
+      "derivation_hash": "64eeadfbe2d076ae9ad16b6111ca5bb5e51717068556e4e022742c92172d77e8",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/polar_kg.json",
+          "sha256": "bffc1ba5b8e624b031c973ecd5c47576951f16175b0a61b0bd60df47dbd6c7a5",
+          "bytes": 2652
+        },
+        "inspect_summary": {
+          "path": "inspect/polar_kg.summary.txt",
+          "sha256": "37f8f9f62fa4433e91ffeabe042fc410f186ad77e6eb500d91899ce64e4d62d4",
+          "bytes": 663
+        },
+        "inspect_families": {
+          "path": "inspect/polar_kg.families.txt",
+          "sha256": "74576fb888a3712c6b916ec6efafba25f1490b3eec12af594f44a2d9596158ff",
+          "bytes": 557
+        },
+        "validate": {
+          "path": "validate/polar_kg.txt",
+          "sha256": "508459cd1276ba2c9ab12aae993c5a3941436b8a34e7c237e9c037151c5995db",
+          "bytes": 881
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "proca_background",
+      "theory": "examples/proca_background/theory.toml",
+      "source_spec": "examples/data/proca_background.json",
+      "derivation_hash": "585956b6f016cefd2cb01baced3526d1bb35ca35ca7ee7c3ab07e22279e5fdc4",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/proca_background.json",
+          "sha256": "75256deec3fb6da53df69cd732a1d489361e66222a4fda18c7dab04ea50f8dd5",
+          "bytes": 14600
+        },
+        "inspect_summary": {
+          "path": "inspect/proca_background.summary.txt",
+          "sha256": "e99e62cda4f7b272ab1f4a9790d03e8c361da476e44749eaa0be2a89d1469da1",
+          "bytes": 1451
+        },
+        "inspect_families": {
+          "path": "inspect/proca_background.families.txt",
+          "sha256": "85ce7c2e169443222259de79f1d2eb8fdf99d1ffa3d07e2427c8db703624b90c",
+          "bytes": 713
+        },
+        "validate": {
+          "path": "validate/proca_background.txt",
+          "sha256": "903dce47b2678c416556003ac28e5c2430d8eddf671afd6386db9064d51ce92e",
+          "bytes": 1310
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "scalar_vector_coupling",
+      "theory": "examples/scalar_vector_coupling/theory.toml",
+      "source_spec": "examples/data/scalar_vector_coupling.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": true,
+      "artifacts": {
+        "spec": {
+          "path": "specs/scalar_vector_coupling.json",
+          "sha256": "ff8dc5c651158e460638fc1259f405bc22f9d9b7e9fa26682f20b6b0b86d63d3",
+          "bytes": 9362
+        },
+        "inspect_summary": {
+          "path": "inspect/scalar_vector_coupling.summary.txt",
+          "sha256": "74a639a98cffc6ce98c688f1ee27214bdd812bb526e235a6e4d252ede719e9dd",
+          "bytes": 1385
+        },
+        "inspect_families": {
+          "path": "inspect/scalar_vector_coupling.families.txt",
+          "sha256": "9a19b7c5a1a07f483cd221f078270cc853c5616865ffa99b65bb6273a2fc5765",
+          "bytes": 721
+        },
+        "validate": {
+          "path": "validate/scalar_vector_coupling.txt",
+          "sha256": "cf744c6d9cd0fbcdd01d2c125552ea37c167b462e8307f0f67a5225f5de29afa",
+          "bytes": 832
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 0
+      },
+      "stability_error_class": null
+    },
+    {
+      "id": "spherical_kg_1d",
+      "theory": "examples/spherical_kg_1d/theory.toml",
+      "source_spec": "examples/data/spherical_kg_1d.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/spherical_kg_1d.json",
+          "sha256": "73ee09ef11fbf55101257e9ec91924caf2dd42baeb168fdc0c5015563bba88e5",
+          "bytes": 2082
+        },
+        "inspect_summary": {
+          "path": "inspect/spherical_kg_1d.summary.txt",
+          "sha256": "c374c7c1b494424c6f56112653843be275de534b548cba05696788799db57d5b",
+          "bytes": 651
+        },
+        "inspect_families": {
+          "path": "inspect/spherical_kg_1d.families.txt",
+          "sha256": "1adcf869b88966fece6a0d99dde24dd185cdb1430f27ed71285927db5b19f78a",
+          "bytes": 578
+        },
+        "validate": {
+          "path": "validate/spherical_kg_1d.txt",
+          "sha256": "35cfcc8da87d718a737cda289ef44b2a2d79e94c7434865010a9c3bdc8f2a446",
+          "bytes": 912
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_dark_photon",
+      "theory": "examples/torsion_dark_photon/theory.toml",
+      "source_spec": "examples/data/torsion_dark_photon.json",
+      "derivation_hash": "f1a3b3f134e562e9fd22137cb32e3702b7deebd121cfc3491bb7a25440717653",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_dark_photon.json",
+          "sha256": "c3cfdf357c3cc6c7bb5e5395d1da6696fd224bfe7fe922a0f247d798ae62adb8",
+          "bytes": 41382
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_dark_photon.summary.txt",
+          "sha256": "17b9603e91a5808705082537c57fe05ec13c321eca1e973bc4c1a0c33c89a01f",
+          "bytes": 4863
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_dark_photon.families.txt",
+          "sha256": "c4d56a618a12c9044ea6775833c5f3b07a46cb3096d819995114826fcd34c3bf",
+          "bytes": 872
+        },
+        "validate": {
+          "path": "validate/torsion_dark_photon.txt",
+          "sha256": "4579bf09656894d74f48e56e729420a307917647b8f9bb1cb0a31f712374303b",
+          "bytes": 1447
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_dark_photon_fv",
+      "theory": "examples/torsion_dark_photon_fv/theory.toml",
+      "source_spec": "examples/data/torsion_dark_photon_fv.json",
+      "derivation_hash": "28ad2d268133dc1b20e4dda1d64c14c18e5a4bd486a404bc7d96ca976d20caa8",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_dark_photon_fv.json",
+          "sha256": "6322275f6709677534465fe7b75f299f22cf0af00742296873d47af2bef0c18d",
+          "bytes": 22747
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_dark_photon_fv.summary.txt",
+          "sha256": "a1d4112760f14c6cba5e623e96a4ca02fe9d9b0071ba94591820d2c9d7c5b3af",
+          "bytes": 1703
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_dark_photon_fv.families.txt",
+          "sha256": "fd7bdf65110958e2d9754dc7bacd5082ee2d25ea2ceca64a7070922048777429",
+          "bytes": 804
+        },
+        "validate": {
+          "path": "validate/torsion_dark_photon_fv.txt",
+          "sha256": "9d1347867108eb05d34cb43a4a91fa536675d1715a6124438defcd518107f925",
+          "bytes": 1359
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein",
+      "theory": "examples/torsion_gertsenshtein/theory.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein.json",
+      "derivation_hash": "51761b4ef41c2902327bd24ff4213b2312e29ff6456b8fe1d736f05769596851",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein.json",
+          "sha256": "4e3f18388acc6003300df5aab4e38c1574f222860c256f63cc826eedc3eb6c33",
+          "bytes": 119045
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein.summary.txt",
+          "sha256": "ff24e5be52fd2bd54493b9f22129d2b7ca64a1f91186c2986c1e1568fd4c2204",
+          "bytes": 8328
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein.families.txt",
+          "sha256": "6f4f031d58a17b8ebb56c3d30949945763249a47b73bc0348d3caa00e3c3470f",
+          "bytes": 980
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein.txt",
+          "sha256": "c1f71dcd9ffec0e01e364daa9a733d47a4dc1bd98e5fcc8b4a5f3441014d61bf",
+          "bytes": 2018
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_b5_zero",
+      "theory": "examples/torsion_gertsenshtein/theory_b5_zero.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_b5_zero.json",
+      "derivation_hash": "0cd1eb2714402283b3f203ce9b495c1dfb039c113af9263edb269f4f40501e22",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_b5_zero.json",
+          "sha256": "756fbf4f70d77b5045eae5296154bea073acb074bb94bbfbbd37b73f5e82a782",
+          "bytes": 89857
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_b5_zero.summary.txt",
+          "sha256": "52f03bab0dc0a2ba4f3643158192546e7fccd1077e029edc3f315d3f01be1340",
+          "bytes": 4033
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_b5_zero.families.txt",
+          "sha256": "93ee2a8707fad24468ab3d15b99b41641844319e2818905bd4d786d9f7b17b61",
+          "bytes": 1068
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_b5_zero.txt",
+          "sha256": "812b465fa09e1329048dff18ba680d834d77da492bf144bcb037b5f046994fa4",
+          "bytes": 1781
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 0,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_combined",
+      "theory": "examples/torsion_gertsenshtein/theory_combined.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_combined.json",
+      "derivation_hash": "1ee3e0f3aeaa6ea44db47e729002e3f21e4cbb37e6bc047b7c1fc060b0092f08",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_combined.json",
+          "sha256": "09b2f438db17391b79914400a80a6357f95c95b6a8a7d0328f6d60a61b7213f3",
+          "bytes": 458006
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_combined.summary.txt",
+          "sha256": "0fadd82b88dec7640f447360ecba2c7c32f888558cb1da7506531fbb21511e45",
+          "bytes": 18467
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_combined.families.txt",
+          "sha256": "a108508ee6d870904df176d0ae7dfb6c44799d5f857a8df1d1c464bf0da2d108",
+          "bytes": 1007
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_combined.txt",
+          "sha256": "2f7b7f55df7b0455ab0f53100030fa10e121954805b104ec43c7d484d15fdcc0",
+          "bytes": 2054
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_complete_even",
+      "theory": "examples/torsion_gertsenshtein/theory_complete_even.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_complete_even.json",
+      "derivation_hash": "cf0b2d4836bbf560afaf2203f16c4b0f0bfdfd90529bede45cc2c4b1ebb87ae8",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_complete_even.json",
+          "sha256": "3c679e2ddab07500a5f9c2608b74b4752b80b08bf5828762374ea8eadd4f8d04",
+          "bytes": 386316
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_complete_even.summary.txt",
+          "sha256": "fd0bef6e0d78a41b1f49e576680b87162fa1594b760cf7be0d051e08fda4f370",
+          "bytes": 17079
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_complete_even.families.txt",
+          "sha256": "f11fe5f4191784725b259a15c969019f556de91ff55c9326e08807171ecc595a",
+          "bytes": 1086
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_complete_even.txt",
+          "sha256": "b988c15ff979cca6c1b3f57df12a362a31e1dfc7fd608dcd799365b010e90fe1",
+          "bytes": 2212
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_complete_even_e_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_complete_even_e_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_complete_even_e_dual_gaussian.json",
+      "derivation_hash": "3ab4cf383aa4d011a8f4269b2932a6feed4e805e51b7846cdc0ed79d2cc0257a",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_complete_even_e_dual_gaussian.json",
+          "sha256": "9b6e727a706106a7c48687f566300d7d7933bde2f47aef24edba506441f193dc",
+          "bytes": 595268
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_complete_even_e_dual_gaussian.summary.txt",
+          "sha256": "64a170b1e9bc2cd849cf415a2508a511b3b74d14b785737e613e35c56613d3a6",
+          "bytes": 17871
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_complete_even_e_dual_gaussian.families.txt",
+          "sha256": "28d5ca60c89c72f0a124164f1081f92b7f72689801616d4d8b53c088c293a7c3",
+          "bytes": 1134
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_complete_even_e_dual_gaussian.txt",
+          "sha256": "f6d6233ae23263751c36ca142d524d22fd90937d523135dc21d186744b3f2f1e",
+          "bytes": 2382
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_complete_even_full_xi",
+      "theory": "examples/torsion_gertsenshtein/theory_complete_even_full_xi.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_complete_even_full_xi.json",
+      "derivation_hash": "8020303a78d35b90a81b0b844e0e4b434f03af5b96a0d951e49851bbf8adbd19",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_complete_even_full_xi.json",
+          "sha256": "a178674f7344561e1fbfc32bfcac9fe168562b6619cf2b0f8e236b0e3c3dce9d",
+          "bytes": 462587
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_complete_even_full_xi.summary.txt",
+          "sha256": "3ecfe7e33ce4c908de618e480a97ed0502e50077f60b82b75199b35f63ed3d98",
+          "bytes": 17103
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_complete_even_full_xi.families.txt",
+          "sha256": "842145925e17b45ecfebb904217dd8d75fe9c7bda6943516e6260a8f613a59bf",
+          "bytes": 1110
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_complete_even_full_xi.txt",
+          "sha256": "d09d58c57d7ef8f8ae704da2f49453234c92d4f58bf1ec64562fe68b64e6d5bd",
+          "bytes": 2244
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_complete_odd",
+      "theory": "examples/torsion_gertsenshtein/theory_complete_odd.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_complete_odd.json",
+      "derivation_hash": "bd5cac7fb2e148b2983f2e7e7a34d96df2b3942da60cdd17ae9e08a304c6d13e",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_complete_odd.json",
+          "sha256": "ba0329140ffcc9b0fb8ae93cd91136526adee6cbd29ecc9ff200b5049303a5e6",
+          "bytes": 1037933
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_complete_odd.summary.txt",
+          "sha256": "d8f16792e6b590f0e044e3e6a285410535ce4d32119972ecd0caf95b3792c243",
+          "bytes": 25759
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_complete_odd.families.txt",
+          "sha256": "9750ba537ffb945051111444137771c1081561b46374f96fdb9b8d3fa4ce1cf7",
+          "bytes": 1083
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_complete_odd.txt",
+          "sha256": "e74d9023c78fa6c0c8a12445ba99be6bb4285d16b283673dacc8e8915aa3044c",
+          "bytes": 2208
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_complete_odd_e_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_complete_odd_e_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_complete_odd_e_dual_gaussian.json",
+      "derivation_hash": "cbbc4911b18998e9831f70f56890e88c591c4631d10df1d9a49ff6344b843d4f",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_complete_odd_e_dual_gaussian.json",
+          "sha256": "7f97b324d1a964af3e1d4ebf22349fd0a7a23328f896d486c37be471118563b0",
+          "bytes": 1666211
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_complete_odd_e_dual_gaussian.summary.txt",
+          "sha256": "70626f45324d736ed273169379d7d7a7be760c2610dbab5b9e02e1e230fded16",
+          "bytes": 27448
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_complete_odd_e_dual_gaussian.families.txt",
+          "sha256": "e9da490bcccb3787f1b894674d4f240af69255a3d8de4d9f4a210b6facc6ed54",
+          "bytes": 1131
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_complete_odd_e_dual_gaussian.txt",
+          "sha256": "b345cd8c295fdab9e4525942b17d390f533d3a4f3db88458461d354bc9e20e21",
+          "bytes": 2378
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_einstein_cartan_e_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_einstein_cartan_e_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_einstein_cartan_e_dual_gaussian.json",
+      "derivation_hash": "cc198180ce0ce1dbf63a82acf9d1bd46aae3642289686a3f9e21994986cd0bb9",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_einstein_cartan_e_dual_gaussian.json",
+          "sha256": "512093b6d37b818576c230c38493d3e7fdd9aa7a24f8004e154ba53e95f94ce7",
+          "bytes": 128045
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_einstein_cartan_e_dual_gaussian.summary.txt",
+          "sha256": "0df4ed9ee7396569b0ad8d505566acb9fbf0b2cfd64e09619f6c8e8a226d4faf",
+          "bytes": 4127
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_einstein_cartan_e_dual_gaussian.families.txt",
+          "sha256": "fa24f493c53a0bf9e4cbc02cfa354fa796af9392b9d4df99107eb6a1e81777d6",
+          "bytes": 1140
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_einstein_cartan_e_dual_gaussian.txt",
+          "sha256": "aca21cfa9a327d318fdc844f1f939ac72dc13efd59a91d097c966229e7595cca",
+          "bytes": 2390
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_exact",
+      "theory": "examples/torsion_gertsenshtein/theory_exact.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_exact.json",
+      "derivation_hash": null,
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_exact.json",
+          "sha256": "6262fc0799d3f20c8a87e5578679ce59b9daed2c8e3037d5d3292b5056361cfd",
+          "bytes": 117539
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_exact.summary.txt",
+          "sha256": "25c0fc3c825808b00c63da72be9b920a694691cefc6a18d753270fb27a039e96",
+          "bytes": 991
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_exact.families.txt",
+          "sha256": "7a317b407d4e279a79d8013bc8ef89398259cbb8dcad5af85dd8e7d769091358",
+          "bytes": 1062
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_exact.txt",
+          "sha256": "5343eb63c78b70e16f4c8241325b0649402c09daaa1de987ad688e14546aa5cb",
+          "bytes": 1781
+        }
+      },
+      "exits": {
+        "inspect_summary": 1,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "spec-load-failure"
+    },
+    {
+      "id": "torsion_gertsenshtein_general_nonminimal",
+      "theory": "examples/torsion_gertsenshtein/theory_general_nonminimal.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_general_nonminimal.json",
+      "derivation_hash": "717857470dc612b754c370634cdbd9338cf815c0ccded0c6d2a18e376fe9b241",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_general_nonminimal.json",
+          "sha256": "313eb5510af27394b6a4eb9a4bd3f90b5f8e056b9ff7f7ff0567595b49215400",
+          "bytes": 169099
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_general_nonminimal.summary.txt",
+          "sha256": "5aee9b10b340038dea1d2b3cadc449bafd7f135ddecac1b14584aef0aeb2c2db",
+          "bytes": 10871
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_general_nonminimal.families.txt",
+          "sha256": "1a6dc175f7a225a6d9202d632313bcd0c75938f95d6e8dcc42473aed558cee8a",
+          "bytes": 1101
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_general_nonminimal.txt",
+          "sha256": "a65ab71a9216fcee50abee60de6fc574619a35e5db2ac89ee6c4e7010c0fe0e1",
+          "bytes": 2232
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_general_nonminimal_e_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_general_nonminimal_e_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_general_nonminimal_e_dual_gaussian.json",
+      "derivation_hash": "eb3640a16e474438ff5d7d0c1e0d7c65440ba4be6680af9f6d094d9d18d07b7e",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_general_nonminimal_e_dual_gaussian.json",
+          "sha256": "66495f95a6fd9d8b47b8c4be1dc7f0a9f27e59972bfa84ae659e5ee05e33efea",
+          "bytes": 378002
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_general_nonminimal_e_dual_gaussian.summary.txt",
+          "sha256": "2462eaea64ca8b81aea72b15a8659994b2b4ae44f515180563fe13d3d47a712c",
+          "bytes": 11663
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_general_nonminimal_e_dual_gaussian.families.txt",
+          "sha256": "ff1d1343b338675bcb6a1acad6930b01bd0c4063e909df1e6587f0bff6eeae02",
+          "bytes": 1149
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_general_nonminimal_e_dual_gaussian.txt",
+          "sha256": "5759c25e9f7c348e2622827e24b6bafcb25539a53629dc99d2f2b03ae127fdd7",
+          "bytes": 2402
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_minimal_propagating",
+      "theory": "examples/torsion_gertsenshtein/theory_minimal_propagating.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_minimal_propagating.json",
+      "derivation_hash": "71ab9ada4d75646b44af77b896ca0d8b9ba8c3e4bed5179694b42df4a7fd179a",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_minimal_propagating.json",
+          "sha256": "b5b8e4ffc0ee8323a5759816c431ec9981f8c18fff7b5fbd783f92546c43d01b",
+          "bytes": 65416
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_minimal_propagating.summary.txt",
+          "sha256": "a8cd62a5025bb04f711b490ca47bc93becbe4d17e45c16020c9cfb113a0e1c88",
+          "bytes": 4956
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_minimal_propagating.families.txt",
+          "sha256": "70c30e41e59914af3a0dadf8542234ac4eef4cdea5d4a3c83f7ee36675ba3dca",
+          "bytes": 973
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_minimal_propagating.txt",
+          "sha256": "d3fd35e98cd62eb7cf15e7c27d22139896af3357dfe9784792bac25d395390d1",
+          "bytes": 2098
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_minimal_propagating_e0_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.json",
+      "derivation_hash": "e917756134b843d9a1501d2febbac2d307689af74547dfb9e03bd676daf969bb",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.json",
+          "sha256": "355fb0e2974ab2e486dbcbaeb30d90858b0ddc53aca3b42167af399e2e86cbb1",
+          "bytes": 133371
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.summary.txt",
+          "sha256": "6174f6633a08b33f48d78a303a6907822c970051dd38a62b6147effbdd1448f1",
+          "bytes": 5863
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.families.txt",
+          "sha256": "0bb49c9ddee0079db1dd6118da2c74fd489d3299fd5e1bfb0376fc36a653cfac",
+          "bytes": 1091
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.txt",
+          "sha256": "b2f87967fcd0dfbd5ef5ab82ba95007d1b44baf113fda81c546599bf0e1c2b43",
+          "bytes": 2272
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_nonminimal",
+      "theory": "examples/torsion_gertsenshtein/theory_nonminimal.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_nonminimal.json",
+      "derivation_hash": "a1c8ee586f50cc4f23393687ed65f03a943970cdfe6ecc0681c070fed4564207",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_nonminimal.json",
+          "sha256": "26b2fa3c07ce30667088e4647d0a85ce453f9fa659416af90eaa1d3eaa502a17",
+          "bytes": 116061
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_nonminimal.summary.txt",
+          "sha256": "5393f8691160038383d705cfbd2baf4afe6c0225e620271f231667ef16d06bb1",
+          "bytes": 8598
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_nonminimal.families.txt",
+          "sha256": "4597845a901088833c37a315cfa6032b33467114b4a32d6d9c2336eddd19572f",
+          "bytes": 1077
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_nonminimal.txt",
+          "sha256": "112b656d249b01ba74d2577bf9ff1b3101ca5f5226ac22aaefd87207768fc29f",
+          "bytes": 2200
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_nonminimal_e_dual_gaussian",
+      "theory": "examples/torsion_gertsenshtein/theory_nonminimal_e_dual_gaussian.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_nonminimal_e_dual_gaussian.json",
+      "derivation_hash": "32298d0b5492ee5cf5ceb7482a21ce2b794c98d5afee1ed7cbb553bbebfd0b58",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_nonminimal_e_dual_gaussian.json",
+          "sha256": "5a2e7439a5072443f1f8b7ea20d05ccb18f9c5f7591054acec89304c645f5fb4",
+          "bytes": 227406
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_nonminimal_e_dual_gaussian.summary.txt",
+          "sha256": "07f9b2fc3c24674b176583494852363bba1ccbadbcee6b6015b7638f11d0f6ab",
+          "bytes": 9390
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_nonminimal_e_dual_gaussian.families.txt",
+          "sha256": "dda00d9d4be0a3877a902e12740e1fb57684cc1c0eda16c9f010ed9b5d7a979f",
+          "bytes": 1125
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_nonminimal_e_dual_gaussian.txt",
+          "sha256": "f7b122eee825f0753549f0259e31969ef275170d056ad42641269b067724502c",
+          "bytes": 2370
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_parity_odd",
+      "theory": "examples/torsion_gertsenshtein/theory_parity_odd.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_parity_odd.json",
+      "derivation_hash": "84cdc5771a09e7a09498e07043e92d5aef7d601edbfa3bb0c4095be4646c3b7e",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_parity_odd.json",
+          "sha256": "7916bec15d65ab754005069711d7548e5e8767cb8207a60cb4021cf788faeaca",
+          "bytes": 310356
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_parity_odd.summary.txt",
+          "sha256": "751740f59c6bf00471f4958487bd4e0a98f7adc7da846e92ce06385fd45fbb02",
+          "bytes": 17053
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_parity_odd.families.txt",
+          "sha256": "3085139300db0fba45c0a668aee33fca0d4e9eee0bda2535e6c1d4f873430756",
+          "bytes": 1077
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_parity_odd.txt",
+          "sha256": "b706e9cde63a11a8931c20375da655f7d3998dae65f1d809eccfaf24cc5d689c",
+          "bytes": 2200
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_parity_odd_minimal",
+      "theory": "examples/torsion_gertsenshtein/theory_parity_odd_minimal.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_parity_odd_minimal.json",
+      "derivation_hash": "1970fca1735b8a55ac83bb66bb5d99ac3127e63041f6d047645f317c90c5c9c3",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_parity_odd_minimal.json",
+          "sha256": "cc701607fbca9918579dfdeecfc29d52a175d3ba87814d7d40ac00f195017a43",
+          "bytes": 95438
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_parity_odd_minimal.summary.txt",
+          "sha256": "1b0e5fafb7dffde0add4213100fa055f58d245653e0628a25c1613ef240d9a56",
+          "bytes": 7752
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_parity_odd_minimal.families.txt",
+          "sha256": "afefec258c90588c4b419bb7259a9379409e7d5dce840e0ec2515627b09fcc56",
+          "bytes": 1014
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_parity_odd_minimal.txt",
+          "sha256": "f3ef9a265fe42d5c9ffcfef96630b4269740cdcaf946e8cd8dabb0e1ad2b25c9",
+          "bytes": 2094
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    },
+    {
+      "id": "torsion_gertsenshtein_propagating",
+      "theory": "examples/torsion_gertsenshtein/theory_propagating.toml",
+      "source_spec": "examples/data/torsion_gertsenshtein_propagating.json",
+      "derivation_hash": "9dddca324a31da9686d618ae18fff90196b32781bbb41d286e633940033065e7",
+      "has_metadata_parameters": false,
+      "artifacts": {
+        "spec": {
+          "path": "specs/torsion_gertsenshtein_propagating.json",
+          "sha256": "e1980de9811bb1565a79dab53ec2e781959996e57a616cdde4f4bf5b63035b15",
+          "bytes": 120365
+        },
+        "inspect_summary": {
+          "path": "inspect/torsion_gertsenshtein_propagating.summary.txt",
+          "sha256": "66ef2038fe62b65974d2eaac2494a335d774427fc12d533504c54e50031cba00",
+          "bytes": 10322
+        },
+        "inspect_families": {
+          "path": "inspect/torsion_gertsenshtein_propagating.families.txt",
+          "sha256": "dcdf110e3e0b160836be9e722ddebaa7c8532264f869217d0e006742899b33e3",
+          "bytes": 1016
+        },
+        "validate": {
+          "path": "validate/torsion_gertsenshtein_propagating.txt",
+          "sha256": "b8a76e1d51eae8c5c0fbb1d5d796106c7bed22f39f650afa8c0cf24d85a0005e",
+          "bytes": 2066
+        }
+      },
+      "exits": {
+        "inspect_summary": 0,
+        "inspect_families": 0,
+        "validate": 1,
+        "validate_stability": 1
+      },
+      "stability_error_class": "symbolic-coefficient-undefined"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gertsenshtein/theory_ungauged.toml
+# spec: examples/data/gertsenshtein_ungauged.json
+# command: tidal --no-banner inspect examples/data/gertsenshtein_ungauged.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  a_0 gradient_x(h_2) ?
+  a_0 laplacian_x(a_0) eff>0
+  a_1 gradient_x(h_5) ?
+  a_1 laplacian_x(a_1) eff>0
+  a_2 first_derivative_t(h_3) ?
+  a_2 gradient_x(h_0) ?
+  a_2 gradient_x(h_4) ?
+  a_2 gradient_x(h_7) ?
+  a_2 gradient_x(h_9) ?
+  a_2 laplacian_x(a_2) eff>0
+  a_3 first_derivative_t(h_2) ?
+  a_3 laplacian_x(a_3) eff>0
+  h_0 gradient_x(a_2) ?
+  h_0 identity(h_0) eff>=0
+  h_0 identity(h_4) eff>=0
+  h_0 identity(h_7) eff<=0
+  h_0 identity(h_9) eff<=0
+  h_0 laplacian_x(h_4) eff>0
+  h_0 laplacian_x(h_7) eff>0
+  h_1 gradient_x(v_h_6) eff>0
+  h_1 identity(h_1) eff<=0
+  h_1 laplacian_x(h_1) eff<0
+  h_2 first_derivative_t(a_3) ?
+  h_2 gradient_x(a_0) ?
+  h_2 gradient_x(v_h_8) eff>0
+  h_2 identity(h_2) eff>=0
+  h_2 laplacian_x(h_2) eff<0
+  h_3 first_derivative_t(a_2) ?
+  h_3 gradient_x(v_h_4) eff<0
+  h_3 gradient_x(v_h_7) eff<0
+  h_3 identity(h_3) eff>=0
+  h_4 d2_t(h_7) eff>0
+  h_4 d2_t(h_9) eff>0
+  h_4 gradient_x(a_2) ?
+  h_4 gradient_x(v_h_3) eff<0
+  h_4 identity(h_0) eff>=0
+  h_4 identity(h_4) eff>=0
+  h_4 identity(h_7) eff>=0
+  h_4 identity(h_9) eff>=0
+  h_4 laplacian_x(h_0) eff>0
+  h_4 laplacian_x(h_7) eff<0
+  h_5 gradient_x(a_1) ?
+  h_5 identity(h_5) eff<=0
+  h_5 laplacian_x(h_5) eff>0
+  h_6 gradient_x(v_h_1) eff>0
+  h_6 identity(h_6) eff<=0
+  h_7 d2_t(h_4) eff>0
+  h_7 d2_t(h_9) eff>0
+  h_7 gradient_x(a_2) ?
+  h_7 gradient_x(v_h_3) eff<0
+  h_7 identity(h_0) eff<=0
+  h_7 identity(h_4) eff>=0
+  h_7 identity(h_7) eff<=0
+  h_7 identity(h_9) eff<=0
+  h_7 laplacian_x(h_0) eff>0
+  h_7 laplacian_x(h_4) eff<0
+  h_8 gradient_x(v_h_2) eff>0
+  h_8 identity(h_8) eff<=0
+  h_9 d2_t(h_4) eff>0
+  h_9 d2_t(h_7) eff>0
+  h_9 gradient_x(a_2) ?
+  h_9 identity(h_0) eff<=0
+  h_9 identity(h_4) eff>=0
+  h_9 identity(h_7) eff<=0
+  h_9 identity(h_9) eff<=0
+#--- stderr ---
+
+#--- end ---

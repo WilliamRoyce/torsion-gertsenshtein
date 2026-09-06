@@ -1,0 +1,215 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/graviton_torsion/theory.toml
+# spec: examples/data/graviton_torsion.json
+# plain-command: tidal --no-banner validate examples/data/graviton_torsion.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/graviton_torsion.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'alpha1' (used in: t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[WARN] Parameter 'alpha2' (used in: t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[WARN] Parameter 'alpha3' (used in: t_0, t_1, t_10, t_13, t_15, t_17, t_2, t_20, t_22, t_23, t_6, t_9) has no default value
+[WARN] Parameter 'b5' (used in: h_0, h_3, h_4, h_7, h_9, t_10, t_13, t_17, t_2, t_20, t_6) has no default value
+[WARN] Parameter 'kappa' (used in: h_0, h_1, h_2, h_3, h_4, h_5, h_6, h_7, h_8, h_9, t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[WARN] hamiltonian_terms[0] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[1] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[2] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[3] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[4] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[5] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[6] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[7] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[8] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[9] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[10] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[11] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[12] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[13] has order_in_eps=1 but coefficient_symbolic ('-kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[14] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[15] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[16] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[17] has order_in_eps=1 but coefficient_symbolic ('alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[18] has order_in_eps=1 but coefficient_symbolic ('alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[19] has order_in_eps=1 but coefficient_symbolic ('1/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[20] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[21] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[22] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[23] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[24] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[25] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[26] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[27] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[28] has order_in_eps=1 but coefficient_symbolic ('-2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[29] has order_in_eps=1 but coefficient_symbolic ('-3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[30] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[31] has order_in_eps=1 but coefficient_symbolic ('-kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[32] has order_in_eps=1 but coefficient_symbolic ('-2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[33] has order_in_eps=1 but coefficient_symbolic ('3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[34] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[35] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[36] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[37] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[38] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[39] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[40] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[41] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[42] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[43] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[44] has order_in_eps=1 but coefficient_symbolic ('-2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[45] has order_in_eps=1 but coefficient_symbolic ('3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[46] has order_in_eps=1 but coefficient_symbolic ('-2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[47] has order_in_eps=1 but coefficient_symbolic ('3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[48] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[49] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[50] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[51] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[52] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[53] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[54] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[55] has order_in_eps=1 but coefficient_symbolic ('alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[56] has order_in_eps=1 but coefficient_symbolic ('alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[57] has order_in_eps=1 but coefficient_symbolic ('1/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[58] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[59] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[60] has order_in_eps=1 but coefficient_symbolic ('-2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[61] has order_in_eps=1 but coefficient_symbolic ('-3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[62] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[63] has order_in_eps=1 but coefficient_symbolic ('-kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[64] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[65] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[66] has order_in_eps=1 but coefficient_symbolic ('-2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[67] has order_in_eps=1 but coefficient_symbolic ('3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[68] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[69] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[70] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[71] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[72] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[73] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[74] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[75] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[76] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[77] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[78] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[79] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[80] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[81] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[82] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[83] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[84] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[85] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[86] has order_in_eps=1 but coefficient_symbolic ('-2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[87] has order_in_eps=1 but coefficient_symbolic ('-3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[88] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[89] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[90] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[91] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[92] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[93] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[94] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[95] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[96] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[97] has order_in_eps=1 but coefficient_symbolic ('alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[98] has order_in_eps=1 but coefficient_symbolic ('alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[99] has order_in_eps=1 but coefficient_symbolic ('1/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[100] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[101] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[102] has order_in_eps=1 but coefficient_symbolic ('-2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[103] has order_in_eps=1 but coefficient_symbolic ('-3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[104] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[105] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[106] has order_in_eps=1 but coefficient_symbolic ('2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[107] has order_in_eps=1 but coefficient_symbolic ('3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[108] has order_in_eps=1 but coefficient_symbolic ('-2*alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[109] has order_in_eps=1 but coefficient_symbolic ('-3/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[110] has order_in_eps=1 but coefficient_symbolic ('2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[111] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[112] has order_in_eps=1 but coefficient_symbolic ('-2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[113] has order_in_eps=1 but coefficient_symbolic ('3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[114] has order_in_eps=1 but coefficient_symbolic ('2*alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[115] has order_in_eps=1 but coefficient_symbolic ('-3/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[116] has order_in_eps=1 but coefficient_symbolic ('-2*alpha1') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[117] has order_in_eps=1 but coefficient_symbolic ('-alpha2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[118] has order_in_eps=1 but coefficient_symbolic ('-alpha3') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[119] has order_in_eps=1 but coefficient_symbolic ('-1/4*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[120] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[121] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[122] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[123] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[124] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[125] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[126] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[127] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[128] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[129] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[130] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[131] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[132] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[133] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[134] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[135] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[136] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[137] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[138] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[139] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[140] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[141] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[142] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[143] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[144] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[145] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[146] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[147] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[148] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[149] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[150] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[151] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[152] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[154] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[155] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[156] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[157] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[158] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[159] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[162] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[163] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[164] has order_in_eps=1 but coefficient_symbolic ('-5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[165] has order_in_eps=1 but coefficient_symbolic ('5/(4*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[169] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[170] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[171] has order_in_eps=1 but coefficient_symbolic ('-5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[172] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[173] has order_in_eps=1 but coefficient_symbolic ('5/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[189] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[190] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[191] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[192] has order_in_eps=1 but coefficient_symbolic ('1/(2*kappa^2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[193] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[194] has order_in_eps=1 but coefficient_symbolic ('-1/2*1/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[210] has order_in_eps=1 but coefficient_symbolic ('-2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[211] has order_in_eps=1 but coefficient_symbolic ('-2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[212] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[213] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[214] has order_in_eps=1 but coefficient_symbolic ('kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[215] has order_in_eps=1 but coefficient_symbolic ('-kappa^(-2)') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[223] has order_in_eps=1 but coefficient_symbolic ('2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[226] has order_in_eps=1 but coefficient_symbolic ('-2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[227] has order_in_eps=1 but coefficient_symbolic ('2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[231] has order_in_eps=1 but coefficient_symbolic ('-2/kappa^2') does not mention any declared small_parameter ['b5'].  Re-derive the theory if the JSON predates v0.36.
+[WARN] hamiltonian_terms[253].factor_a.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] hamiltonian_terms[253].factor_b.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] hamiltonian_terms[254].factor_a.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] hamiltonian_terms[254].factor_b.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] hamiltonian_terms[255].factor_a.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] hamiltonian_terms[255].factor_b.operator='mixed_2_0_0_0' encodes time-derivative order 2.  This is the irreducible LPS residue of the constraint-promotion case (the small parameter promotes an algebraic constraint to a higher-derivative dynamical field).  See docs/tex/perturbative_reduction_constraint_barrier.tex and issue #321 for the architectural barrier.
+[WARN] Constraint-promotion case detected for fields ['h_4', 'h_7', 'h_9'].  Lagrangian Perturbative Substitution (LPS, v6 Phase 2) cannot reduce these theories' Hamiltonians at the standard substitution level.  The JSON's existing hamiltonian_terms are the pre-LPS form (containing mixed_T_* with T>=2 residues).  See issue #321 and docs/tex/perturbative_reduction_constraint_barrier.tex for the architectural barrier and three open research directions.
+[OK] graviton_torsion.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '1/(2*kappa^2)' (Python form: '1/(2*kappa**2)'): name 'kappa' is not defined
+#--- end ---

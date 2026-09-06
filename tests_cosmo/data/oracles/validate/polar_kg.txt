@@ -1,0 +1,20 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/polar_kg/theory.toml
+# spec: examples/data/polar_kg.json
+# plain-command: tidal --no-banner validate examples/data/polar_kg.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/polar_kg.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'polm2' (used in: phi_0) has no default value
+[OK] polar_kg.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-polm2' (Python form: '-polm2'): name 'polm2' is not defined
+#--- end ---

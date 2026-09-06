@@ -1,0 +1,15 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gravitational_waves/theory.toml
+# spec: examples/data/linearized_gravity.json
+# command: tidal --no-banner inspect examples/data/linearized_gravity.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  h_5 laplacian_z(h_5) eff>0
+  h_7 laplacian_z(h_7) eff>0
+#--- stderr ---
+
+#--- end ---

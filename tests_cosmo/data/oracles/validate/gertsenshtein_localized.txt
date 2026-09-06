@@ -1,0 +1,22 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gertsenshtein/theory_localized.toml
+# spec: examples/data/gertsenshtein_localized.json
+# plain-command: tidal --no-banner validate examples/data/gertsenshtein_localized.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/gertsenshtein_localized.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'Bpeak' (used in: a_1, a_2, h_5, h_7) has no default value
+[WARN] Parameter 'R' (used in: a_1, a_2, h_5, h_7) has no default value
+[WARN] Parameter 'kappa' (used in: h_5, h_7) has no default value
+[OK] gertsenshtein_localized.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-((Bpeak*x[])/(E^(x[]^2/(2*R^2))*R^2))' (Python form: '-((Bpeak*x)*exp(-(x**2/(2*R**2)))/(R**2))'): name 'Bpeak' is not defined
+#--- end ---
