@@ -196,6 +196,8 @@ them, there was simply no index.
 | **Linearity enforcement** | **Ours, not PSALTer's** — `NonLinearCouplings` is never thrown and a bare numeric coefficient passes silently. Our validator is load-bearing for correctness | H8, 2026-09-04 | #522, #527 |
 | **WXF** | Something we **produce**, not an interchange we receive: PSALTer writes no WXF and populates two association keys; the exporter reads private `$Local*` globals | H8, 2026-09-04 | #523 |
 | **WS6 dependency** | **Not** independent — contradicting an earlier claim in this document; H2's dependency graph governs | H4 correction, 2026-08-31 | `observable_ladder.md` |
+| **WKB sequencing** | Matrix-WKB is **built alongside Magnus in the first WS3 handoff**, not gated behind a bake-off. The bake-off decides composition and thresholds on measured numbers; no candidate is discounted on paper estimates | user, 2026-09-05/06 | `solver_design.md` §8/§12, #519 |
+| **Admissible theories** | Scoped **explicitly**: only theories admitting the assumed background are in scope, the user judges whether theirs qualifies, and the background-EOM residual is a **first-class per-theory gate** rather than a diagnostic | user, 2026-09-05 | `spectator_route.md` §3, #501, #531 |
 | **Verification gates** | Made **able to fail** — `tidalcosmo/` had been outside pyright, coverage, `testpaths` and CI, and the never-import-legacy rule had no test | coherence pass, 2026-09-04 | `8b54fe6e`, #524 |
 
 ### Still open, deliberately
@@ -444,26 +446,157 @@ post-dispatch scope extension — both solver kinds designed — plus the 2026-0
 directions: Wolfram-at-derivation-only symbolic policy, experimentation-over-reading
 bake-off, uniform+stochastic B̄ modes, soft classifier.)
 
+## Implementation delegation protocol
+
+How implementation work leaves this program document and comes back. **The wave board
+below is the single source of truth for where things stand** — a session with no other
+context should be able to read it and the queue, and know what to do next.
+
+### The loop
+
+1. **Orchestrator writes prompts** into `docs/cosmology/handoffs/` as an `I-<issue>.md`
+   file (the `I-` series; `H-` was the research series, all complete).
+2. **The user dispatches** each prompt to a separate session. *This orchestrator session
+   never launches them.*
+3. A delegate works in **its own git worktree** off `feat/cosmology-program`
+   (`git worktree add /tmp/tidal-i<issue> -b cosmo/i<issue>-<slug> feat/cosmology-program`),
+   **never merges**, and reports its branch back.
+4. **The user relays a short update**; the orchestrator runs the merge checklist, merges,
+   and updates the board **in the same commit**.
+5. At a wave boundary the orchestrator updates memory, and the next wave is **planned
+   fresh** rather than executed from a pre-baked plan — later waves are shaped by what
+   earlier ones found.
+
+### Prompt template
+
+Header (issue · milestone · wave · **Wolfram lane y/n** · dependencies · **owned paths**)
+→ context and an *ordered reading list* naming sections, not whole documents → the
+**interface contract** (what it consumes, what it produces, with exact references) →
+**quantitative success criteria stated before any code**, plus the tests to add under
+`tests_cosmo/` → a **scope fence** naming the adjacent temptations explicitly → working
+rules → the **flaw protocol** → the report-back format.
+
+**Working rules every prompt carries:**
+
+- Worktree off `feat/cosmology-program`; branch `cosmo/i<issue>-<slug>`; **never merge**;
+  never touch the shared working directory (it is the orchestrator's alone).
+- **Never version-bump, tag, or edit the changelog.** This overrides `CLAUDE.md`'s
+  default-to-bumping rule: parallel delegates share `.git` refs, so concurrent bumps
+  guarantee a `pyproject.toml` conflict and a tag collision. The orchestrator bumps once
+  per wave.
+- **Stay inside your owned paths** (listed in the header). Two sessions writing the same
+  directory is the one collision a worktree does not prevent.
+- One `wolframscript` at a time, machine-wide — only a prompt flagged for the Wolfram lane
+  may start a kernel.
+- Conventional commits; no attribution trailers.
+
+**Flaw protocol** — what to do on finding the design wrong:
+
+- A **design-document contradiction or error**: amend it *at the instruction site*, pinned
+  to the version, and report it. Do not work around it silently and do not only note it in
+  the report — the next reader of that instruction must see the correction.
+- An **architectural contradiction** (the design cannot be built as specified): **stop and
+  report.** Do not redesign in a delegate session.
+
+**Report back:** branch name · gates run, with their output · amendments made · anything
+discovered that the orchestrator should route · suggested next step.
+
+### Orchestrator merge checklist
+
+Run for every reported branch — this is what keeps coherence continuous rather than
+requiring another end-of-phase sweep:
+
+1. Read the **full diff**, not a summary.
+2. Run every gate: `ruff check`, `ruff format --check`, `pyright`, `cspell`, **both**
+   suites, the boundary test.
+3. Verify the prompt's success criteria **positively, from artifacts** — never from the
+   session's report alone.
+4. Propagate any instruction-site amendment the session should have made and did not.
+5. Merge; close issues with commit references; **update the wave board and the queue in
+   the merge commit**; put a status header on the prompt file.
+6. At a wave boundary: memory + backup.
+
+### The Wolfram lane
+
+One `wolframscript` machine-wide, so **at most one lane-flagged session is ever active** —
+the orchestrator included. The next occupant starts only once the previous lane work is
+**merged and its gate independently re-run**: once a long run begins, the lane offers no
+verification window. Runs that can span a day (the Stage-1 cost measurement, 24 h ceiling)
+are **launch-and-collect** — a detached script, collected by a later session.
+
+### Wave board
+
+Status: `drafted → dispatched → reported → merged`.
+
+| Wave | Prompt | Issue | Lane | Owned paths | Branch | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | I-524 — packaging, extras, CI lane | #524 | — | `pyproject.toml`, `.github/`, `tidalcosmo/__init__.py`, `tidalcosmo/cli/` | — | drafted |
+| 0 | I-525 — freeze the legacy oracle | #525 | — | `scripts/oracles/`, `tests_cosmo/data/` | — | drafted |
+| 0 | I-526 — install PSALTer, Tier-1 gate | #526 | **yes** | `scripts/install-psalter.sh`, `scripts/verify-wolfram-setup.sh`, `tests_cosmo/fixtures/` | — | drafted |
+| 1 | I-532 — CAMB seam, background protocol, flag schema | #532 | — | `tidalcosmo/{background,spectator,validity}/` | — | planned |
+| 1 | I-503 — per-operator dispersion + zero-mode scope | #503 | — | `research/lagrangian_enumeration/`, `docs/` | — | planned |
+| 1 | I-S1A — Stage-1 Python side | #527 | — | `tidalcosmo/{config,derive}/` (Python only), `tidalcosmo/spectrum/` | — | planned |
+| 2 | I-S1B — Stage-1 Wolfram side + cost run | #495 | **yes** | `tidalcosmo/derive/wolfram/` | — | outline |
+| 2 | M1b — Cobaya Theory + ΛCDM posterior | — | — | `tidalcosmo/{spectator,presets,likelihoods}/` | — | outline |
+| 2 | M2/O1 — CAMB fork re-apply | #498 | — | fork repo + `tidalcosmo/background/` | — | outline |
+
+**Wave 3+, named only:** WS2 FRW derive (lane), then the O2 fan-out — WS2 background +
+residual ∥ WS3 solver ∥ WS4 line-of-sight ∥ WS6 Stage-2. WS3's first handoff carries
+**Magnus and matrix-WKB together** (`solver_design.md` §12), written from the ground up for
+a time-dependent background; nothing is ported from `modal.py` and it is not an oracle.
+
+### Wave-boundary checklist
+
+What the next planning session does *first*, before planning anything:
+
+1. Confirm every row of the wave reads `merged`.
+2. Re-run the full gate set once on the merged trunk.
+3. Read the delegates' reported discoveries and **route** each — amend at the site, open an
+   issue, or fold into the next wave's scope.
+4. Update memory (`project_cosmology_program.md`, the MEMORY.md status line) and back up.
+5. *Then* plan the next wave, in detail; the one after it in outline; nothing beyond.
+
 ## What to implement next
 
-The program is **design-complete** and entering implementation. In dependency order:
+The program is **design-complete**, has passed the pre-implementation scientific review
+(`docs/cosmology/scientific_review.md`), and is entering implementation.
+**Wave 0 is drafted and ready to dispatch** — see the wave board above. In dependency order:
 
 1. **#524 (M0)** — packaging: second console script, extras, YAML package-data, the CI lane.
-   The verification gates themselves are already live (`8b54fe6e`).
+   The verification gates themselves are already live (`8b54fe6e`, `7b6f7a17`).
 2. **#525 (M0.5)** — freeze the legacy oracle as committed data, **before any porting
    begins**. This is what decouples port order from deletion order and makes retiring
-   `tidal/inference/` at M1 safe.
-3. **#491 / M1 → O0** — `config/`, `background/camb_seam.py`, `spectator/` pass-through,
-   `validity/flags.py`. Gate: sub-percent agreement with CAMB over `2 ≤ ℓ ≤ 2500`, and a
-   standard ΛCDM posterior.
-4. **#498 / M2 → O1** — the CAMB fork first (re-apply off `2.0.3`), then `TabulatedBackground`.
+   `tidal/inference/` at M1b safe.
+3. **#532 / M1a → O0 (seam half)** — `background/protocol.py` (defined by investigating
+   CAMB's API; it is the session's first deliverable), `background/camb_seam.py`,
+   `spectator/` pass-through, `validity/flags.py` with **both flag severities** defined.
+   Gate: **machine-precision identity** on the pass-through path, seam-product spot checks,
+   a gauge-mismatch refusal test, flag-schema unit tests.
+
+   > *Amended 2026-09-06.* This step pointed at **#491**, which is the WS2 **symbolic**
+   > tracker — a session dispatched against it would pull Wolfram work into a non-lane
+   > slot. M1 now splits into M1a/M1b (#532 is the new M1a issue; M1 had none). Its old
+   > gate, "sub-percent agreement with CAMB", was **circular**: a pass-through returns
+   > CAMB's own arrays, so it passes by construction while staying loose enough to hide a
+   > unit or `ℓ(ℓ+1)/2π` slip.
+4. **M1b → O0 (inference half)** — the Cobaya `Theory` class and packaging. Gate: our
+   pass-through Theory's ΛCDM posterior ≡ a plain-CAMB Cobaya run within sampling noise,
+   plus #515's duplicated-compute benchmark. Retires `tidal/inference/`.
+5. **#498 / M2 → O1** — the CAMB fork first (re-apply off `2.0.3`), then `TabulatedBackground`.
 
 **In parallel, unblocked by the above:** **#526** — install PSALTer and pass the Tier-1 gate.
 It is the single blocker behind #521, #522 and #523, so it converts three stalled issues into
 one afternoon. WS6 (#495) is buildable any time after M0.
 
 **Also parallel, and it gates the settled rung order:** **#503** — the per-operator photon
-dispersion relations. Whether O4a is the cheap rung depends on its answer.
+dispersion relations. Whether O4a is the cheap rung depends on its answer — though note
+#503 settles only *half* the precondition (the frequency exponent `n`); "`β` constant over
+recombination" is a property of the torsion zero-mode's evolution and needs its own owner.
+
+**Open physics question, tracked and scoped:** **#531** — whether an FRW background solves
+the PGT field equations. The thesis proves `T̄ = 0` exact on *flat Minkowski*; FRW is open.
+Handled by scoping admissible theories, testing the background-EOM residual per theory
+(#501), and surveying the research rather than attempting to settle it.
 
 ## Verification gates
 

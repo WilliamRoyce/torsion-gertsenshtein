@@ -29,6 +29,7 @@ produced by eight sequential handoff sessions (H1–H8).
 | `spectrum_design.md` | H6 — the two-stage spectrum architecture; Schur-complement kinetic-matrix criterion (arXiv:2506.02111) as the primary algorithm |
 | `stage1_engineering_plan.md` | H8 — Stage-1 engineering **study**: six live-source findings correcting H6 (#521, #522, #523) |
 | `birefringence_notes.md` | O4 foundation: rotation formulae, the per-operator frequency-scaling problem, likelihood options |
+| `scientific_review.md` | **The pre-implementation review (2026-09-06).** Per-rung verdicts, a 40-finding disposition ledger, the ranked risk register, and the interfaces that must be defined before their consumers are built |
 | `planning_session_record.md` | Archived planning transcript. **Not authoritative** — kept for provenance only |
 | `handoffs/H1–H6, H8.md` | The prompts each session was given. All complete; each carries a status header. Kept as the record of *what was asked* |
 
