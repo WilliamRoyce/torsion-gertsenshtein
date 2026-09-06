@@ -6,8 +6,8 @@ The following versions of this project are currently supported with security upd
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.52.x   | :white_check_mark: |
-| < 0.52   | :x:                |
+| 0.53.x   | :white_check_mark: |
+| < 0.53   | :x:                |
 
 ## Scope
 
