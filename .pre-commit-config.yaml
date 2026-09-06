@@ -14,6 +14,11 @@ repos:
       # Prevent giant files from being committed
       - id: check-added-large-files
         args: [--maxkb=1000]
+        # The frozen legacy oracle (GH #525) copies two derived specs that exceed
+        # the cap -- 1.0 and 1.6 MB. They are byte-for-byte copies of files
+        # already tracked under examples/data/, so the cap would reject a
+        # duplicate of something the repo already carries.
+        exclude: ^tests_cosmo/data/oracles/(specs|inspect|validate)/|^tests_cosmo/data/oracles/manifest\.json$
       # Check for files that would conflict in case-insensitive filesystems
       - id: check-case-conflict
       # Check for merge conflicts
@@ -24,11 +29,17 @@ repos:
       # Check TOML files for parseable syntax
       - id: check-toml
       # Ensure files end in a newline
+      # The oracle's generated subtrees join outputs/ here for a sharper reason: 45 of
+      # its 46 spec copies are byte-for-byte copies of committed files that have
+      # no trailing newline. Appending one would make the copy differ from its
+      # source, and the freeze script would rewrite it on the next run -- a
+      # byte-for-byte gate (GH #525) that can never be clean. Scoped to the
+      # generated subtrees, so the hand-written README stays fixed up.
       - id: end-of-file-fixer
-        exclude: ^outputs/
+        exclude: ^(outputs/|tests_cosmo/data/oracles/(specs|inspect|validate)/|^tests_cosmo/data/oracles/manifest\.json$)
       # Remove trailing whitespace
       - id: trailing-whitespace
-        exclude: ^outputs/
+        exclude: ^(outputs/|tests_cosmo/data/oracles/(specs|inspect|validate)/|^tests_cosmo/data/oracles/manifest\.json$)
       # Check Python syntax
       - id: check-ast
       # Check for debugger imports
