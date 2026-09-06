@@ -942,6 +942,41 @@ for M6.
   New-package tests assert against **those files**, never against a live import or
   subprocess. Deleting legacy then costs nothing and cannot silently break the suite.
 
+  > **⚠ Amendment (I-525 session, 2026-09-06) — two of the three reasons given for copying
+  > the spec JSONs do not hold. The conclusion survives; the justification is replaced.**
+  >
+  > **What is not true.** All 48 spec JSONs are **git-tracked**; `examples/` appears in **no
+  > retire column** (M6 retires `tidal/`, `tests/` and the console script, not `examples/`);
+  > and there is **no plan anywhere to replace `examples/`**. So "copy them so they survive
+  > legacy's deletion" was never a real reason — deleting `tidal/` does not touch
+  > `examples/data/`, and version control already prevents loss.
+  >
+  > **Why the copies are nonetheless load-bearing** — the two reasons that actually apply:
+  >
+  > 1. **M3's own output location is undecided, and the oracle must not depend on it.** At M3
+  >    the corpus is re-derived under the new conventions (#513), and nothing states where
+  >    those specs are written. If they land in `examples/data/`, the old spec is overwritten
+  >    — and the reviewer of the §5.2 written mapping loses one side of the comparison at
+  >    exactly the moment it is needed. Copying decouples the oracle from a decision M3 has
+  >    not taken.
+  > 2. **#397 makes drift concrete.** **18 committed specs are known-defective** under an
+  >    open issue. Re-deriving them is legitimate; against a *referenced* corpus it would
+  >    leave frozen "fail" verdicts pointing at specs that now pass — an oracle silently
+  >    inconsistent with itself. A copy is a pin; a reference is a moving target.
+  >
+  > **Cost, measured:** 7.0 MB raw but **0.3 MB compressed**, which is what git stores —
+  > 0.3% of a 101 MB `.git`. The duplication objection is real but small.
+  >
+  > **Considered and rejected:** recording each spec's git blob SHA instead of copying. It
+  > gives the pin without duplication, but the mapping must be human-reviewable months
+  > later, and `git cat-file` reconstruction puts a step between reviewer and evidence
+  > (and degrades under shallow clones or exported archives).
+  >
+  > **Companion rule, added:** **if `tidal/` or `examples/data/` changes, re-run
+  > `scripts/oracles/` in the same commit.** Stated as an action rather than a prohibition —
+  > "never edit legacy" is unenforceable and would forbid fixing an open bug, whereas this
+  > is checkable at review and keeps the oracle honest by construction.
+
   > **Amendment (scientific review, 2026-09-06).** The fixture list above previously also
   > named *measured scalars* and *reference `C_ℓ` and transfer arrays*. Neither belongs at
   > M0.5:
