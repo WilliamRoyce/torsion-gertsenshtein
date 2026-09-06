@@ -30,7 +30,7 @@ $$P(g \to \gamma) = \sin^2(2\theta)\,\sin^2\!\Bigl(\frac{\Delta_{\mathrm{osc}}\,
 
 - **Massless limit** ($m_A^2 = 0$): $P = \sin^2(\kappa B_0 D/2)$ — standard Gertsenshtein (1962)
 - **Off-resonance** ($m_A^2 \gg \kappa B_0 \omega$): conversion suppressed as $P \propto (\kappa B_0/m_A^2)^2$
-- **Resonance**: when $m_A^2 = m_T^2$ (photon mass matches dark photon mass), $A_{\mathrm{osc}}$ is maximised
+- **Resonance**: when $m_A^2 = m_T^2$ (photon mass matches dark photon mass), $A_{\mathrm{osc}}$ is maximized
 
 The numerical solver reproduces this formula to < 0.04% across the full $m_A^2$ range.
 
@@ -71,11 +71,11 @@ Plain $R$ (not $\tilde{R}$): using $\tilde{R}$ (Riemann-Cartan) introduced an un
 
 This is **not** simply Holdom triviality. Holdom (1986) applies to massless fields; the dark photon here is massive. The real mechanism:
 
-After diagonalising the kinetic matrix (which has off-diagonal entries from $\delta_m F \cdot F_T$), the mass eigenstates have asymmetric mixing. The off-diagonal coupling in the equations of motion — i.e. how strongly $a$ sources $t$ and vice versa through mass mixing — is:
+After diagonalizing the kinetic matrix (which has off-diagonal entries from $\delta_m F \cdot F_T$), the mass eigenstates have asymmetric mixing. The off-diagonal coupling in the equations of motion — i.e. how strongly $a$ sources $t$ and vice versa through mass mixing — is:
 
 $$M_{ta} = \frac{-2\,\delta_m\,m_A^2}{4\delta_m^2 - \xi}$$
 
-where $m_A^2$ is the photon mass. In the vacuum ($m_A^2 = 0$), $M_{ta} = 0$ exactly. The photon is massless: after kinetic diagonalisation, the mass eigenstate for $a$ remains an exact zero-mass mode with no cross-coupling to $t$. The dark photon sits in an orthogonal eigenstate that the TT graviton initial condition cannot populate.
+where $m_A^2$ is the photon mass. In the vacuum ($m_A^2 = 0$), $M_{ta} = 0$ exactly. The photon is massless: after kinetic diagonalization, the mass eigenstate for $a$ remains an exact zero-mass mode with no cross-coupling to $t$. The dark photon sits in an orthogonal eigenstate that the TT graviton initial condition cannot populate.
 
 **This is an algebraic, not numerical, result** — it holds at all values of $\alpha$, $\xi$, $\delta_m$.
 

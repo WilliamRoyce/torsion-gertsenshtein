@@ -74,7 +74,7 @@ of gravity, with the conversion probability suppressed by the
 square of the Planck mass.
 
 Gertsenshtein himself in 1962 gave the formula and immediately
-recognised it was hopelessly small. Boccaletti and collaborators
+recognized it was hopelessly small. Boccaletti and collaborators
 in 1970 did the full analytic solution for a localized B-field
 region. Raffelt and Stodolsky in 1988 embedded the problem in
 the axion-photon-mixing framework, which is the modern standard
