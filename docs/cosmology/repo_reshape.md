@@ -515,7 +515,8 @@ the engine may be verb-shaped.
 > **Amendment (coherence pass, 2026-09-04):** this section previously read *"Not decided here … an open WS0 decision"*. H3 settled it
 > on 2026-08-31: **option (iii), our own solver chained to unmodified CAMB, for BOTH engines
 > over one shared core** (`solver_design.md` §6; `COSMOLOGY_PROGRAM.md`). The deciding
-> argument is structural rather than comparative — **no Boltzmann code has per-frequency
+> argument is structural rather than comparative — Boltzmann codes are `k`-resolved but
+> frequency-*integrated* (`solver_design.md` §2.1 amendment), so **no Boltzmann code has per-frequency
 > photon propagation**, so O3 is only possible this way, which settles the architecture
 > regardless of how O2 alone would have gone. #516 closed with it: learn from DISCO-EB
 > freely and cite it, never copy its code (GPL-3.0 against our MIT).
@@ -529,7 +530,7 @@ only through `background/protocol.py`, and receives `M(η, k)` from `perturbatio
 what sits behind that protocol changes one directory, not the package shape.
 
 H3's scope has widened since its prompt was written. H2 §0.1 showed that **O3 needs a second
-engine kind**: a 100 GHz CMB photon makes ~10²⁶ oscillations over a Hubble time, and no
+engine kind**: a 100 GHz CMB photon makes ~10²⁹ oscillations over a Hubble time, and no
 integrator steps through that, so the literature removes the carrier analytically and integrates
 only the slowly varying amplitude, with patch averaging along the line of sight. `solver/`
 therefore accommodates **two front-ends over a shared core**; H3 decides the internals.
@@ -909,10 +910,10 @@ for M6.
 > WS6 branch runs in parallel from M0, which puts it in apparent conflict with two rules
 > above. Both are resolved, not waived:
 >
-> - **M0.5's "before any porting begins"** governs the *legacy-behaviour* oracle — the
+> - **M0.5's "before any porting begins"** governs the *legacy-behavior* oracle — the
 >   capabilities whose equivalence is established against frozen legacy output. WS6's
 >   oracles are **PSALTer's own published artifacts** (`ParticleSpectrographCTEG.mx`, the
->   committed `.wxf` fixtures, the published inequalities), not frozen legacy behaviour, so
+>   committed `.wxf` fixtures, the published inequalities), not frozen legacy behavior, so
 >   the spectrum branch is not gated on M0.5. `stage1_engineering_plan.md` §4.3 does port
 >   one legacy function (the torsion/curvature decomposition helper); that is a genuine
 >   port and carries the §5.7 provenance requirements, but it needs no legacy oracle

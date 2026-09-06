@@ -91,9 +91,29 @@ a stand-in**:
 So the torsion was allowed to change *how fast the universe expands*, but not to have its own
 ripples that gravitate, cluster, free-stream, or carry anisotropic stress.
 
-**Including those torsion perturbations is precisely this project's work — it is O2, the
-first genuinely new result.** TorC names it as its own future work; we are building the
-engine that does it, for any Lagrangian.
+**Including those torsion perturbations is precisely this project's work.** TorC names it
+as its own future work; we are building the engine that does it, for any Lagrangian.
+
+> **⚠ Amendment (scientific review, 2026-09-06) — this section describes the *full-
+> backreaction* programme, not what O2 actually is.** The sentence above previously ended
+> "— it is **O2**, the first genuinely new result", and the bullets below list the new
+> sector contributing `δρ, δP` and anisotropic stress `σ` to the Einstein constraints.
+> **Those are explicitly out of scope in the strict spectator limit** —
+> `spectator_route.md` §4 lists "gravitational sourcing of scalar CMB anisotropies
+> (new-sector `δρ, σ` in the Einstein constraints)" as *not reachable*, because that is
+> perturbation-level backreaction: the axionCAMB-style full-component route, which our
+> route is cheaper than **precisely by declining to do it**.
+>
+> **What O2 actually is:** modified *tensor propagation* — the new sector alters how
+> gravitational waves propagate (friction `ν`, mass `μ`, speed `c_T`, derived from the
+> Lagrangian), carried through the tensor transfer function into B-modes. Propagation and
+> conversion effects on standard quanta, not gravitational sourcing by the new sector.
+>
+> This matters because this document is the one a newcomer is told to read first, so it is
+> where a wrong mental model of the whole programme would be formed. The material below is
+> kept — it correctly describes what a *Level 2 / full-backreaction* treatment would be, and
+> that remains a deliberate later extension (`COSMOLOGY_PROGRAM.md`: "a deliberate later
+> extension, never silently blended in"). Read it as *the road not taken, yet*.
 
 **Promoting to Level 2** means deriving the torsion perturbations' own equations of motion
 from the Lagrangian and evolving `δT(k,η)` alongside the standard species. **The linear
@@ -130,7 +150,22 @@ inferred parameters, and the Hubble-tension claim rests on those parameters.
 **The key architectural decision.** The ΛCDM sector is enormously well solved: photons,
 baryons, CDM, neutrinos, recombination, the full Boltzmann hierarchy, validated across 12
 independent codes to sub-percent agreement (arXiv:1709.09135). **We do not reimplement any of
-it.** We take it from CAMB and add only our new sector, coupled in through the Einstein
+it.**
+
+> **What the photon hierarchy actually resolves — `k`, not `ν`.** Worth stating plainly,
+> because it is the single fact that decides our architecture and the primer previously left
+> it out. A Boltzmann code integrates each Fourier mode `k` separately; what it evolves per
+> `k` is the photon **brightness multipole hierarchy `Θ_ℓ(k, η)`, integrated over photon
+> frequency**. The photon distribution is assumed to stay a blackbody whose *temperature*
+> perturbs, so the spectral shape is fixed: there is **one photon fluid per `k`, never a
+> photon state per frequency `ν`**.
+>
+> That matters because O3 and O4 are frequency-dependent physics — the plasma detuning goes
+> as `ω_pl²/2ω`, and birefringence runs as `ν⁰` or `ν²` depending on the operator. There is
+> simply no per-`ν` photon degree of freedom inside CAMB to attach that to, which is why we
+> chain onto CAMB and evolve our own small system rather than patching its Fortran
+> (`solver_design.md` §6). "`k`-resolved" and "`ν`-resolved" are different axes, and
+> conflating them is the most natural way to misread the whole design. We take it from CAMB and add only our new sector, coupled in through the Einstein
 equations. That is the entire reason to chain onto CAMB rather than write a Boltzmann code.
 
 **Do we have to evolve the photons?** Depends on the theory, and this is what orders the

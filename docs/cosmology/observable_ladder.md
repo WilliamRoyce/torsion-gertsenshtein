@@ -31,7 +31,7 @@ must resolve.
   every oscillation. This is the standard Boltzmann-code tensor problem, and it is what
   WS3's ladder (`handoffs/H3.md`) is designed around.
 - **O3** evolves *photons at CMB frequencies*: `ν ~ 100 GHz` is comoving
-  `k ≈ 2×10²² Mpc⁻¹`, some `10²⁶` oscillations between recombination and today. No
+  `k ≈ 6.5×10²⁵ Mpc⁻¹`, some `10²⁹` oscillations between recombination and today. No
   integrator steps through that. Every paper in this literature (Cembranos
   arXiv:2302.08186; Domcke & Garcia-Cely arXiv:2006.01161; He et al. arXiv:2312.17636;
   Kushwaha & Jain arXiv:2502.12517) removes the carrier analytically — writing the field
@@ -239,7 +239,7 @@ The thesis's own physics on an expanding background, and the program's stated co
 | Detuned flat limit | `P = (μ/ω_m)² sin²(ω_m D)`, `μ = κB₀/2`, `ω_m = √(Δ² + μ²)`, `Δ = (m_γ² − m_g²)/2ω` | ~1% |
 | Single patch on FRW, GR | Cembranos Eq. 34: `P = [Δ_M² e^{−Δ_g^I η}/(α²+β²)]·[sinh²(βη) + sin²(αη)]`, and the number `P = 8.6×10⁻¹²` at `ω = 10⁵ eV`, `B_T = 5 nG`, `n_e = 2.47×10⁻⁷ cm⁻³`, `η₀ = 3.7×10¹⁷ s`, `ℋ = 2.2×10⁻¹⁸ s⁻¹` | ~10% (their rounding) |
 | Graviton mass | `μ = 10⁻³³ eV` reproduces the GR number exactly | indistinguishable |
-| Friction sweep | `ν` at the GW170817 upper bound → `P = 2.09×10⁻¹³`; at the lower bound → `P = 1.67` | order of magnitude |
+| Friction sweep | `ν` at the GW170817 upper bound → `P = 2.09×10⁻¹³`; at the lower bound → `P = 1.67` **(⚠ formula check only — `P = 1.67` is unphysical and trips the program's own `P ≪ 1` validity flag by design: it is the `sinh²` growing branch of Cembranos eq. 34, i.e. exactly where the linearized treatment has broken down. Reproduce the number to validate the expression; never report it as a conversion probability, and expect the run to be flagged)** | order of magnitude |
 | Patch-averaged line of sight, GR | Domcke & Garcia-Cely: `𝓕 = 6.3×10⁻¹⁹ (B₀/nG)²(ω₀/T₀)²(Mpc/Δz₀)(I/10⁶)`; He et al.: `P ≈ 3.78×10⁻²⁰ (B/0.1 nG)²(f/f_eq)²(Mpc/Δl₀)(I/6×10⁶)` with `I(1100) ≈ 6.31×10⁶` | factor ~2 (conventions differ by `h` and the transverse `2/3`) |
 
 The flat-space target is **TIDAL's own formula on TIDAL's own setup**, which is why the

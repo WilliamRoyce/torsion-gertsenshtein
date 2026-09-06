@@ -10,7 +10,7 @@ below are measured, not estimated, unless marked otherwise. Claims sourced from 
 **TL;DR.** WS3 is **two solver problems, not one** (H2 §0.1): an **oscillation-resolving
 mode-equation engine** for O2 (gravitational waves, ~1–10³ oscillations per mode — step
 through them) and an **eikonal amplitude engine with patch averaging** for O3 (CMB-frequency
-photons, ~10²⁶ oscillations — carrier removed symbolically at derivation time, only
+photons, ~10²⁹ oscillations — carrier removed symbolically at derivation time, only
 slowly-varying amplitudes evolved). Recommended architecture: **our own solver chained to
 unmodified CAMB (option iii) for both engines, sharing one numerical core** — O3 is only
 possible this way, which settles the choice regardless of the O2 verdict. First
@@ -57,10 +57,23 @@ loop. Two distinct regimes (H2, `observable_ladder.md` §0.1):
 
 | | O2 (gravitational waves) | O3 (CMB photons) |
 | --- | --- | --- |
-| mode index | comoving `k ~ 10⁻⁴–1 Mpc⁻¹` | `ω ~ 100 GHz` ⇒ `k ≈ 2×10²² Mpc⁻¹` |
-| oscillations over `η₀ ≈ 1.4×10⁴ Mpc` | ~1–10³ | ~10²⁶ |
+| mode index | comoving `k ~ 10⁻⁴–1 Mpc⁻¹` | `ω ~ 100 GHz` ⇒ `k ≈ 6.5×10²⁵ Mpc⁻¹` |
+| oscillations over `η₀ ≈ 1.4×10⁴ Mpc` | ~1–10³ | ~10²⁹ |
 | steppable? | yes — the mode-equation engine (§8) | no — eikonal amplitude engine (§4, §7) |
 | per-call cost profile | budget-critical | `N_ω ~ 50 × N_η ~ 10³` small matrices, ≪ 1 s |
+
+> **Amendment (scientific review, 2026-09-06) — the O3 column's numbers were ~10³ low.**
+> They previously read `k ≈ 2×10²² Mpc⁻¹` and `~10²⁶` oscillations. At `ν = 100 GHz`,
+> `λ = c/ν = 3.0 mm`, so `k = 2π/λ ≈ 6.5×10²⁵ Mpc⁻¹` and `kη₀/2π ≈ 1.4×10²⁹` oscillations
+> over `η₀ ≈ 1.4×10⁴ Mpc`. The old pair was self-consistent but both members were three
+> orders low. **No conclusion changes** — the point is that neither figure is steppable,
+> and the corrected numbers make that case stronger, not weaker. Corrected at every site it
+> had propagated to (`observable_ladder.md`, `repo_reshape.md`, `COSMOLOGY_PROGRAM.md`'s
+> decisions register and handoff table, `tidalcosmo/solver/README.md`, `handoffs/H2.md`
+> and `H3.md`). Flagged because the figure is quoted as the program's headline motivation,
+> and B7's validity benchmark lowers `ω` relative to `|M|` by a stated factor — anything
+> that consumes these numbers quantitatively must use the corrected ones.
+
 
 **Budget, derived.** Inference needs ~10⁴–10⁵ likelihood calls; at CAMB's <1 s/call that
 is ~3–30 CPU-hours at parity. 10× slower stays feasible; 100× makes sampling impractical.
@@ -86,12 +99,41 @@ evaluated once per likelihood call on the η-grid** (per segment, per mode bucke
 batched arrays, and the steppers consume arrays, never evaluators. This is the single
 strongest argument for a shared numerical core (§7).
 
+> **Amendment (scientific review, 2026-09-06) — what this measurement does and does not
+> license.** The "`expm` is 0.4%" figure is quoted downstream (#518,
+> `tidalcosmo/solver/README.md`, the decisions register) without these two caveats:
+>
+> - **The numbers come from two different runs.** The component breakdown (probe ~13 ms,
+>   `CoefficientEvaluator.__init__` ~19 ms, `_build_evolution_matrices` ~30 ms, `expm`
+>   ~0.3 ms) sums to ~71 ms and belongs to the **72 ms** table in
+>   `MODAL_TEMPLATE_CACHE_RETROSPECTIVE.md`; **82.6 ms** is the separate template-OFF
+>   baseline in the same document. The ratio is ~0.4% either way, so the conclusion stands
+>   — but these are not one measurement and should not be presented as one.
+> - **It was measured on a different problem shape.** That fixture has 34 fields and a
+>   **30×30** dynamical block at 17 Fourier modes; this design targets `n ≈ 4–10` over
+>   `N_k ∈ {100, 300, 1000}`. "Assembly dominates" is a claim about *an assembly path of
+>   that shape*, which is how the paragraph above carefully states it. It is **not** a
+>   measured property of the new solver and must not harden into one before the bake-off
+>   measures assembly directly.
+
 Batched-`expm` throughput measured on this machine (scipy loop, float64): ~20–70 µs per
 `expm` at n = 4–10. Naive full-resolution rung 2 at `k = 1 Mpc⁻¹` needs `kη₀/π ≈ 4500`
 steps; 10³ modes × 4500 steps × ~30 µs ≈ **2 minutes/call — over budget**. With per-k
 step counts (`N_steps(k) ∝ k`, log-spaced k), the total collapses by ~an order of
-magnitude to the "acceptable" band; the WKB rung (§9) and mode freezing take it further.
+magnitude — to **~15 s, which is on the wrong side of this section's own `>10 s = fail`
+gate**; the WKB rung (§9) and mode freezing take it further.
 Step counts scaling with k, not the exponential's unit cost, are the O2 cost driver.
+
+> **Amendment (scientific review, 2026-09-06) — this is an `expm`-only floor, not a
+> verdict on any stepper.** The estimate counts matrix exponentials alone and omits the
+> coefficient assembly that the paragraph above identifies as dominant, so the true figure
+> is *higher* than 15 s, not lower. It is therefore evidence that the O2 cost question is
+> open — **not** evidence that Magnus fails. **No candidate is discounted on this
+> arithmetic** (D7, and the standing experimentation-over-reading direction): every stepper
+> ships as a registry backend and the bake-off (§11) decides on measured numbers, with
+> `rk-adaptive` as its mandatory measured baseline. What the estimate does justify is
+> building the WKB rung (§9) from the start rather than deferring it behind this
+> calculation — see §8 and §12.
 
 **Relation to the legacy solver and H4.** The new solver is a **clean design from the end
 goals** — nothing is ported from `tidal/solver/modal.py`, per H4's "not ported, not an
@@ -135,7 +177,34 @@ experiments decide.
 
 **Two structural findings.** (1) **No existing code evolves graviton–photon or
 axion–photon mixing inside a Boltzmann solver** — every CMB-facing conversion paper
-post-processes along the line of sight. (2) The CAMB tensor equation, from the code
+post-processes along the line of sight.
+
+> **Amendment (scientific review, 2026-09-06) — say this in `k`-vs-`ν` terms, because as
+> phrased it reads as false.** The claim is elsewhere compressed to "no Boltzmann code has
+> per-frequency photon propagation", which invites the obvious objection that CAMB and
+> CLASS *do* evolve each Fourier mode `k` separately. Both are true, on different axes:
+>
+> - **`k`-resolved they are.** Per `k` the code integrates the photon **brightness
+>   multipole hierarchy `Θ_ℓ(k, η)`**.
+> - **`ν`-resolved they are not.** That hierarchy is **integrated over photon frequency**:
+>   the distribution is assumed to remain a blackbody whose *temperature* perturbs, so the
+>   spectral shape is fixed and there is **one photon fluid per `k`, not a photon state per
+>   `ν`**.
+>
+> Our O3/O4 physics is frequency-dependent in exactly the way that erases — the plasma
+> detuning is `ω_pl²/2ω`, and birefringence runs as `ν⁰` or `ν²` per operator. So there is
+> **no per-`ν` degree of freedom in CAMB or CLASS for the mixing to attach to**, which is
+> why architecture (i) fails structurally for O3 rather than merely being inconvenient.
+> Nearest exception, stated so it is not mistaken for a counterexample: spectral
+> distortions (`μ`, `y`) are *integrated parameters* derived from energy-injection rates,
+> not a propagated frequency-resolved photon field.
+>
+> Ecosystem corroboration (#511): Cobaya's `Cl` keys are `t/e/b/p` and the CAMB wrapper's
+> mapping is `{tt, ee, bb, te, et}` — there is no frequency axis and no Stokes `V` anywhere
+> in the interface, so the absence is in the data model, not merely in the implementations.
+> **Falsification:** this claim is wrong the moment any Boltzmann code carries a photon
+> state indexed by frequency through its transport step; re-check on first use rather than
+> inheriting it. (2) The CAMB tensor equation, from the code
 (`derivst`): `σ' = −2ℋσ + kH_T − ρπ/k`, `H_T' = −kσ`, i.e.
 `H_T'' + 2ℋH_T' + k²H_T = 8πG·a² Σ_i ρ_i π_i` and the convention
 `h_ij = 2H_T Q_ij` — the source normalization is taken from the code, not from a
@@ -266,11 +335,19 @@ The few **solver-independent structural facts** it can rely on now:
 
 **Sourced evolution is first-class.** CAMB's tensor equation carries the photon/neutrino
 anisotropic-stress source (`ρπ/k` in `derivst`), which damps tensor amplitudes at the
-percent-to-tens-of-percent level around horizon crossing; the O2 gate (sub-percent BB
+percent-to-tens-of-percent level around horizon crossing (the standard neutrino-damping
+result — Weinberg, *Phys. Rev. D* **69**, 023503 (2004), ~35% in power for modes entering
+during radiation domination; **amended 2026-09-06** — this figure previously carried no
+citation, and it must not be attributed to Seljak–Zaldarriaga, whose `los.tex:355-362`
+calls the same source "always negligible" at 1996 accuracy); the O2 gate (sub-percent BB
 agreement with CAMB) is **unreachable with a homogeneous-only formalism**. Design:
 variation of constants `y(η) = U(η,η₀)y₀ + ∫ U(η,s) s(s) ds`, implemented with the
-augmented-matrix exponential (`Z = [[M, s],[0, 0]]`; Al-Mohy–Higham; legacy precedent
-`modal.py:3775`) which every Magnus-family stepper inherits without modification.
+augmented-matrix exponential (`Z = [[M, s],[0, 0]]`; Al-Mohy–Higham) which every
+Magnus-family stepper inherits without modification. *(Amended 2026-09-06: a "legacy
+precedent `modal.py:3775`" pointer stood here and is removed rather than corrected — it
+cites a different augmentation, `[[A, S],[0, A]]`, and WS3 is written from the ground up
+for a time-dependent background. `modal.py` is neither ported nor an oracle (H4 §5.6), so
+nothing here is anchored on its structure.)*
 Prototype evidence (benchmark A8): a forced oscillator through the augmented matrix
 reproduces the analytic particular solution to 2.7×10⁻¹¹ (magnus4, 2000 steps).
 
@@ -342,12 +419,30 @@ rather than only shifting the mean. Every selection is logged.
 
 ### One-way vs two-way coupling, per engine
 
-- **O2:** one-way (CAMB → us) is valid iff the new sector's back-reaction on the standard
-  modes sits below CAMB's own accuracy — the same class of approximation CAMB itself
-  makes when it drops the anisotropic-stress source where negligible (Seljak–Zaldarriaga
-  `los.tex:355-362`). Gated by the program's growth-impact monitor; two-way would be
-  needed only if `|S_new| ≳ |S_std|` at the source level, which contradicts the spectator
-  premise.
+- **O2:** one-way (CAMB → us) holds while the new sector's back-reaction on the standard
+  modes stays below CAMB's own accuracy. Gated by the growth-impact monitor against **two
+  distinct thresholds on the source ratio** `R = |S_new|/|S_std|`:
+
+  | `R` | verdict | what it means |
+  |---|---|---|
+  | `≲ 10⁻³` | pass | below CAMB's own accuracy — one-way is exact at the precision we quote |
+  | `10⁻³ … 1` | **flag** | the one-way answer is no longer trustworthy at that precision; record it on the run rather than returning the number silently |
+  | `≳ 1` | **fail** | the spectator premise itself is gone, not merely the approximation |
+
+  > **Amendment (scientific review, 2026-09-06).** This bullet previously gave both bounds
+  > as though they were one criterion — "below CAMB's own accuracy" (`~10⁻³`) in one
+  > sentence, then "two-way would be needed only if `|S_new| ≳ |S_std|`" (`~1`) in the
+  > next. Those are three orders apart, and the monitor has to be implemented against a
+  > number. Separated above: `10⁻³` is where the *approximation* stops being exact, `1` is
+  > where the *premise* fails, and the band between is a flagged result (flag, never
+  > assume).
+  >
+  > The Seljak–Zaldarriaga citation that stood here is **removed as support for this
+  > claim**: it was offered as precedent for neglecting the anisotropic-stress source, but
+  > `los.tex:355-362` calls that source "always negligible" — the opposite of what §4
+  > argues two paragraphs earlier (it damps at percent-to-tens-of-percent, and the O2 gate
+  > is unreachable without it). S–Z is fine precedent for the general *practice* of
+  > dropping a demonstrably negligible source; it is not evidence about this one.
 - **O3:** structurally one-way — a per-frequency depletion/rotation operator applied to
   CAMB's output; two-way would require conversion to drain photon energy at
   recombination-relevant levels, excluded by `P ≪ 1`.
@@ -385,9 +480,27 @@ Deliverables for WS2:
 3. **Dropped terms exported symbolically**, so the engine can evaluate
    `|dropped|/|kept|` per η as a runtime validity flag (soundness rule: flag, never
    assume).
-4. **Acceptance test**: the reduction of the graviton–photon FRW system reproduces
-   Cembranos eqs. 24–25 (including the `Δ_M = B_T/M_Pl` normalization pinned down in §4)
-   on their setup.
+4. **Acceptance test**: the reduction of the graviton–photon FRW system reproduces the
+   Cembranos amplitude system on their setup, **with the `Δ_M = B_T/M_Pl` normalization
+   pinned in §4 — which is eq. 27's, not eq. 24's.**
+
+   > **⚠ Amendment (scientific review, 2026-09-06).** This item previously read "reproduces
+   > Cembranos eqs. **24**–25 (including the `Δ_M = B_T/M_Pl` normalization pinned down in
+   > §4)", which is self-contradictory and would produce a wrong number. **The paper is
+   > internally inconsistent by a factor of 2**: eq. 24 prints the off-diagonal as
+   > `κ_eff B_T / 2` with `κ_eff = M_*⁻¹`, while eq. 27 prints `Δ_M = B_T/M_*`. §4 of this
+   > document resolves it *numerically* in favor of eq. 27 — with `Δ_M = B_T/M_Pl` their
+   > own eq. 37 benchmark reproduces to 1.7%, while the `/2` and reduced-mass variants miss
+   > by 4–25×. So "reproduce eq. 24 as printed" and "use the §4 normalization" cannot both
+   > be satisfied. **Follow §4.** An implementer coding to eq. 24's printed form takes a
+   > factor 2 in amplitude and therefore a factor 4 in `P`, inside the acceptance test
+   > meant to catch exactly that.
+   >
+   > Second trap in the same section, recorded so a reader who checks the source is not
+   > derailed: Cembranos' *prose* states `M_* ≃ (16πG)^{-1/2}` — the **reduced** Planck
+   > mass, `M_Pl/√(16π)` — which contradicts what their own numbers use. §4's finding is
+   > that their numbers, not their words, define the convention. Verify against eq. 35's
+   > `Δ_M = 2.4×10⁻¹⁵ (B_T/1G) s⁻¹`, which `B_T/M_Pl` reproduces.
 
 Runtime consumption reuses the numeric coefficient-table path; no Wolfram at sampling
 time, no string surgery.
@@ -404,7 +517,7 @@ Three architectures, five criteria, assessed against **both** engines:
 | maintenance | fork tracking (EFTCAMB shows it is possible, at real cost) | GPL-3.0 + young codebase | ours; CAMB stays stock (program's CAMB policy) |
 | coupling handling | two-way "for free" — which is exactly wrong here | two-way by design | one-way by construction, monitor-gated |
 | **O2 verdict** | plausible (MagCAMB precedent) but wrong trade | poor fit today | **fits** |
-| **O3 verdict** | **structurally impossible** — CAMB has no per-frequency photon propagation | same | **the only option** |
+| **O3 verdict** | **structurally impossible** — CAMB's photon transport is `k`-resolved but frequency-*integrated* (§2.1 amendment), so there is no per-`ν` state to attach the mixing to | same | **the only option** |
 
 **Decision: (iii) for both engines, sharing one numerical core.** The headline finding is
 the asymmetry: **O3 forces (iii) regardless of the O2 verdict.** (ii) remains the fallback
@@ -455,7 +568,8 @@ small-matrix numerics, identical assembly constraint, identical flag plumbing.
    measured order 3.9 with the corrected values, and the working composition applies
    `exp(h(α₂A₁+α₁A₂))` first); **GL6** (measured order 5.9) for smooth early segments.
    **Validated: necessary, insufficient alone.**
-3. **Matrix WKB** — §9. The research rung; gated on bake-off evidence (§12).
+3. **Matrix WKB** — §9. The research rung. **Built in the first WS3 handoff alongside
+   Magnus, not gated behind it** (amended 2026-09-06 — see §12).
 4. **Piecewise-analytic transfer matrices** (Haddadin–Handley) — requires a frictionless
    *scalar* form; for a matrix block it applies only per eigenmode after
    diagonalization, i.e. it is rung 3's adiabatic propagator with Airy/Bessel phase fits
@@ -487,15 +601,34 @@ per step [η, η+h], batched over the segment's mode bucket:
   M_j = M(η + c_j h) at GL3 nodes;  Λ_j, V_j = eig(M_j)
   continuity: match eigenvector columns to the previous node by max overlap
               (greedy assignment), fix phase so the overlap is real-positive
-  Γ = V_mid⁻¹ V'   (V' by finite-difference stencil across the nodes)
+  Γ_j = V_j⁻¹ V'(η + c_j h)  AT EACH GL node j   (V' by FD stencil across the nodes)
   Φ_osc = diag ∫ i·Im Λ ds   (GL3 quadrature)      # oscillatory phase only
-  damping ∫ Re Λ ds applied as a separate diagonal factor   # see below
+  Φ_damp = diag ∫ Re Λ ds    (GL3 quadrature)      # kept SEPARATE -- see below
   B(s) = −e^{−Φ_osc} Γ e^{Φ_osc}    # entries oscillate via Im-eigenvalue
                                     # differences only; ‖B‖ ~ ‖Γ‖, not ~k
-  Ω_B = GL4 Magnus of B             # converges iff ∫‖Γ‖ < π (the adiabatic-
-                                    # picture convergence statement)
-  U_step = V(η+h) · e^{Φ} · e^{Ω_B} · V(η)⁻¹
+  Ω_B = GL4 Magnus of B, from B at the TWO Gauss nodes:
+        Ω_B = (h/2)(B₁+B₂) − (√3/12)h²[B₁,B₂]      # needs two samples, not one
+  U_step = V(η+h) · e^{Φ_osc} · e^{Φ_damp} · e^{Ω_B} · V(η)⁻¹
 ```
+
+> **Amendment (scientific review, 2026-09-06) — three defects that made this block
+> unimplementable as written.** All are mechanical, none changes the design:
+>
+> 1. **`Φ` was used undefined in `U_step`.** The block defines `Φ_osc` and describes the
+>    damping factor separately, then the final line wrote `e^{Φ}`. Since the very next
+>    bullet exists to warn that putting the *full* `Φ` in the similarity transform is
+>    fatal — `B_ij` would carry `exp(∫Re(λ_j − λ_i))` and destroy `∫‖B‖ < π` — the
+>    ambiguity sat exactly where the error is most costly. Now explicit: `Φ_osc` and
+>    `Φ_damp` are separate named factors, and only `Φ_osc` enters the transform.
+> 2. **`Γ` was computed once but consumed as if sampled.** It read `Γ = V_mid⁻¹ V'`, a
+>    single midpoint value, while the next line asks for a **GL4 Magnus of `B`**, which
+>    needs `B` at two Gauss nodes plus their commutator. With one `Γ` the commutator term
+>    vanishes and `Ω_B` silently degrades to first order. Now sampled per node.
+> 3. **Node sets did not match.** `M_j` and the phase quadrature are stated at GL3 nodes
+>    while `Ω_B` is a two-point (GL4) Magnus, with no interpolation rule. The corrected
+>    block evaluates `B` at the two Gauss nodes the Magnus step actually uses; if the GL3
+>    eigen-decomposition nodes are retained for the phase, state the interpolation
+>    explicitly rather than leaving the reader to guess.
 
 Design decisions, each with its failure mode:
 
@@ -606,9 +739,30 @@ over one shared core** (§7). O3 forces it; O2 confirms it.
 3. O3 front-end: generic eikonal engine (wavefunction + density-matrix forms) + the
    patch chain; gated on the WS2 reduction stage (§5) — its absence blocks O3, not O2;
    B1/B3/B6 as gates.
-4. Matrix-WKB rung (§9): promoted from prototype when the bake-off shows the Magnus
-   baseline exceeding budget in the `k ≳ 0.1 Mpc⁻¹` band (A4 evidence); publishable
-   independently (§2.2).
+4. Matrix-WKB rung (§9): **implemented in the first WS3 handoff, alongside Magnus**, with
+   the classifier handover exercised from the start; publishable independently (§2.2).
+
+   > **Amendment (user decision, 2026-09-05/06).** This item previously read "promoted from
+   > prototype when the bake-off shows the Magnus baseline exceeding budget in the
+   > `k ≳ 0.1 Mpc⁻¹` band (A4 evidence)" — i.e. WKB was *contingent*. Two reasons it is now
+   > planned rather than contingent: the supervisors expect WKB to be the approach that
+   > works and recommended rebuilding the methods published for analogous problems (which is
+   > what §9 does — Lorenz–Jahnke–Lubich adiabatic Magnus, cross-checked against
+   > Ioannisian–Smirnov, with neutrino oscillation in matter as the template); and §10's A2b
+   > already measured the property that matters — error *identical* at `k = 10, 100, 1000`
+   > at fixed 60 steps, where Magnus at the same step count is useless.
+   >
+   > **This is not a decision that Magnus loses, and the §1 cost arithmetic is explicitly
+   > not the evidence for it** — that estimate is an `expm`-only floor (see the §1
+   > amendment). **Both are implemented, both are measured, and the bake-off decides**
+   > composition and handover thresholds on real numbers, with `rk-adaptive` as the
+   > mandatory measured baseline. No candidate is discounted before a real attempt (D7).
+   > What changes is only that WKB is *available to measure* from the first handoff.
+   >
+   > Recorded honestly: **no matrix RKWKB implementation exists anywhere** — `oscode` and
+   > `riccati` are scalar-only — so this is a generalization of a published scalar method,
+   > not a port. It is the highest-risk piece of WS3, now front-loaded deliberately, and
+   > A4's oracles (`oscode`/`riccati`) are not currently installed.
 5. Deferred: piecewise-analytic (rung 4); emulation (only on benchmark failure); GPU/JAX
    path (only with GPU allocations); CF6/CFET high-order variants (coefficients on hand).
 

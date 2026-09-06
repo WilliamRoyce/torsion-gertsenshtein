@@ -172,7 +172,7 @@ them, there was simply no index.
 | **D1–D9** | Program-level direction — see the table below | user, 2026-08-29 | this document |
 | **Rung order** | `O0 → O1 → O2 → O4a → O3 → O4b/V-modes`. Technically neutral, so a pure scientific-priority call. **Gated on #503**: O4a is only cheap if the operator is `n = 0` and `β` is constant over recombination | user, 2026-09-04 (H2 recommended) | §Rung order, `observable_ladder.md` §5 |
 | **Integration target** | **Option (iii)** — our own coupled-block solver chained to **unmodified** CAMB. Patching CAMB's Fortran and building on DISCO-EB both rejected; learn from DISCO-EB, never copy its code (#516 closed) | H3, 2026-08-31 | `solver_design.md` §6 |
-| **Two solver kinds** | O2 needs an oscillation-resolving mode-equation solver (`~1–10³` oscillations); O3 needs an eikonal amplitude engine with coherence-patch averaging (**`~10²⁶`** — not steppable). **Two engines, one shared core** | H2 → H3, 2026-08-30/31 | `observable_ladder.md` §0.1, `solver_design.md` §7 |
+| **Two solver kinds** | O2 needs an oscillation-resolving mode-equation solver (`~1–10³` oscillations); O3 needs an eikonal amplitude engine with coherence-patch averaging (**`~10²⁹`** — not steppable). **Two engines, one shared core** | H2 → H3, 2026-08-30/31 | `observable_ladder.md` §0.1, `solver_design.md` §7 |
 | **Binding cost** | `η`-grid **assembly**, not the matrix exponential (#518). Optimize there first | H3, 2026-08-31 | `solver_design.md` §1 |
 | **Stepper choice** | By **bake-off**, not a priori — every candidate implemented and trialed against the §10 protocol | H3, 2026-08-31 | `solver_design.md` §11 |
 | **R1 — O1 scope** | O1 is a **fixed-table pass-through plumbing gate**, not a TorC reproduction. Full posterior reproduction (O1b) rejected for now — a nested-sampling campaign for a plumbing check, with the nonlinear TorC background inside the fast block | H1, 2026-08-30 | `torc_pipeline_audit.md` §R1 |
@@ -323,7 +323,9 @@ The per-theory derivation-timing headers in the TOMLs are declared untrustworthy
 - **WS0 — Research & scoping** (no code): handoffs H1–H5; integration-target decision —
   **SETTLED by H3 (2026-08-31, `docs/cosmology/solver_design.md` §6): option (iii), own
   solver chained to unmodified CAMB, for BOTH engines over one shared core.** O3 forces
-  it regardless of the O2 verdict (no Boltzmann code has per-frequency photon
+  it regardless of the O2 verdict (Boltzmann codes are `k`-resolved but frequency-*integrated*
+  — one photon fluid per `k`, not a photon state per `ν`; see `solver_design.md` §2.1's
+  amendment — so there is no per-frequency photon
   propagation); DISCO-EB stays the fallback only if gradient sampling ever becomes a
   requirement (GPL decision recorded: learn freely, never copy literally — #516 closed).
 - **WS1 — New package, strangler-fig**: the existing framework is **legacy, not a
@@ -426,7 +428,7 @@ which was live instruction text for a task finished five days earlier.
 | ID | Task | Artifact |
 |---|---|---|
 | H1 | TorC pipeline audit — **DONE** (2026-08-30). Settled R1 (O1 = fixed-table pass-through, above) and R2 (re-apply the CAMB patch, GH #498). Also for WS5: the provider→consumer wiring template (§3.1), the `planck_clik` NaN guard as a flagged rejection path (§3.3), and a caution that stock Cobaya's PolyChord does not give correct evidences under non-uniform priors without the Ormondroyd patch (§3.2). For the spectator flags: `ΔN_eff` (§1.7) is already parameterized for the torsion sector | `docs/cosmology/torc_pipeline_audit.md` ✅ |
-| H2 | Observable-ladder feasibility — **DONE** (2026-08-30). Found O3 needs a *different solver kind* from O2 (10²⁶ vs 10³ oscillations → eikonal + patch averaging; H3.md extended accordingly), that O4 splits into three channels with different prerequisites, and that no paper enforces the PMF's own spectator status | `docs/cosmology/observable_ladder.md` + `magnetic_field_background.md` ✅ |
+| H2 | Observable-ladder feasibility — **DONE** (2026-08-30). Found O3 needs a *different solver kind* from O2 (10²⁹ vs 10³ oscillations → eikonal + patch averaging; H3.md extended accordingly), that O4 splits into three channels with different prerequisites, and that no paper enforces the PMF's own spectator status | `docs/cosmology/observable_ladder.md` + `magnetic_field_background.md` ✅ |
 | H3 | Solver design study — **DONE** (2026-08-31). Two engines over one shared core; architecture (iii) settled; assembly (not expm) identified as the binding cost; six-stepper prototype registry with measured orders; matrix-WKB designed + prototyped (bake-off-gated, #519); 18-paper reference set acquired. Follow-ups #517–#520 | `docs/cosmology/solver_design.md` ✅ |
 | H4 | New-package design — **DONE** (2026-08-31). Target layout + `tidalcosmo/` scaffold (READMEs only, no Python); port inventory; **#513** adopt CAMB/PSALTer conventions natively (gauge as spec metadata), which is why the `derive` gate cannot be a byte diff; #514–#516 | `docs/cosmology/repo_reshape.md` ✅ |
 | H5 | Literature acquisition — **DONE** (2026-08-30). 20/20 fetched and title-verified; `literature/README.md` now tracked and auto-generated by `scripts/bibaudit/index_literature.py` (GH #497) | populated `literature/` + `docs/references.md` ✅ |

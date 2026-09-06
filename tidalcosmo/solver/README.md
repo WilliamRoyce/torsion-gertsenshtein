@@ -36,7 +36,7 @@ problems:
 - an **oscillation-resolving mode-equation solver** for gravitational waves
   (`k ~ 10⁻⁴–1 Mpc⁻¹`, `~1–10³` oscillations over a Hubble time);
 - an **eikonal amplitude engine with patch averaging** for CMB photons
-  (`k ≈ 2×10²² Mpc⁻¹`, `~10²⁶` oscillations — no integrator steps through that, so the carrier is
+  (`k ≈ 6.5×10²⁵ Mpc⁻¹`, `~10²⁹` oscillations — no integrator steps through that, so the carrier is
   removed analytically and only the slowly varying amplitude is integrated).
 
 **Workstream.** WS3 (#492). **Filled at.** M4, per `docs/cosmology/solver_design.md` — 650 lines, landed 2026-08-31. Follow-ups: **#518** (assembly, prerequisite), **#519** (matrix-WKB, bake-off-gated), **#520** (this rewrite), **#505** (O3 front-end, needs #504 + #518).
