@@ -520,6 +520,19 @@ requiring another end-of-phase sweep:
 2. Run every gate: `ruff check`, `ruff format --check`, `pyright`, `cspell`, **both**
    suites, the boundary test.
 
+   **Run `cspell` over the merge's full changed-file set, including your own edits to the
+   board and prompt headers** — not over an ad-hoc selection:
+
+   ```sh
+   git diff --name-only <merge>~1 <merge> | grep -vE '^(uv\.lock|tests_cosmo/data/)' \
+     | xargs npx cspell lint --no-progress
+   ```
+
+   *(Learned immediately: the `654b627a` merge turned the trunk red on `uncontended`, a
+   word the orchestrator wrote in a status header during that very merge. Local cspell
+   flags it — it simply was not run on the file that had just been edited. The checklist
+   said "run cspell"; what it needed to say is "over what you changed".)*
+
    > **⚠ Local `cspell` is a pre-check, not the gate (found by I-524, 2026-09-06).**
    > `npx cspell lint` and the `cspell-action` **disagree**: the action flagged
    > `PYTHONIOENCODING` and `PYTHONNOUSERSITE` in `scripts/oracles/freeze_legacy_oracle.py`
