@@ -56,9 +56,31 @@ jax = ["jax>=0.4.20", "jaxlib>=0.4.20"]
 # On HPC with MPI: pip install . (no --no-mpi flag)
 completion = ["shtab>=1.5"]
 color = ["rich-argparse>=1.4"]
+# Cosmology program (#488).  No upper bounds: SOLikeT's `camb<2` is a live example of a
+# metadata pin stranding a package a major version behind its ecosystem.
+camb = ["camb>=2.0.3"]
+cobaya = ["cobaya>=3.5.5"]
+# camb and cobaya are extras only while nothing under tidalcosmo/ imports them.  They become
+# core dependencies on a stated trigger (repo_reshape.md section 9, amended 2026-09-06):
+#   camb   -> core at M1a (#532), when background/camb_seam.py imports it
+#   cobaya -> core at M1b, when __init__.py re-exports a Cobaya component (section 2.11)
+# That re-export is what gives the short dotted path (tidal.SpectatorTheory:), and it also
+# makes `import tidalcosmo` itself require cobaya -- which reaches pyright, coverage, the
+# package boundary test and any doc build, not only Cobaya runs.  So cobaya cannot stay
+# optional past M1b.  Both extras are deleted at the section 1.3 rename, when the surviving
+# package is a Cobaya extension and they are simply core dependencies.
+#
+# The forked CAMB carrying the tabulated (rho, P) background hook is NOT a fourth extra: per
+# the H1 audit section 7.2 the package depends on that branch only when the feature is
+# enabled, the default install takes stock CAMB from PyPI with no Fortran build, and the fork
+# does not exist yet -- it is M2 (#498), and a forked-CAMB extra lands there.
+all = ["tidal[camb,cobaya,wolfram,sensitivity,inference,jax,completion,color]"]
 
 [project.scripts]
 tidal = "tidal.cli:main"
+# Both console scripts coexist during the transition (D3); at the section 1.3 rename
+# tidalcosmo becomes tidal and this pair collapses back to one.
+tidalcosmo = "tidalcosmo.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/WilliamRoyce/tidal"
@@ -416,8 +438,16 @@ package-dir = { "" = "." }
 
 [tool.setuptools.package-data]
 tidal = ["py.typed", "wolfram/*.wl"]
+# The recursive glob is required, not stylistic.  Cobaya finds a component's defaults with a
+# bare os.path.exists() next to inspect.getfile(cls), and returns None *silently* when the
+# file is absent -- so an unshipped YAML costs you the defaults with no error.  The common
+# `"*" = ["*.yaml"]` idiom only reaches directories that are themselves packages, which would
+# drop a presets/ subtree that has no __init__.py (repo_reshape.md sections 2.11, 3, 9).
+tidalcosmo = ["py.typed", "**/*.yaml"]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["tidal*"]
+# "tidal*" already glob-matches tidalcosmo; naming it is documentation, so that the second
+# root is not left resting on a coincidence of the first one's name (section 9).
+include = ["tidal*", "tidalcosmo*"]
 exclude = ["outputs*", "tests*", "docs*"]
