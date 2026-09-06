@@ -1,0 +1,59 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_dark_photon_fv/theory.toml
+# spec: examples/data/torsion_dark_photon_fv.json
+# command: tidal --no-banner inspect examples/data/torsion_dark_photon_fv.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  a_0 gradient_x(v_t_3) ?
+  a_0 identity(a_0) ?
+  a_0 laplacian_x(a_0) eff>0
+  a_0 laplacian_x(t_0) ?
+  a_1 d2_t(t_1) ?
+  a_1 gradient_x(h_5) ?
+  a_1 identity(a_1) ?
+  a_1 laplacian_x(a_1) eff>0
+  a_1 laplacian_x(t_1) ?
+  a_2 d2_t(t_2) ?
+  a_2 gradient_x(h_7) ?
+  a_2 identity(a_2) ?
+  a_2 laplacian_x(a_2) eff>0
+  a_2 laplacian_x(t_2) ?
+  a_3 d2_t(t_3) ?
+  a_3 gradient_x(v_t_0) ?
+  a_3 identity(a_3) ?
+  a_3 laplacian_x(a_3) eff>0
+  h_5 gradient_x(a_1) ?
+  h_5 gradient_x(t_1) ?
+  h_5 identity(h_5) eff<=0
+  h_5 laplacian_x(h_5) eff>0
+  h_7 gradient_x(a_2) ?
+  h_7 gradient_x(t_2) ?
+  h_7 identity(h_7) eff<=0
+  h_7 laplacian_x(h_7) eff>0
+  t_0 gradient_x(v_a_3) ?
+  t_0 gradient_x(v_t_3) ?
+  t_0 identity(t_0) ?
+  t_0 laplacian_x(a_0) ?
+  t_0 laplacian_x(t_0) ?
+  t_1 d2_t(a_1) ?
+  t_1 gradient_x(h_5) ?
+  t_1 identity(t_1) ?
+  t_1 laplacian_x(a_1) ?
+  t_1 laplacian_x(t_1) eff>0
+  t_2 d2_t(a_2) ?
+  t_2 gradient_x(h_7) ?
+  t_2 identity(t_2) ?
+  t_2 laplacian_x(a_2) ?
+  t_2 laplacian_x(t_2) eff>0
+  t_3 d2_t(a_3) ?
+  t_3 gradient_x(v_a_0) ?
+  t_3 gradient_x(v_t_0) ?
+  t_3 identity(t_3) ?
+  t_3 laplacian_x(t_3) ?
+#--- stderr ---
+
+#--- end ---

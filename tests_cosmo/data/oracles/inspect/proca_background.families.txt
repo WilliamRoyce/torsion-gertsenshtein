@@ -1,0 +1,18 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/proca_background/theory.toml
+# spec: examples/data/proca_background.json
+# command: tidal --no-banner inspect examples/data/proca_background.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'A'  rank=1  n=3
+    0 temporal index/indices: A_1, A_2
+    1 temporal index/indices: A_0
+family 'B'  rank=1  n=3
+    0 temporal index/indices: B_1, B_2
+    1 temporal index/indices: B_0
+#--- stderr ---
+
+#--- end ---

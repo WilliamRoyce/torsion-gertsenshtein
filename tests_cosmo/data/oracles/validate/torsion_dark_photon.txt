@@ -1,0 +1,24 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_dark_photon/theory.toml
+# spec: examples/data/torsion_dark_photon.json
+# plain-command: tidal --no-banner validate examples/data/torsion_dark_photon.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/torsion_dark_photon.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'B0' (used in: a_1, a_2, h_5, h_7, t_0, t_1, t_15, t_22, t_23, t_9) has no default value
+[WARN] Parameter 'alpha' (used in: t_0, t_1, t_10, t_13, t_15, t_17, t_2, t_20, t_22, t_23, t_6, t_9) has no default value
+[WARN] Parameter 'deltam' (used in: a_0, a_1, a_2, a_3, h_5, h_7, t_0, t_1, t_10, t_13, t_15, t_17, t_2, t_20, t_22, t_23, t_6, t_9) has no default value
+[WARN] Parameter 'kappa' (used in: h_5, h_7) has no default value
+[WARN] Parameter 'xi' (used in: t_0, t_1, t_10, t_13, t_15, t_17, t_2, t_20, t_22, t_23, t_6, t_9) has no default value
+[OK] torsion_dark_photon.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '2*deltam' (Python form: '2*deltam'): name 'deltam' is not defined
+#--- end ---

@@ -1,0 +1,22 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gertsenshtein/theory_eh_top.toml
+# spec: examples/data/gertsenshtein_eh_top.json
+# plain-command: tidal --no-banner validate examples/data/gertsenshtein_eh_top.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/gertsenshtein_eh_top.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'B0' (used in: a_0, a_1, a_2, a_3, h_5, h_7) has no default value
+[WARN] Parameter 'kappa' (used in: h_5, h_7) has no default value
+[WARN] Parameter 'rho' (used in: a_0, a_1, a_2, a_3, h_5, h_7) has no default value
+[OK] gertsenshtein_eh_top.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-2*B0^2*rho' (Python form: '-2*B0**2*rho'): name 'B0' is not defined
+#--- end ---

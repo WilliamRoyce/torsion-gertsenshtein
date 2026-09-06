@@ -1,0 +1,21 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_gertsenshtein/theory_minimal_propagating_e0_dual_gaussian.toml
+# spec: examples/data/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.json
+# plain-command: tidal --no-banner validate examples/data/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.json
+# plain-exit: 1
+# stability-command: tidal --no-banner validate examples/data/torsion_gertsenshtein_minimal_propagating_e0_dual_gaussian.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[ERROR] Field 'a': components 'a_0' and 'a_1' have opposite effective self-laplacian orientation. The wave operator acts identically on every component of a family, so this spec is internally inconsistent -- it predates the GH #381 LHS normalization fix and needs re-deriving (see GH #397). This is a derivation-integrity finding, not a spectral one: use GH #360 for ghost and tachyon analysis.
+[ERROR] Field 'a': components 'a_0' and 'a_2' have opposite effective self-laplacian orientation. The wave operator acts identically on every component of a family, so this spec is internally inconsistent -- it predates the GH #381 LHS normalization fix and needs re-deriving (see GH #397). This is a derivation-integrity finding, not a spectral one: use GH #360 for ghost and tachyon analysis.
+[ERROR] Field 'a': components 'a_0' and 'a_3' have opposite effective self-laplacian orientation. The wave operator acts identically on every component of a family, so this spec is internally inconsistent -- it predates the GH #381 LHS normalization fix and needs re-deriving (see GH #397). This is a derivation-integrity finding, not a spectral one: use GH #360 for ghost and tachyon analysis.
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-((Bpeak*zc1)/(E^((zc1 - x[])^2/(2*sigB^2))*sigB^2))' (Python form: '-((Bpeak*zc1)*exp(-((zc1 - x)**2/(2*sigB**2)))/(sigB**2))'): name 'Bpeak' is not defined
+#--- end ---

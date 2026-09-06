@@ -1,0 +1,24 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/proca_background/theory.toml
+# spec: examples/data/proca_background.json
+# plain-command: tidal --no-banner validate examples/data/proca_background.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/proca_background.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'R' (used in: A_0, A_1, A_2, B_0, B_1, B_2) has no default value
+[WARN] Parameter 'g0' (used in: A_0, A_1, A_2, B_0, B_1, B_2) has no default value
+[WARN] Parameter 'gcoup' (used in: A_0, A_1, A_2, B_0, B_1, B_2) has no default value
+[WARN] Parameter 'mA2' (used in: A_0, A_1, A_2) has no default value
+[WARN] Parameter 'mB2' (used in: B_0, B_1, B_2) has no default value
+[OK] proca_background.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-((g0*gcoup*R^2)/(R^2 + x[]^2 + y[]^2))' (Python form: '-((g0*gcoup*R**2)/(R**2 + x**2 + y**2))'): name 'g0' is not defined
+#--- end ---

@@ -1,0 +1,42 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/massive_gravity/theory.toml
+# spec: examples/data/massive_gravity_3d.json
+# command: tidal --no-banner inspect examples/data/massive_gravity_3d.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  h_0 cross_derivative_xy(h_4) eff<0
+  h_0 identity(h_3) ?
+  h_0 identity(h_5) ?
+  h_0 laplacian_x(h_5) eff>0
+  h_0 laplacian_y(h_3) eff>0
+  h_1 cross_derivative_xy(h_2) eff>0
+  h_1 gradient_x(v_h_5) eff<0
+  h_1 gradient_y(v_h_4) eff>0
+  h_1 identity(h_1) ?
+  h_1 laplacian_y(h_1) eff<0
+  h_2 cross_derivative_xy(h_1) eff>0
+  h_2 gradient_x(v_h_4) eff>0
+  h_2 gradient_y(v_h_3) eff<0
+  h_2 identity(h_2) ?
+  h_2 laplacian_x(h_2) eff<0
+  h_3 d2_t(h_5) eff>0
+  h_3 gradient_y(v_h_2) eff<0
+  h_3 identity(h_0) ?
+  h_3 identity(h_5) ?
+  h_3 laplacian_y(h_0) eff>0
+  h_4 cross_derivative_xy(h_0) eff<0
+  h_4 gradient_x(v_h_2) eff>0
+  h_4 gradient_y(v_h_1) eff>0
+  h_4 identity(h_4) ?
+  h_5 d2_t(h_3) eff>0
+  h_5 gradient_x(v_h_1) eff<0
+  h_5 identity(h_0) ?
+  h_5 identity(h_3) ?
+  h_5 laplacian_x(h_0) eff>0
+#--- stderr ---
+
+#--- end ---

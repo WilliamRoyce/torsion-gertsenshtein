@@ -1,0 +1,23 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/dark_photon_plasma/theory_e_dual_gaussian.toml
+# spec: examples/data/dark_photon_plasma_e_dual_gaussian.json
+# command: tidal --no-banner inspect examples/data/dark_photon_plasma_e_dual_gaussian.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'a'  rank=1  n=4
+    0 temporal index/indices: a_1, a_2, a_3
+    1 temporal index/indices: a_0
+family 'h'  rank=2  n=10
+    0 temporal index/indices: h_4, h_5, h_6, h_7, h_8, h_9
+    1 temporal index/indices: h_1, h_2, h_3
+    2 temporal index/indices: h_0
+family 't'  rank=3  n=12
+    0 temporal index/indices: t_10, t_15, t_17, t_22, t_23, t_9
+    1 temporal index/indices: t_13, t_20, t_6
+    2 temporal index/indices: t_0, t_1, t_2
+#--- stderr ---
+
+#--- end ---

@@ -1,0 +1,27 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gertsenshtein/theory_localized.toml
+# spec: examples/data/gertsenshtein_localized.json
+# command: tidal --no-banner inspect examples/data/gertsenshtein_localized.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  a_0 laplacian_x(a_0) eff>0
+  a_1 gradient_x(h_5) ?
+  a_1 identity(h_5) ?
+  a_1 laplacian_x(a_1) eff>0
+  a_2 gradient_x(h_7) ?
+  a_2 identity(h_7) ?
+  a_2 laplacian_x(a_2) eff>0
+  a_3 laplacian_x(a_3) eff>0
+  h_5 gradient_x(a_1) ?
+  h_5 identity(h_5) eff<=0
+  h_5 laplacian_x(h_5) eff>0
+  h_7 gradient_x(a_2) ?
+  h_7 identity(h_7) eff<=0
+  h_7 laplacian_x(h_7) eff>0
+#--- stderr ---
+
+#--- end ---

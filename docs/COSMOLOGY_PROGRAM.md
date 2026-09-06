@@ -198,6 +198,8 @@ them, there was simply no index.
 | **WS6 dependency** | **Not** independent — contradicting an earlier claim in this document; H2's dependency graph governs | H4 correction, 2026-08-31 | `observable_ladder.md` |
 | **WKB sequencing** | Matrix-WKB is **built alongside Magnus in the first WS3 handoff**, not gated behind a bake-off. The bake-off decides composition and thresholds on measured numbers; no candidate is discounted on paper estimates | user, 2026-09-05/06 | `solver_design.md` §8/§12, #519 |
 | **Admissible theories** | Scoped **explicitly**: only theories admitting the assumed background are in scope, the user judges whether theirs qualifies, and the background-EOM residual is a **first-class per-theory gate** rather than a diagnostic | user, 2026-09-05 | `spectator_route.md` §3, #501, #531 |
+| **Oracle re-run rule** | **If `tidal/` or `examples/data/` changes, re-run `scripts/oracles/` in the same commit.** Stated as an action, not a prohibition — "never edit legacy" is unenforceable and would forbid fixing an open bug, whereas this is checkable at review and keeps the frozen oracle honest by construction | I-525 + orchestrator, 2026-09-06 | `repo_reshape.md` §8, `tests_cosmo/data/oracles/README.md` |
+| **Guardrails retire too** | `tests_cosmo/test_package_boundary.py` and the shell-out check are **deleted at M7, not adapted** — after `git mv tidalcosmo tidal` their own regexes match every legitimate import, so the guard inverts into a blocker | I-525, 2026-09-06 | #537, §7's M7 row |
 | **Verification gates** | Made **able to fail** — `tidalcosmo/` had been outside pyright, coverage, `testpaths` and CI, and the never-import-legacy rule had no test | coherence pass, 2026-09-04 | `8b54fe6e`, #524 |
 
 ### Still open, deliberately
@@ -531,7 +533,7 @@ Status: `drafted → dispatched → reported → merged`.
 | Wave | Prompt | Issue | Lane | Owned paths | Branch | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | I-524 — packaging, extras, CI lane | #524 | — | `pyproject.toml`, `.github/`, `tidalcosmo/__init__.py`, `tidalcosmo/cli/` | — | drafted |
-| 0 | I-525 — freeze the legacy oracle | #525 | — | `scripts/oracles/`, `tests_cosmo/data/` | — | drafted |
+| 0 | I-525 — freeze the legacy oracle | #525 | — | `scripts/oracles/`, `tests_cosmo/data/` | `cosmo/i525-oracles` | **merged** ✅ gate re-run independently: 185 fixtures current, regeneration byte-identical |
 | 0 | I-526 — install PSALTer, Tier-1 gate | #526 | **yes** | `scripts/install-psalter.sh`, `scripts/verify-wolfram-setup.sh`, `tests_cosmo/fixtures/` | — | drafted |
 | 1 | I-532 — CAMB seam, background protocol, flag schema | #532 | — | `tidalcosmo/{background,spectator,validity}/` | — | planned |
 | 1 | I-503 — per-operator dispersion + zero-mode scope | #503 | — | `research/lagrangian_enumeration/`, `docs/` | — | planned |

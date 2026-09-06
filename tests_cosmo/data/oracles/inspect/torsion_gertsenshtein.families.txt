@@ -1,0 +1,18 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_gertsenshtein/theory.toml
+# spec: examples/data/torsion_gertsenshtein.json
+# command: tidal --no-banner inspect examples/data/torsion_gertsenshtein.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'a'  rank=0  n=4   (grouping GUESSED from name, no metadata)
+    members: a_0, a_1, a_2, a_3
+family 'h'  rank=0  n=10   (grouping GUESSED from name, no metadata)
+    members: h_0, h_1, h_2, h_3, h_4, h_5, h_6, h_7, h_8, h_9
+family 't'  rank=0  n=24   (grouping GUESSED from name, no metadata)
+    members: t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9
+#--- stderr ---
+
+#--- end ---

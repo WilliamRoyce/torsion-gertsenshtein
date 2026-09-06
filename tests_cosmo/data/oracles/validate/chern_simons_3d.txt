@@ -1,0 +1,20 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/chern_simons/theory.toml
+# spec: examples/data/chern_simons_3d.json
+# plain-command: tidal --no-banner validate examples/data/chern_simons_3d.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/chern_simons_3d.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'kappa' (used in: A_0, A_1, A_2) has no default value
+[OK] chern_simons_3d.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient 'kappa' (Python form: 'kappa'): name 'kappa' is not defined
+#--- end ---

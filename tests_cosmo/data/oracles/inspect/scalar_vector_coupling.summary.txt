@@ -1,0 +1,41 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/scalar_vector_coupling/theory.toml
+# spec: examples/data/scalar_vector_coupling.json
+# command: tidal --no-banner inspect examples/data/scalar_vector_coupling.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  phi_0 first_derivative_t(A_0) ?
+  phi_0 gradient_x(A_1) ?
+  phi_0 gradient_y(A_2) ?
+  phi_0 identity(phi_0) ?
+  phi_0 laplacian_x(phi_0) eff>0
+  phi_0 laplacian_y(phi_0) eff>0
+  A_0 first_derivative_t(phi_0) ?
+  A_0 gradient_x(A_2) ?
+  A_0 gradient_x(v_A_1) eff>0
+  A_0 gradient_y(A_1) ?
+  A_0 gradient_y(v_A_2) eff>0
+  A_0 identity(A_0) ?
+  A_0 laplacian_x(A_0) eff<0
+  A_0 laplacian_y(A_0) eff<0
+  A_1 cross_derivative_xy(A_2) eff<0
+  A_1 first_derivative_t(A_2) ?
+  A_1 gradient_x(phi_0) ?
+  A_1 gradient_x(v_A_0) eff>0
+  A_1 gradient_y(A_0) ?
+  A_1 identity(A_1) ?
+  A_1 laplacian_y(A_1) eff>0
+  A_2 cross_derivative_xy(A_1) eff<0
+  A_2 first_derivative_t(A_1) ?
+  A_2 gradient_x(A_0) ?
+  A_2 gradient_y(phi_0) ?
+  A_2 gradient_y(v_A_0) eff>0
+  A_2 identity(A_2) ?
+  A_2 laplacian_x(A_2) eff>0
+#--- stderr ---
+
+#--- end ---

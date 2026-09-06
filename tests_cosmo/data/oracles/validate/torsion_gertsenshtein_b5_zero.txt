@@ -1,0 +1,24 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/torsion_gertsenshtein/theory_b5_zero.toml
+# spec: examples/data/torsion_gertsenshtein_b5_zero.json
+# plain-command: tidal --no-banner validate examples/data/torsion_gertsenshtein_b5_zero.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/torsion_gertsenshtein_b5_zero.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'B0' (used in: a_0, a_1, a_2, a_3, h_0, h_1, h_2, h_3, h_4, h_5, h_6, h_7, h_8, h_9) has no default value
+[WARN] Parameter 'alpha1' (used in: t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[WARN] Parameter 'alpha2' (used in: t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[WARN] Parameter 'alpha3' (used in: t_0, t_1, t_10, t_13, t_15, t_17, t_2, t_20, t_22, t_23, t_6, t_9) has no default value
+[WARN] Parameter 'kappa' (used in: h_0, h_1, h_2, h_3, h_4, h_5, h_6, h_7, h_8, h_9, t_0, t_1, t_10, t_11, t_12, t_13, t_14, t_15, t_16, t_17, t_18, t_19, t_2, t_20, t_21, t_22, t_23, t_3, t_4, t_5, t_6, t_7, t_8, t_9) has no default value
+[OK] torsion_gertsenshtein_b5_zero.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient 'B0' (Python form: 'B0'): name 'B0' is not defined
+#--- end ---

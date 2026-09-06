@@ -1,0 +1,23 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/coupled_scattering/theory.toml
+# spec: examples/data/coupled_scattering.json
+# plain-command: tidal --no-banner validate examples/data/coupled_scattering.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/coupled_scattering.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'R' (used in: chi_0, phi_0) has no default value
+[WARN] Parameter 'g0' (used in: chi_0, phi_0) has no default value
+[WARN] Parameter 'mChi2' (used in: chi_0) has no default value
+[WARN] Parameter 'mPhi2' (used in: phi_0) has no default value
+[OK] coupled_scattering.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-(g0/E^(x[]^2/(2*R^2)))' (Python form: '-(g0*exp(-(x**2/(2*R**2))))'): name 'g0' is not defined
+#--- end ---

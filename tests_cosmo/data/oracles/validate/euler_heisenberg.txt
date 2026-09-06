@@ -1,0 +1,21 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/euler_heisenberg/theory.toml
+# spec: examples/data/euler_heisenberg.json
+# plain-command: tidal --no-banner validate examples/data/euler_heisenberg.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/euler_heisenberg.json --stability
+# stability-exit: 1
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[WARN] Parameter 'B0' (used in: a_0, a_1, a_2, a_3) has no default value
+[WARN] Parameter 'rho' (used in: a_0, a_1, a_2, a_3) has no default value
+[OK] euler_heisenberg.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[ERROR] Cannot evaluate symbolic coefficient '-2*B0^2*rho' (Python form: '-2*B0**2*rho'): name 'B0' is not defined
+#--- end ---

@@ -28,6 +28,11 @@ Symbolic physics pipeline: Lagrangian (xAct/Mathematica) -> JSON -> native PDE s
   optional extras installed, pyright reports phantom unresolved-import errors for `jax` in
   `tidal/solver/modal_jax.py` -- CI syncs all extras and reports 0 errors, so a local-only
   failure there means the venv has drifted, not that the code is broken.
+  **The same drift hits the test suite, which was not written down until 2026-09-06:**
+  without extras, ~12 tests in `tests/test_atlas_plot.py` and `tests/test_inference.py`
+  fail with `ModuleNotFoundError: No module named 'anesthetic'`. They are not a regression.
+  Run `uv sync --all-extras` and re-run before treating a failure count as real -- this
+  bites fresh worktrees in particular, since each gets its own `.venv`.
 
 ## Critical Conventions
 

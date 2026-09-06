@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/elasticity/theory.toml
+# spec: examples/data/navier_cauchy_2d.json
+# plain-command: tidal --no-banner validate examples/data/navier_cauchy_2d.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/navier_cauchy_2d.json --stability
+# stability-exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[OK] navier_cauchy_2d.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[OK] navier_cauchy_2d.json is valid [stable]
+#--- end ---

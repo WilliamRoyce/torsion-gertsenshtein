@@ -1,0 +1,17 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/gertsenshtein/theory_eh_top.toml
+# spec: examples/data/gertsenshtein_eh_top.json
+# command: tidal --no-banner inspect examples/data/gertsenshtein_eh_top.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'a'  rank=1  n=4
+    0 temporal index/indices: a_1, a_2, a_3
+    1 temporal index/indices: a_0
+family 'h'  rank=2  n=2
+    0 temporal index/indices: h_5, h_7
+#--- stderr ---
+
+#--- end ---

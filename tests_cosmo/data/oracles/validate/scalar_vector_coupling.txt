@@ -1,0 +1,19 @@
+# frozen legacy oracle -- tidal validate, plain and --stability
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/scalar_vector_coupling/theory.toml
+# spec: examples/data/scalar_vector_coupling.json
+# plain-command: tidal --no-banner validate examples/data/scalar_vector_coupling.json
+# plain-exit: 0
+# stability-command: tidal --no-banner validate examples/data/scalar_vector_coupling.json --stability
+# stability-exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- plain:stdout ---
+
+#--- plain:stderr ---
+[OK] scalar_vector_coupling.json is valid
+#--- stability:stdout ---
+
+#--- stability:stderr ---
+[OK] scalar_vector_coupling.json is valid [stable]
+#--- end ---

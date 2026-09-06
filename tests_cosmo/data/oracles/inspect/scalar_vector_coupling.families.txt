@@ -1,0 +1,16 @@
+# frozen legacy oracle -- tidal inspect --families
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/scalar_vector_coupling/theory.toml
+# spec: examples/data/scalar_vector_coupling.json
+# command: tidal --no-banner inspect examples/data/scalar_vector_coupling.json --families
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+family 'phi'  rank=0  n=1   (grouping GUESSED from name, no metadata)
+    members: phi_0
+family 'A'  rank=0  n=3   (grouping GUESSED from name, no metadata)
+    members: A_0, A_1, A_2
+#--- stderr ---
+
+#--- end ---

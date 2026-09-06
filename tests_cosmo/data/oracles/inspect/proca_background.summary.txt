@@ -1,0 +1,45 @@
+# frozen legacy oracle -- tidal inspect --detail summary
+# generator: scripts/oracles/freeze_legacy_oracle.py -- do not edit by hand
+# regenerate: uv run python -m scripts.oracles.freeze_legacy_oracle
+# theory: examples/proca_background/theory.toml
+# spec: examples/data/proca_background.json
+# command: tidal --no-banner inspect examples/data/proca_background.json --detail summary
+# exit: 0
+# scrub: ansi-stripped; warnings-suppressed; paths-relative; trailing-whitespace-normalized
+#--- stdout ---
+Signs (proven only; ? = undecided):
+  A_0 gradient_x(v_A_1) eff>0
+  A_0 gradient_y(v_A_2) eff>0
+  A_0 identity(A_0) ?
+  A_0 identity(B_0) ?
+  A_0 laplacian_x(A_0) eff<0
+  A_0 laplacian_y(A_0) eff<0
+  A_1 cross_derivative_xy(A_2) eff<0
+  A_1 gradient_x(v_A_0) eff>0
+  A_1 identity(A_1) ?
+  A_1 identity(B_1) ?
+  A_1 laplacian_y(A_1) eff>0
+  A_2 cross_derivative_xy(A_1) eff<0
+  A_2 gradient_y(v_A_0) eff>0
+  A_2 identity(A_2) ?
+  A_2 identity(B_2) ?
+  A_2 laplacian_x(A_2) eff>0
+  B_0 gradient_x(v_B_1) eff>0
+  B_0 gradient_y(v_B_2) eff>0
+  B_0 identity(A_0) ?
+  B_0 identity(B_0) ?
+  B_0 laplacian_x(B_0) eff<0
+  B_0 laplacian_y(B_0) eff<0
+  B_1 cross_derivative_xy(B_2) eff<0
+  B_1 gradient_x(v_B_0) eff>0
+  B_1 identity(A_1) ?
+  B_1 identity(B_1) ?
+  B_1 laplacian_y(B_1) eff>0
+  B_2 cross_derivative_xy(B_1) eff<0
+  B_2 gradient_y(v_B_0) eff>0
+  B_2 identity(A_2) ?
+  B_2 identity(B_2) ?
+  B_2 laplacian_x(B_2) eff>0
+#--- stderr ---
+
+#--- end ---
