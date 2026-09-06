@@ -1,9 +1,32 @@
 name: Run Tests
 
+# The cosmology program (#488) accumulates on the long-lived integration branch
+# feat/cosmology-program: each delegate branches off it, and only the finished programme
+# lands on main.  Testing only pull requests into main therefore left both of the moments
+# that matter unobserved -- a delegate finishing an issue, and a merge into the integration
+# branch -- so "the lane is green" was unverifiable at merge time (#524).
+#
+# pull_request filters on the *base* branch and runs from the merge commit, so a pull
+# request from a cosmo/* branch into feat/cosmology-program is covered by the entry below
+# without needing a push trigger on a branch glob (which would double up against the pull
+# request).  workflow_dispatch only dispatches workflows already present on the default
+# branch, so it is inert until this merges to main.
 on:
   pull_request:
     branches:
       - main
+      - feat/cosmology-program
+  push:
+    branches:
+      - feat/cosmology-program
+  workflow_dispatch:
+
+# Collapse superseded runs of the same branch and event.  The event is part of the key on
+# purpose: a push and a pull request describe different commits (the branch tip and the
+# merge commit), so cancelling one because the other started would hide a real result.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   test:
