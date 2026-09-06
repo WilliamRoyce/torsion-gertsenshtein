@@ -891,18 +891,36 @@ that slice's replacement is live.
 | --- | --- | --- | --- |
 | **M0** | **the scaffold** (this document's companion) plus `pyproject` second console script, extras, YAML package-data, the hygiene test, the CI lane | new lane green; no `import tidal` under the new root | the `drop` rows: `sweep`, `sample`, `analyze`, `plot` and their tests, once §5 records the decision |
 | **M0.5** | **freeze the oracle** — run legacy across the example corpus and commit the outputs. **Before any porting begins** | fixtures committed and reproducible | — |
-| **M1** | **O0** — `config/`, `background/camb_seam.py`, `spectator/` pass-through, `validity/flags.py` skeleton | sub-percent agreement with CAMB/nanoCMB, `2 ≤ ℓ ≤ 2500`; a standard ΛCDM posterior. **Also: benchmark the duplicated-scalar-compute overhead of §2.3** | **`tidal/inference/`** — outdated for a Cobaya interface (D9), goes as soon as the new path stands up |
+| **M1a** | **O0, seam half** — `background/protocol.py` (defined by investigating CAMB's API; it is this milestone's first deliverable), `background/camb_seam.py`, `spectator/` pass-through, `validity/flags.py` with the flag schema. Reference `C_ℓ`/transfer oracles are captured **here**, not at M0.5 | **machine-precision identity** on pass-through arrays (a pass-through returns CAMB's own arrays, so a *sub-percent* tolerance would test nothing and could hide a unit/convention slip); seam-product spot checks; a **gauge-mismatch refusal** test (§2.8 req. 4); flag-schema unit tests | — |
+| **M1b** | **O0, inference half** — the Cobaya `Theory` class and packaging | our pass-through Theory's ΛCDM posterior ≡ a plain-CAMB Cobaya run of the same config, within sampling noise. **Also: benchmark the duplicated-scalar-compute overhead of §2.3 (#515)**, and prove the provisional `config/` layer is *replaced* rather than extended | **`tidal/inference/`** — outdated for a Cobaya interface (D9), goes as soon as the new path stands up |
 | **M2** | **O1** — **the CAMB fork first** (re-apply off the `2.0.3` tag, #498; read CAMB's license), then `TabulatedBackground` against it | H1 §R1 gate, plus the free `set_w_a_table` cross-check at `ϖ_r = 0.8` | — |
 | **M3** | **WS2** — `derive/` + `spec/` **port and extension** (§5.4), conformal time, CAMB/PSALTer conventions, per-channel source functions | semantic equivalence to the frozen specs (§5.2); de Sitter analytics; FRW-derived EOM → Minkowski EOM as `a → const` | `tidal/wolfram/`, `cli/_derive*.py`, `tidal/symbolic/` |
 | **M4** | **WS3** — `solver/` per H3's design, two front-ends | H3's stated per-rung tolerances | `tidal/solver/` |
 | **M5** | **WS4** — `observables/`, `validity/spectator.py`; the first rung attempted | validity flags on every run artifact | `tidal/measurement/`, `cli/_simulate.py`, `cli/_measure.py` |
 | **M6** | whatever `port` rows remain | every §5 `port` row green | the rest of `tidal/`, `tests/`, the `tidal` console script |
 | **M7** | **the rename** — trigger: `tidal/` is gone | the three-commit sequence of §1.3 | — · a single PyPI publish becomes possible after this |
-| **M∥** | **WS6** — `spectrum/`; buildable any time after M0, wired into `validity/` before the first rung runs | Lin–Hobson–Lasenby inequalities reproduced exactly | — |
+| **M∥** | **WS6** — `spectrum/`; buildable any time after M0, wired into `validity/` before the first rung runs | Lin–Hobson–Lasenby inequalities reproduced — **each margin's sign at the working point, with each boundary located to `10⁻⁶` relative by 1-D scan** (`spectrum_design.md` §12(a); the earlier word "exactly" overstated a gate the design states as sign-plus-tolerance). **Plus the performance gate the design sets and this row omitted: median per-sample verdict ≤ 1 ms** (§9) | — |
 
 **Why early deletion is safe:** because the oracle is *frozen data* (§8), not live legacy code.
-That is precisely what buys the freedom to retire `tidal/inference/` at M1 rather than waiting
+That is precisely what buys the freedom to retire `tidal/inference/` at M1b rather than waiting
 for M6.
+
+> **Amendment (scientific review, 2026-09-06) — how M∥ coexists with M0.5 and M3.** The
+> WS6 branch runs in parallel from M0, which puts it in apparent conflict with two rules
+> above. Both are resolved, not waived:
+>
+> - **M0.5's "before any porting begins"** governs the *legacy-behaviour* oracle — the
+>   capabilities whose equivalence is established against frozen legacy output. WS6's
+>   oracles are **PSALTer's own published artifacts** (`ParticleSpectrographCTEG.mx`, the
+>   committed `.wxf` fixtures, the published inequalities), not frozen legacy behaviour, so
+>   the spectrum branch is not gated on M0.5. `stage1_engineering_plan.md` §4.3 does port
+>   one legacy function (the torsion/curvature decomposition helper); that is a genuine
+>   port and carries the §5.7 provenance requirements, but it needs no legacy oracle
+>   because its correctness is established by the Tier-1/Tier-2 gates.
+> - **M3 owns `derive/`.** Stage-1 lands code there before M3 runs. That code is
+>   **subject to the port manifest (§5.7) and to M3's semantic-equivalence gate when M3
+>   lands** — it is early work inside M3's boundary, not a separate parallel implementation
+>   that M3 may ignore. State it in both handoffs so neither session assumes otherwise.
 
 ---
 
@@ -919,9 +937,29 @@ for M6.
 - **Oracles frozen as committed data at M0.5, before any porting.** A script under
   `scripts/oracles/` — **the single place allowed to touch legacy** — runs the legacy CLI across
   the example corpus and commits the results under `tests_cosmo/data/oracles/`: derived spec
-  JSONs, `tidal inspect --detail summary` reports, measured scalars, reference `C_ℓ` and transfer
-  arrays. New-package tests assert against **those files**, never against a live import or
+  JSONs, `tidal inspect --detail summary` reports, and `tidal validate` verdicts.
+  New-package tests assert against **those files**, never against a live import or
   subprocess. Deleting legacy then costs nothing and cannot silently break the suite.
+
+  > **Amendment (scientific review, 2026-09-06).** The fixture list above previously also
+  > named *measured scalars* and *reference `C_ℓ` and transfer arrays*. Neither belongs at
+  > M0.5:
+  >
+  > - **`C_ℓ`/transfer arrays are not legacy's to produce.** Legacy `tidal` is flat-space;
+  >   only CAMB computes a `C_ℓ`, and CAMB is not even installed until M0 adds the extras.
+  >   These move to **M1a**, where the seam that produces them exists.
+  > - **Measured scalars gate nothing that survives.** Per §5.1/§5.3, `simulate` is
+  >   *re-implemented* against WS3's own gates ("not equality"), and `measure` is a **drop**
+  >   row whose energy and conversion quantities have no FRW counterpart. Freezing an oracle
+  >   for a capability we are deliberately not porting buys nothing.
+  > - **`validate` verdicts were missing** although §5.1 names "same verdicts on the example
+  >   corpus" as that subcommand's port gate. Added.
+  >
+  > Enumerate the corpus from `examples/*/theory*.toml` paired with its committed spec JSON —
+  > **not** from `scripts/run_examples.sh`, which is stale and silently skips directories that
+  > no longer exist. Four TOMLs have no committed spec (`curved_spacetime/de_sitter` and the
+  > three `gertsenshtein` dipolar/radial variants); deriving them needs the Wolfram lane, so
+  > they are excluded by name with the reason recorded rather than silently missed.
 
 - **The comparison is semantic, and the mapping is committed.** Per §5.2, the new naming differs
   from the old by design, so the fixtures ship with a written mapping recording how new
