@@ -202,6 +202,31 @@ check**, and if it fails the fix is to guard the PDF export rather than to aband
 the analysis and the association are what Stage 1 needs, and the PDF is a human
 cross-check.
 
+> **⚠ Amendment (I-526 live check, 2026-09-06 — PSALTer `bb45adb0`, Wolfram 14.3, this
+> container).** The live check was run and **the prediction above is wrong in the way that
+> matters.** `UsingFrontEnd@Export` does not *fail* headless — it **hangs indefinitely**,
+> and the fix is **one environment variable**, not a guard:
+>
+> ```sh
+> export QT_QPA_PLATFORM=offscreen   # export then completes in ~4 s
+> ```
+>
+> `DISPLAY` **is** set in this container (`:27`), so Qt finds a display, tries to use it,
+> and blocks. `offscreen` tells it not to.
+>
+> **Why the distinction matters more than it looks.** "Guard the PDF export" would have had
+> the next session *delete a working capability* to avoid a problem that has a one-line
+> fix. And a hang, unlike a failure, consumes the **single-license Wolfram lane
+> indefinitely** — inside the §6 cost run, with its 24 h ceiling, an unguarded hang is
+> indistinguishable from "PSALTer is slow on PGT+EM", which is precisely the measurement
+> that run exists to make.
+>
+> **Where the export lives:** in the scripts (`install-psalter.sh`, the Tier-1 gate script,
+> any PSALTer runner), *not* in `devcontainer.json` — a container-wide setting would
+> override a display other processes may use, and would need a rebuild to take effect, so
+> it would look applied while being inert. Durable coverage belongs in
+> `tidalcosmo/derive/wolfram_driver.py` (§4.4), beside the engine-idle guard.
+
 ---
 
 ## 1. Environment audit (verified 2026-09-03)
@@ -525,7 +550,7 @@ belong in `scripts/psalter/` wrappers, outside the glob. Python tests skip clean
 
 | risk | mitigation |
 | --- | --- |
-| `UsingFrontEnd@Export` fails headless | one live check; if it fails, guard the PDF export — the association is what Stage 1 needs (§0.6) |
+| ~~`UsingFrontEnd@Export` fails headless~~ **it HANGS headless** | **Resolved 2026-09-06 (I-526):** set `QT_QPA_PLATFORM=offscreen` — export then completes in ~4 s. `DISPLAY` is set in this container, so Qt blocks trying to use it. **Do not guard the export**; the guard would delete a working capability, and a hang (unlike a failure) consumes the single-license lane indefinitely. See the §0.6 amendment |
 | private-symbol churn in PSALTer | pin the commit, record it in every export, and let the fixture tests fail loudly on drift (§0.4) |
 | single-session linearization proves awkward for our field content | documented two-session fallback (§0.5); last resort, hand-derive the (small) quadratic Lagrangian once and automate only the spectroscopy — report the compromise rather than hiding it |
 | `ParticleSpectrum` does not terminate on PGT+EM | report plainly with checkpoints; no workaround (§6) |
