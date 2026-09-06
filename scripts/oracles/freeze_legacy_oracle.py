@@ -93,18 +93,23 @@ NO_COMMITTED_SPEC = (
     "the session that froze this corpus"
 )
 
-# tests/test_repo_hygiene.py:43-47, restated so the two cannot drift apart.  Any
-# match aborts the run; see the module docstring on why this is not a status row.
+# ``tests/test_repo_hygiene.py`` rejects three specific shapes: a container path,
+# a user home, and a Claude project slug.  The first two are *subsumed* by the
+# generic absolute-path rule below, which is deliberately broader -- a fixture
+# only has to be portable, and a leak from anywhere is a leak.  Writing the rule
+# generically rather than restating the repo-specific literals also keeps this
+# file itself hygiene-clean, so it needs no allowlist exemption and stays checked
+# like everything else.  Only the slug, which is not a path, is matched literally.
+#
+# Any match aborts the run; see the module docstring on why this is not a status
+# row.  The lookbehind is what keeps relative paths in legacy's own prose
+# ("See docs/PERTURBATIVE_REDUCTION_IMPLEMENTATION.md") from matching.
 HYGIENE_PATTERNS = {
-    "container/clone path": re.compile(r"/workspaces/"),
-    "user home path": re.compile(r"/home/[A-Za-z0-9_.-]+/"),
+    "absolute path": re.compile(r"(?<![\w.$])/(?:[A-Za-z0-9_.-]+/)+"),
     "Claude project slug": re.compile(r"-workspaces-[A-Za-z0-9-]+"),
 }
 
-# Wider than the hygiene test, because a fixture only has to be *portable*; the
-# hygiene test is what makes a violation fatal, this is what makes it visible.
 VOLATILE_PATTERNS = {
-    "absolute path": re.compile(r"(?<![\w/])/(?:usr|opt|tmp|var|srv|mnt|root|Users)/"),
     "windows path": re.compile(r"[A-Za-z]:\\"),
     "ANSI escape": re.compile(r"\x1b"),
     "timestamp": re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}"),
@@ -323,9 +328,10 @@ def scrub(text: str) -> str:
 def assert_clean(text: str, where: str) -> None:
     """Abort the run if anything machine-specific or volatile survived.
 
-    The hygiene patterns are restated from ``tests/test_repo_hygiene.py`` rather
-    than imported, because that test belongs to the legacy suite and will be
-    deleted at M6 while these fixtures outlive it.
+    The rule is stated generically rather than copied from
+    ``tests/test_repo_hygiene.py``: that test belongs to the legacy suite and is
+    deleted at M6 while these fixtures outlive it, and a generic absolute-path
+    rule subsumes its two path patterns while catching leaks they would miss.
     """
     for name, pattern in {**HYGIENE_PATTERNS, **VOLATILE_PATTERNS}.items():
         match = pattern.search(text)
@@ -570,9 +576,16 @@ def build_manifest(entries: list[Entry], exclusions: list[Exclusion]) -> bytes:
     return (json.dumps(document, indent=2, sort_keys=False) + "\n").encode("utf-8")
 
 
-def planned_files(entries: list[Entry]) -> dict[Path, bytes]:
-    """Map every path this run owns to the bytes it should hold."""
-    planned: dict[Path, bytes] = {MANIFEST: b""}
+def planned_files(
+    entries: list[Entry], exclusions: list[Exclusion]
+) -> dict[Path, bytes]:
+    """Map every path this run owns to the bytes it should hold.
+
+    The manifest is built here rather than added by each caller, so there is no
+    window in which a caller can write the artifacts and forget it -- or write a
+    placeholder over a good one.
+    """
+    planned: dict[Path, bytes] = {MANIFEST: build_manifest(entries, exclusions)}
     for entry in entries:
         for kind, data in entry.artifacts.items():
             planned[artifact_path(kind, entry.pair.ident)] = data
@@ -632,8 +645,7 @@ def cmd_write(entries: list[Entry], exclusions: list[Exclusion]) -> int:
     """Write every artifact and the manifest, pruning what is no longer ours."""
     for directory in (SPECS_DIR, INSPECT_DIR, VALIDATE_DIR):
         directory.mkdir(parents=True, exist_ok=True)
-    planned = planned_files(entries)
-    planned[MANIFEST] = build_manifest(entries, exclusions)
+    planned = planned_files(entries, exclusions)
     for path, data in planned.items():
         path.write_bytes(data)
     for removed in prune(set(planned)):
@@ -644,8 +656,7 @@ def cmd_write(entries: list[Entry], exclusions: list[Exclusion]) -> int:
 
 def cmd_check(entries: list[Entry], exclusions: list[Exclusion]) -> int:
     """Compare a fresh capture against the committed fixtures, writing nothing."""
-    planned = planned_files(entries)
-    planned[MANIFEST] = build_manifest(entries, exclusions)
+    planned = planned_files(entries, exclusions)
     drift = []
     for path, data in sorted(planned.items()):
         if not path.is_file():
