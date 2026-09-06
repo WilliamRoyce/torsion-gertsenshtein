@@ -20,6 +20,14 @@ capability" (§7) quietly stops being possible.  New-package tests assert agains
 committed fixtures under ``tests_cosmo/data/oracles/``, never against a live import.
 The first revision of this module scanned ``tidalcosmo/`` only, so the half that
 matters most was unenforced while three documents said otherwise.
+
+**Retirement: delete this module at M7.**  The rule holds only while two package roots
+coexist.  M7 is ``git mv tidalcosmo tidal`` (``repo_reshape.md`` §1.3), after which every
+legitimate import in the package is spelled ``tidal`` and ``LEGACY_IMPORT`` below matches
+all of them -- the guard inverts into a blocker.  So this file is **deleted, not adapted**,
+in the M7 sequence; the same applies to the shell-out check in ``test_oracles.py``.
+Recorded here and in §7's M7 row, because a guardrail nobody remembers to retire is the
+mirror image of a rule nobody enforces.
 """
 
 from __future__ import annotations

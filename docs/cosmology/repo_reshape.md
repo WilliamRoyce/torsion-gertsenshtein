@@ -899,7 +899,7 @@ that slice's replacement is live.
 | **M4** | **WS3** — `solver/` per H3's design, two front-ends | H3's stated per-rung tolerances | `tidal/solver/` |
 | **M5** | **WS4** — `observables/`, `validity/spectator.py`; the first rung attempted | validity flags on every run artifact | `tidal/measurement/`, `cli/_simulate.py`, `cli/_measure.py` |
 | **M6** | whatever `port` rows remain | every §5 `port` row green | the rest of `tidal/`, `tests/`, the `tidal` console script |
-| **M7** | **the rename** — trigger: `tidal/` is gone | the three-commit sequence of §1.3 | — · a single PyPI publish becomes possible after this |
+| **M7** | **the rename** — trigger: `tidal/` is gone | the three-commit sequence of §1.3 | **`tests_cosmo/test_package_boundary.py` and the shell-out check in `test_oracles.py`** — after the rename their own regexes match every legitimate import, so they are *deleted*, not adapted. Also the frozen oracle under `tests_cosmo/data/oracles/`, once M3's §5.2 mapping is recorded · a single PyPI publish becomes possible after this |
 | **M∥** | **WS6** — `spectrum/`; buildable any time after M0, wired into `validity/` before the first rung runs | Lin–Hobson–Lasenby inequalities reproduced — **each margin's sign at the working point, with each boundary located to `10⁻⁶` relative by 1-D scan** (`spectrum_design.md` §12(a); the earlier word "exactly" overstated a gate the design states as sign-plus-tolerance). **Plus the performance gate the design sets and this row omitted: median per-sample verdict ≤ 1 ms** (§9) | — |
 
 **Why early deletion is safe:** because the oracle is *frozen data* (§8), not live legacy code.
@@ -996,6 +996,24 @@ for M6.
   > no longer exist. Four TOMLs have no committed spec (`curved_spacetime/de_sitter` and the
   > three `gertsenshtein` dipolar/radial variants); deriving them needs the Wolfram lane, so
   > they are excluded by name with the reason recorded rather than silently missed.
+  >
+  > > **⚠ Amendment (2026-09-06, M0.5 implementation).** The **glob above is wrong** and does
+  > > not produce the count this paragraph claims. `examples/*/theory*.toml` matches 48 files
+  > > and silently drops **`examples/curved_spacetime/conformal_static.toml`**, which does
+  > > have a committed spec — giving 45 pairs, not 46. It also makes the exclusion list
+  > > incoherent: under that glob `de_sitter.toml` is not a candidate at all, so it cannot be
+  > > "excluded" and only three exclusions exist. The **count (46) and the four exclusions are
+  > > correct**; only the recipe is wrong.
+  > >
+  > > **Use instead:** enumerate `examples/*/*.toml` and keep every TOML whose `[output].path`,
+  > > resolved *relative to the TOML's own directory* (`tidal/cli/_derive.py:6305-6310`), ends
+  > > in `.json`. That is exactly **50** TOMLs, of which **46** have a committed spec. The
+  > > `.json` test is what drops the five `sweep_*.toml` files, whose `[output].path` is a
+  > > directory. Do not filter on the `theory` filename prefix: `conformal_static.toml` and
+  > > `de_sitter.toml` are theory derivations that do not carry it.
+  > >
+  > > (Also measured while checking: `run_examples.sh` names 11 non-existent directories, not
+  > > ~13, and covers only 12 of the 50 TOMLs. The warning stands; the number was loose.)
 
 - **The comparison is semantic, and the mapping is committed.** Per §5.2, the new naming differs
   from the old by design, so the fixtures ship with a written mapping recording how new
